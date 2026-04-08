@@ -7,11 +7,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us - Little Village</title>
 
+  <meta name="description" content="Little Village is a multi-cuisine restaurant in Mangalagiri near NRI Hospital offering authentic Andhra flavors, family dining, and a beautiful function hall for events.">
+  <meta name="keywords" content="Little Village Restaurant, Mangalagiri restaurants, best restaurants in Guntur, Andhra food, multi cuisine restaurant, function hall booking, family restaurant">
+  <meta name="author" content="Little Village">
+
   <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!-- AOS Library -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
 
   <style>
     body {
@@ -48,9 +55,193 @@
       background: rgba(0, 0, 0, 0.18);
     }
 
+    /* Hover zoom on about image */
+    figure.page-card {
+      overflow: hidden;
+      border-radius: 24px;
+      padding: 0;
+    }
+
+    figure.page-card img {
+      transition: transform 0.5s ease;
+      display: block;
+      width: 100%;
+      border-radius: 24px;
+    }
+
+    figure.page-card:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Milestones strip */
+    .milestones {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .milestone-item {
+      padding: 24px;
+      text-align: center;
+      border: 1px solid var(--white-alpha-10);
+      border-radius: 18px;
+      background: rgba(0,0,0,0.18);
+    }
+
+    .milestone-item .m-number {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--accent-wheat, #d4a96a);
+      line-height: 1.1;
+    }
+
+    .milestone-item .m-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      margin-top: 6px;
+    }
+
+    /* Our Journey section */
+    .journey-section {
+      padding-block: 20px 80px;
+    }
+
+    .journey-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 40px;
+      align-items: start;
+      margin-top: 40px;
+    }
+
+    .journey-image-wrap {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--white-alpha-10);
+    }
+
+    .journey-image-wrap img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .journey-image-wrap:hover img {
+      transform: scale(1.04);
+    }
+
+    .journey-badge {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(0,0,0,0.75);
+      border: 1px solid var(--white-alpha-10);
+      border-radius: 14px;
+      padding: 10px 18px;
+      backdrop-filter: blur(6px);
+    }
+
+    .journey-badge .badge-number {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent-wheat, #d4a96a);
+      line-height: 1.1;
+    }
+
+    .journey-badge .badge-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+      margin-top: 2px;
+    }
+
+    .journey-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .journey-card {
+      padding: 24px 28px;
+      border: 1px solid var(--white-alpha-10);
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    .journey-card .card-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .journey-card .card-title {
+      color: var(--accent-wheat, #d4a96a);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .journey-card p {
+      font-size: 14px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.58);
+    }
+
+    /* Telugu story block */
+    .telugu-story {
+      padding-block: 20px 80px;
+    }
+
+    .telugu-story-inner {
+      padding: 36px 40px;
+      border: 1px solid var(--white-alpha-10);
+      border-radius: 24px;
+      background: rgba(0,0,0,0.22);
+      position: relative;
+      overflow: hidden;
+      margin-top: 40px;
+    }
+
+    .telugu-story-inner::before {
+      content: '"';
+      position: absolute;
+      top: -10px;
+      left: 24px;
+      font-size: 120px;
+      color: var(--accent-wheat, #d4a96a);
+      opacity: 0.10;
+      font-family: Georgia, serif;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .telugu-story-inner p {
+      font-size: 15px;
+      line-height: 2;
+      color: rgba(255,255,255,0.62);
+    }
+
+    .telugu-story-inner p + p {
+      margin-top: 16px;
+    }
+
     @media (max-width: 900px) {
-      .page-grid {
+      .page-grid,
+      .journey-grid {
         grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .milestones {
+        grid-template-columns: 1fr;
+      }
+
+      .telugu-story-inner {
+        padding: 24px 20px;
       }
     }
   </style>
@@ -65,7 +256,6 @@
         <div class="icon">
           <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
         </div>
-
         <span class="span">
           Little Village, Near NRI Hospital, Mangalagiri, Guntur, Andhra Pradesh
         </span>
@@ -77,15 +267,13 @@
         <div class="icon">
           <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
         </div>
-
         <span class="span">Open Daily : 11:30 AM - 10:30 PM</span>
       </div>
 
-      <a href="tel:+91 94401 59707" class="topbar-item link">
+      <a href="tel:+919440159707" class="topbar-item link">
         <div class="icon">
           <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
         </div>
-
         <span class="span">+91 94401 59707</span>
       </a>
 
@@ -95,7 +283,6 @@
         <div class="icon">
           <ion-icon name="logo-whatsapp" aria-hidden="true"></ion-icon>
         </div>
-
         <span class="span">WhatsApp Us</span>
       </a>
 
@@ -120,67 +307,55 @@
         </a>
 
         <ul class="navbar-list">
-
           <li class="navbar-item">
             <a href="index.html" class="navbar-link hover-underline">
               <div class="separator"></div>
               <span class="span">Home</span>
             </a>
           </li>
-
           <li class="navbar-item">
             <a href="menu.html" class="navbar-link hover-underline">
               <div class="separator"></div>
               <span class="span">Full Menu</span>
             </a>
           </li>
-
           <li class="navbar-item">
             <a href="aboutus.html" class="navbar-link hover-underline active">
               <div class="separator"></div>
               <span class="span">About Us</span>
             </a>
           </li>
-
           <li class="navbar-item">
             <a href="gallery.html" class="navbar-link hover-underline">
               <div class="separator"></div>
               <span class="span">Gallery</span>
             </a>
           </li>
-
           <li class="navbar-item">
             <a href="booking.html" class="navbar-link hover-underline">
               <div class="separator"></div>
               <span class="span">Function Hall</span>
             </a>
           </li>
-
           <li class="navbar-item">
             <a href="contact.html" class="navbar-link hover-underline">
               <div class="separator"></div>
               <span class="span">Contact</span>
             </a>
           </li>
-
         </ul>
 
         <div class="text-center">
           <p class="headline-1 navbar-title">Visit Us</p>
-
           <address class="body-4">
             NRI Hospital Road, Mangalagiri, <br>
             Guntur, Andhra Pradesh
           </address>
-
           <p class="body-4 navbar-text">Daily : 11:30 AM - 10:30 PM</p>
-
           <div class="separator"></div>
-
           <p class="contact-label">Quick Support</p>
-
-          <a href="tel:+911234567890" class="body-1 contact-number hover-underline">
-            +91 12345 67890
+          <a href="tel:+919440159707" class="body-1 contact-number hover-underline">
+            +91 94401 59707
           </a>
         </div>
 
@@ -203,13 +378,19 @@
   </header>
 
   <main>
+
+    <!-- ===== INTRO SECTION ===== -->
     <article class="page-intro section">
       <div class="container">
-        <p class="section-subtitle label-2 text-center">Our Story</p>
-        <h1 class="headline-1 section-title text-center">Authentic Taste Meets Rustic Charm</h1>
+
+        <p class="section-subtitle label-2 text-center" data-aos="fade-up">Our Story</p>
+        <h1 class="headline-1 section-title text-center" data-aos="fade-up" data-aos-delay="100">
+          Authentic Taste Meets Rustic Charm
+        </h1>
 
         <div class="page-grid">
-          <div class="page-card page-copy">
+
+          <div class="page-card page-copy" data-aos="fade-right" data-aos-delay="150">
             <p>
               Little Village brings together Andhra village warmth and multi-cuisine dining in one relaxed,
               family-friendly space. The restaurant is designed to feel grounded and welcoming, with a setting that
@@ -226,13 +407,117 @@
             </a>
           </div>
 
-          <figure class="page-card">
+          <figure class="page-card" data-aos="fade-left" data-aos-delay="200">
             <img src="./assets/images/about-banner.jpg" width="570" height="570" loading="lazy"
               alt="Little Village dining ambiance" class="w-100">
           </figure>
+
         </div>
+
+        <!-- Milestones strip -->
+        <div class="milestones">
+          <div class="milestone-item" data-aos="fade-up" data-aos-delay="100">
+            <div class="m-number">9+</div>
+            <div class="m-label">Years of Service</div>
+          </div>
+          <div class="milestone-item" data-aos="fade-up" data-aos-delay="200">
+            <div class="m-number">6 mo</div>
+            <div class="m-label">Chef Training Before Opening</div>
+          </div>
+          <div class="milestone-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="m-number">1</div>
+            <div class="m-label">Goal — Your Happiness</div>
+          </div>
+        </div>
+
       </div>
     </article>
+
+    <!-- ===== OUR JOURNEY SECTION ===== -->
+    <section class="journey-section section">
+      <div class="container">
+
+        <p class="section-subtitle label-2 text-center" data-aos="fade-up">The Journey</p>
+        <h2 class="headline-1 section-title text-center" data-aos="fade-up" data-aos-delay="100">
+          From Challenge to Celebration
+        </h2>
+
+        <div class="journey-grid">
+
+          <div class="journey-image-wrap" data-aos="fade-right" data-aos-delay="150">
+            <img src="./assets/images/about-banner.jpg" width="570" height="640" loading="lazy"
+              alt="Little Village restaurant interior">
+            <div class="journey-badge">
+              <div class="badge-number">9+</div>
+              <div class="badge-label">Years Serving Mangalagiri</div>
+            </div>
+          </div>
+
+          <div class="journey-cards" data-aos="fade-left" data-aos-delay="200">
+
+            <div class="journey-card">
+              <span class="card-icon">🏗️</span>
+              <div class="card-title">The Beginning</div>
+              <p>Our founders ran a successful builder business for years — until unexpected government policy changes forced a major pivot. Rather than giving up, they chose to start fresh in a new direction.</p>
+            </div>
+
+            <div class="journey-card">
+              <span class="card-icon">🍽️</span>
+              <div class="card-title">The Idea</div>
+              <p>After visiting many prominent restaurants in the region, they realised the food they loved — genuine Andhra comfort cooking — wasn't being done justice anywhere. That gap became the mission.</p>
+            </div>
+
+            <div class="journey-card">
+              <span class="card-icon">👨‍🍳</span>
+              <div class="card-title">The Preparation</div>
+              <p>Before opening day, experienced chefs and staff were carefully selected and put through nearly 6 months of dedicated training. Even after opening, new chefs were brought in to continuously raise the quality bar.</p>
+            </div>
+
+            <div class="journey-card">
+              <span class="card-icon">🌿</span>
+              <div class="card-title">The Vision</div>
+              <p>A place for families — with ample parking, a village-theme setting, a spacious function hall, and food that genuinely feels like home. Not just a restaurant, but a full experience.</p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TELUGU STORY SECTION ===== -->
+    <section class="telugu-story section">
+      <div class="container">
+
+        <p class="section-subtitle label-2 text-center" data-aos="fade-up">మా కథ</p>
+        <h2 class="headline-1 section-title text-center" data-aos="fade-up" data-aos-delay="100">
+          మా ప్రయాణం
+        </h2>
+
+        <div class="telugu-story-inner" data-aos="fade-up" data-aos-delay="150">
+          <p>
+            Little Village Restaurant కథ ఒక కొత్త ప్రారంభానికి ప్రతీక. ఒకప్పుడు నిర్మాణ రంగంలో (Builder Business) విజయవంతంగా కొనసాగిన మా ప్రయాణం, కొన్ని అనుకోని ప్రభుత్వ సమస్యల వల్ల పెద్ద మార్పు చూసింది.
+          </p>
+          <p>
+            ఆ పరిస్థితుల్లో కూడా మేము వెనుకడుగు వేయలేదు. కొత్త దారిని వెతుక్కోవాలని నిర్ణయించుకుని, అనేక ప్రముఖ రెస్టారెంట్లలో ఫుడ్ టేస్ట్ చేశాం. కానీ మనసుకు నచ్చే అసలు రుచి ఎక్కడా దొరకలేదు.
+          </p>
+          <p>
+            అక్కడినుంచే Little Village ఆలోచన పుట్టింది — మంచి ఆహారం మాత్రమే కాదు, పూర్తి అనుభవం ఇవ్వగలిగే ఒక ప్రత్యేక స్థలం కావాలి అని. కుటుంబాలతో ఆనందంగా గడపగలిగే వాతావరణం, సరిపడా పార్కింగ్ సౌకర్యం, మరియు గ్రామీణ శైలి (Village Theme) కలిసిన ఒక అందమైన ప్రదేశాన్ని రూపుదిద్దాం అనుకున్నాం.
+          </p>
+          <p>
+            రెస్టారెంట్ ప్రారంభానికి ముందు అనుభవజ్ఞులైన చెఫ్‌లు మరియు స్టాఫ్‌ను ఎంపిక చేసి, దాదాపు 6 నెలలు ప్రత్యేకంగా ట్రైనింగ్ ఇచ్చాం. ఓపెనింగ్ తర్వాత కూడా మా ప్రయాణం అక్కడే ఆగలేదు — ఇంకా మంచి రుచిని అందించాలనే లక్ష్యంతో కొత్త చెఫ్‌లను తీసుకుని ఫుడ్ క్వాలిటీని మరింత మెరుగుపరిచాం.
+          </p>
+          <p>
+            ఈ రోజు, దాదాపు 9–10 సంవత్సరాలుగా Little Village Restaurant విజయవంతంగా నడుస్తూ, మంగళగిరిలో ప్రముఖ రెస్టారెంట్‌గా గుర్తింపు పొందింది. మా లక్ష్యం ఒకటే — ప్రతి కస్టమర్‌కు రుచి, సౌకర్యం, మరియు ఆనందంతో కూడిన అనుభవాన్ని అందించడం.
+          </p>
+          <p>
+            Little Village కి వచ్చిన ప్రతి అతిథి మా కుటుంబ సభ్యుడే. మీ ప్రతి సందర్శనను మరపురాని అనుభవంగా మార్చడం మా వాగ్దానం.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
   <footer class="footer section has-bg-image text-center" id="footer"
@@ -242,99 +527,52 @@
       <div class="footer-top grid-list">
 
         <div class="footer-brand has-before has-after">
-
           <a href="index.html" class="logo">
             <h2 class="headline-1" style="color: var(--accent-wheat); margin-bottom: 20px;">LITTLE VILLAGE</h2>
           </a>
-
           <address class="body-4">
             NRI Hospital Road, Mangalagiri, Guntur, Andhra Pradesh
           </address>
-
           <a href="mailto:info@littlevillage.com" class="body-4 contact-link">info@littlevillage.com</a>
-
           <a href="tel:+919440159707" class="body-4 contact-link">Inquiries : +91 94401 59707</a>
-
-          <p class="body-4">
-            Open : 11:30 AM - 10:30 PM
-          </p>
-
+          <p class="body-4">Open : 11:30 AM - 10:30 PM</p>
           <div class="wrapper">
             <div class="separator"></div>
             <div class="separator"></div>
             <div class="separator"></div>
           </div>
-
           <p class="title-1">Special Events</p>
-
           <p class="label-1">
             Book our <span class="span">Function Hall</span> for your special days.
           </p>
-
           <a href="booking.html" class="btn btn-secondary footer-cta-btn">
             <span class="text text-1">Book Now</span>
             <span class="text text-2" aria-hidden="true">Book Now</span>
           </a>
-
         </div>
 
         <ul class="footer-list">
-
-          <li>
-            <a href="index.html" class="label-2 footer-link hover-underline">Home</a>
-          </li>
-
-          <li>
-            <a href="menu.html" class="label-2 footer-link hover-underline">Full Menu</a>
-          </li>
-
-          <li>
-            <a href="aboutus.html" class="label-2 footer-link hover-underline">About Us</a>
-          </li>
-
-          <li>
-            <a href="booking.html" class="label-2 footer-link hover-underline">Function Hall</a>
-          </li>
-
-          <li>
-            <a href="contact.html" class="label-2 footer-link hover-underline">Contact</a>
-          </li>
-
+          <li><a href="index.html" class="label-2 footer-link hover-underline">Home</a></li>
+          <li><a href="menu.html" class="label-2 footer-link hover-underline">Full Menu</a></li>
+          <li><a href="aboutus.html" class="label-2 footer-link hover-underline">About Us</a></li>
+          <li><a href="booking.html" class="label-2 footer-link hover-underline">Function Hall</a></li>
+          <li><a href="contact.html" class="label-2 footer-link hover-underline">Contact</a></li>
         </ul>
 
         <ul class="footer-list">
-
-          <li>
-            <a href="#" class="label-2 footer-link hover-underline">Facebook</a>
-          </li>
-
-          <li>
-            <a href="#" class="label-2 footer-link hover-underline">Instagram</a>
-          </li>
-
-          <li>
-            <a href="#" class="label-2 footer-link hover-underline">Twitter</a>
-          </li>
-
-          <li>
-            <a href="#" class="label-2 footer-link hover-underline">Youtube</a>
-          </li>
-
-          <li>
-            <a href="https://maps.app.goo.gl/B9WqXW6YxX8X8X8X8" target="_blank"
-              class="label-2 footer-link hover-underline">Google Map</a>
-          </li>
-
+          <li><a href="#" class="label-2 footer-link hover-underline">Facebook</a></li>
+          <li><a href="#" class="label-2 footer-link hover-underline">Instagram</a></li>
+          <li><a href="#" class="label-2 footer-link hover-underline">Twitter</a></li>
+          <li><a href="#" class="label-2 footer-link hover-underline">Youtube</a></li>
+          <li><a href="https://maps.app.goo.gl/B9WqXW6YxX8X8X8X8" target="_blank" class="label-2 footer-link hover-underline">Google Map</a></li>
         </ul>
 
       </div>
 
       <div class="footer-bottom">
-
         <p class="copyright">
           &copy; 2026 Little Village Multi Cuisine Restaurant. All Rights Reserved.
         </p>
-
       </div>
 
     </div>
@@ -345,6 +583,15 @@
   </a>
 
   <script src="./assets/js/script.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 700,
+      easing: 'ease-out',
+      once: true,
+      offset: 60
+    });
+  </script>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
