@@ -496,7 +496,7 @@
       const categoryIndex = headers.indexOf('CATEGORY');
       const priceIndex = headers.indexOf('PRICE');
       const descriptionIndex = headers.indexOf('DESCRIPTION');
-      const imageIndex = headers.indexOf('IMAGE URL');
+       
       const groupedData = {};
 
       rows.slice(1).forEach((row) => {
@@ -510,7 +510,7 @@
           name: (row[nameIndex] || '').trim(),
           price: Number((row[priceIndex] || '').trim()),
           desc: (row[descriptionIndex] || '').trim(),
-          image: (row[imageIndex] || '').trim(),
+           
         };
 
         if (!category || !item.id || !item.name) {
@@ -566,7 +566,7 @@
         const skeleton = document.createElement('div');
         skeleton.className = 'skeleton-card';
         skeleton.innerHTML = `
-          <div class="skeleton-media"></div>
+           
           <div class="skeleton-content">
             <div class="skeleton-line title"></div>
             <div class="skeleton-line"></div>
@@ -586,7 +586,7 @@
         const itemCard = document.createElement('div');
         itemCard.className = 'menu-item';
         itemCard.innerHTML = `
-          <img src="${item.image}" alt="${item.name}">
+           
           <div class="item-content">
             <div class="item-title">
               <span>${item.name}</span>
