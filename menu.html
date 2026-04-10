@@ -496,7 +496,7 @@
       const categoryIndex = headers.indexOf('CATEGORY');
       const priceIndex = headers.indexOf('PRICE');
       const descriptionIndex = headers.indexOf('DESCRIPTION');
-      const imageIndex = headers.indexOf('IMAGE URL');
+       
       const groupedData = {};
 
       rows.slice(1).forEach((row) => {
@@ -510,7 +510,7 @@
           name: (row[nameIndex] || '').trim(),
           price: Number((row[priceIndex] || '').trim()),
           desc: (row[descriptionIndex] || '').trim(),
-          image: (row[imageIndex] || '').trim(),
+           
         };
 
         if (!category || !item.id || !item.name) {
@@ -645,7 +645,7 @@
         const cartItem = document.createElement('div');
         cartItem.className = 'cart-item';
         cartItem.innerHTML = `
-          <img src="${item.image}" alt="${item.name}">
+           
           <div class="cart-item-info">
             <div class="cart-item-name">${item.name}</div>
             <div class="cart-item-price">₹${item.price} x ${item.qty}</div>
