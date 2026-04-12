@@ -236,7 +236,7 @@
         </div>
       </nav>
 
-      <a href="https://wa.me/919440159707" class="btn btn-secondary">
+      <a href="https://wa.me/919440159707" class="btn btn-secondary btn-whatsapp">
         <span class="text text-1"><ion-icon name="logo-whatsapp" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:6px;"></ion-icon>Order on WhatsApp</span>
         <span class="text text-2" aria-hidden="true"><ion-icon name="logo-whatsapp" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:6px;"></ion-icon>Order on WhatsApp</span>
       </a>
@@ -266,6 +266,17 @@
     <span class="cart-count" id="cartCount">0</span>
   </div>
 
+  <!-- Proceed to Cart Bar (Floating) -->
+  <div class="proceed-to-cart-bar" id="proceedCartBar">
+    <div class="cart-info">
+        <span class="cart-count-badge" id="barCartCount">0</span>
+        <span class="cart-total" id="barCartTotal">₹0</span>
+    </div>
+    <div class="proceed-text">
+        Proceed to Cart <ion-icon name="arrow-forward-outline"></ion-icon>
+    </div>
+  </div>
+
   <!-- Cart Drawer -->
   <div class="cart-drawer" id="cartDrawer">
     <div class="cart-header">
@@ -278,6 +289,7 @@
     <div class="cart-footer">
         <div id="customerInfo" style="margin-bottom: 15px;">
             <input type="text" id="custName" placeholder="Your Name" class="input-field" style="height: 40px; margin-bottom: 10px;">
+            <input type="tel" id="custPhone" placeholder="Phone Number (Mandatory)" class="input-field" style="height: 40px; margin-bottom: 10px;">
             <textarea id="custAddr" placeholder="Delivery Address" class="input-field" style="height: 70px;"></textarea>
         </div>
       <div class="cart-total">
@@ -417,6 +429,7 @@
       });
 
       document.getElementById('cartOverlay').onclick = () => document.getElementById('cartDrawer').classList.add('active');
+      document.getElementById('proceedCartBar').onclick = () => document.getElementById('cartDrawer').classList.add('active');
       document.getElementById('drawerClose').onclick = () => document.getElementById('cartDrawer').classList.remove('active');
       document.getElementById('whatsappCheckout').onclick = sendOrderWhatsapp;
 
@@ -623,7 +636,9 @@
       }
 
       updateCartUI();
-      document.getElementById('cartDrawer').classList.add('active');
+      // Only open drawer automatically on large screens or if needed, 
+      // but user asked for first adding items then proceed.
+      // document.getElementById('cartDrawer').classList.add('active');
     };
 
     function updateCartUI() {
@@ -662,6 +677,19 @@
 
       count.textContent = totalQty;
       totalText.textContent = `₹${total}`;
+
+      // Update Floating Bar
+      const bar = document.getElementById('proceedCartBar');
+      const barCount = document.getElementById('barCartCount');
+      const barTotal = document.getElementById('barCartTotal');
+
+      if (totalQty > 0) {
+        bar.classList.add('active');
+        barCount.textContent = totalQty;
+        barTotal.textContent = `₹${total}`;
+      } else {
+        bar.classList.remove('active');
+      }
     }
 
     window.changeQty = (index, delta) => {
@@ -686,15 +714,17 @@
       }
 
       const name = document.getElementById('custName').value.trim();
+      const phone = document.getElementById('custPhone').value.trim();
       const addr = document.getElementById('custAddr').value.trim();
 
-      if (!name || !addr) {
-        alert('Please enter your name and address for delivery.');
+      if (!name || !phone || !addr) {
+        alert('Please enter your name, phone number, and address for delivery.');
         return;
       }
 
       let message = `*New Order - Little Village Restaurant*\n\n`;
       message += `*Customer:* ${name}\n`;
+      message += `*Phone:* ${phone}\n`;
       message += `*Address:* ${addr}\n\n`;
       message += `*Items:*\n`;
 

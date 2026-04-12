@@ -140,6 +140,32 @@
         grid-template-columns: 1fr 1.1fr;
       }
     }
+
+    .gallery-section {
+       padding-block: 80px;
+       background-color: var(--eerie-black-3);
+    }
+    .gallery-grid {
+       display: grid;
+       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+       gap: 20px;
+       margin-top: 40px;
+    }
+    .gallery-item {
+       border-radius: 12px;
+       overflow: hidden;
+       border: 1px solid var(--white-alpha-10);
+       transition: var(--transition-1);
+    }
+    .gallery-item:hover {
+       transform: scale(1.03);
+       border-color: var(--gold-crayola);
+    }
+    .gallery-item img {
+       width: 100%;
+       height: 250px;
+       object-fit: cover;
+    }
   </style>
 </head>
 
@@ -271,7 +297,7 @@
 
       </nav>
 
-      <a href="https://wa.me/919440159707" class="btn btn-secondary">
+      <a href="https://wa.me/919440159707" class="btn btn-secondary btn-whatsapp">
         <span class="text text-1"><ion-icon name="logo-whatsapp" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:6px;"></ion-icon>Order on WhatsApp</span>
         <span class="text text-2" aria-hidden="true"><ion-icon name="logo-whatsapp" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:6px;"></ion-icon>Order on WhatsApp</span>
       </a>
@@ -343,7 +369,7 @@
             <input type="number" id="guests" class="input-field" min="10" placeholder="Expected Guests" required>
             <textarea id="msg" placeholder="Additional Requirements"></textarea>
 
-            <button class="btn btn-secondary" type="submit">
+            <button class="btn btn-secondary btn-whatsapp" type="submit">
               <span class="text text-1"><ion-icon name="logo-whatsapp" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:6px;"></ion-icon>Confirm On WhatsApp</span>
               <span class="text text-2" aria-hidden="true"><ion-icon name="logo-whatsapp" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:6px;"></ion-icon>Confirm On WhatsApp</span>
             </button>
@@ -352,6 +378,34 @@
         </div>
       </div>
     </section>
+
+    <section class="section gallery-section">
+      <div class="container">
+        <p class="section-subtitle label-2 text-center">Our Venue</p>
+        <h2 class="headline-1 text-center">Take a Look Inside</h2>
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img src="./assets/images/Little Village/Pics/RNP03490 Medium.png" alt="Hall Setting">
+          </div>
+          <div class="gallery-item">
+            <img src="./assets/images/Little Village/Pics/RNP03358 Medium.png" alt="Stage Decor">
+          </div>
+          <div class="gallery-item">
+            <img src="./assets/images/Little Village/Pics/RNP03361 Medium.png" alt="Function Hall Interior">
+          </div>
+          <div class="gallery-item">
+             <img src="./assets/images/Little Village/Pics/RNP03474 Medium.png" alt="Guest Seating">
+          </div>
+          <div class="gallery-item">
+             <img src="./assets/images/Little Village/Pics/RNP03480 Medium.png" alt="Event Ambience">
+          </div>
+          <div class="gallery-item">
+             <img src="./assets/images/Little Village/Pics/RNP03494 Medium.png" alt="Function Hall View">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
   </main>
 
   <footer class="footer section has-bg-image text-center" id="footer"
