@@ -5,10 +5,10 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us - Little Village</title>
+  <title>Best Family Restaurant in Vijayawada | Little Village</title>
 
-  <meta name="description" content="Little Village is a multi-cuisine restaurant in Mangalagiri near NRI Hospital offering authentic Andhra flavors, family dining, and a beautiful function hall for events.">
-  <meta name="keywords" content="Little Village Restaurant, Mangalagiri restaurants, best restaurants in Guntur, Andhra food, multi cuisine restaurant, function hall booking, family restaurant">
+  <meta name="description" content="Little Village Restaurant in Vijayawada offers premium quality food, authentic biryani taste, fresh ingredients, and a hygienic dining experience for families.">
+  <meta name="keywords" content="Little Village Vijayawada, best biryani in Vijayawada, family restaurant in Vijayawada, fresh seafood Vijayawada, hygienic restaurants in Vijayawada, best food in Vijayawada, premium dining Vijayawada, Andhra style biryani Vijayawada">
   <meta name="author" content="Little Village">
 
   <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
@@ -16,11 +16,86 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
-
-  <!-- AOS Library -->
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
 
   <style>
+    /* =============================================
+       KEYFRAME ANIMATIONS
+    ============================================= */
+
+    @keyframes float-icon {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-7px); }
+    }
+
+    @keyframes shimmer-text {
+      0%   { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(212,169,106,0); }
+      50%       { box-shadow: 0 0 22px 5px rgba(212,169,106,0.18); }
+    }
+
+    @keyframes shimmer-overlay {
+      0%   { left: -100%; }
+      100% { left: 200%; }
+    }
+
+    @keyframes badge-bounce {
+      0%, 100% { transform: translateY(0); }
+      40%       { transform: translateY(-9px); }
+      60%       { transform: translateY(-4px); }
+    }
+
+    @keyframes line-grow {
+      from { transform: scaleY(0); }
+      to   { transform: scaleY(1); }
+    }
+
+    @keyframes dot-pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%       { transform: scale(1.4); opacity: 0.65; }
+    }
+
+    @keyframes particle-float {
+      0%   { transform: translateY(0) translateX(0); opacity: 0.5; }
+      33%  { transform: translateY(-40px) translateX(18px); opacity: 0.85; }
+      66%  { transform: translateY(-18px) translateX(-14px); opacity: 0.6; }
+      100% { transform: translateY(0) translateX(0); opacity: 0.5; }
+    }
+
+    @keyframes pill-in {
+      from { opacity: 0; transform: translateX(-12px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes para-in {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes number-glow {
+      0%, 100% { text-shadow: none; }
+      50%       { text-shadow: 0 0 20px rgba(212,169,106,0.6); }
+    }
+
+    @keyframes border-flow {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes progress-shine {
+      0%   { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+
+    /* =============================================
+       BASE
+    ============================================= */
+
     body {
       overflow: auto;
       overflow-x: hidden;
@@ -28,9 +103,80 @@
       height: auto;
     }
 
+    /* =============================================
+       SCROLL PROGRESS BAR
+    ============================================= */
+
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, #b8832a, #d4a96a, #f0c884, #d4a96a, #b8832a);
+      background-size: 200% auto;
+      z-index: 9999;
+      transition: width 0.08s linear;
+      animation: progress-shine 2.5s linear infinite;
+    }
+
+    /* =============================================
+       FLOATING PARTICLES
+    ============================================= */
+
     .page-intro {
       padding-block: 140px 80px;
+      position: relative;
     }
+
+    .intro-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .intro-particles span {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(212,169,106,0.32);
+      animation: particle-float linear infinite;
+    }
+
+    .intro-particles span:nth-child(1)  { top:10%; left:7%;  width:5px; height:5px; animation-duration:7s;   animation-delay:0s;   }
+    .intro-particles span:nth-child(2)  { top:22%; left:82%; width:7px; height:7px; animation-duration:9s;   animation-delay:1s;   }
+    .intro-particles span:nth-child(3)  { top:58%; left:13%; width:4px; height:4px; animation-duration:8s;   animation-delay:2s;   }
+    .intro-particles span:nth-child(4)  { top:72%; left:72%; width:6px; height:6px; animation-duration:11s;  animation-delay:0.5s; }
+    .intro-particles span:nth-child(5)  { top:38%; left:90%; width:5px; height:5px; animation-duration:6.5s; animation-delay:3s;   }
+    .intro-particles span:nth-child(6)  { top:83%; left:44%; width:4px; height:4px; animation-duration:10s;  animation-delay:1.5s; }
+    .intro-particles span:nth-child(7)  { top:6%;  left:54%; width:3px; height:3px; animation-duration:8.5s; animation-delay:4s;   }
+    .intro-particles span:nth-child(8)  { top:48%; left:33%; width:6px; height:6px; animation-duration:7.5s; animation-delay:2.5s; }
+
+    .page-intro .container { position: relative; z-index: 1; }
+
+    /* =============================================
+       SHIMMER HEADING
+    ============================================= */
+
+    .headline-shimmer {
+      background: linear-gradient(
+        90deg,
+        rgba(255,255,255,0.82) 0%,
+        rgba(212,169,106,1) 40%,
+        rgba(255,255,255,0.82) 60%,
+        rgba(212,169,106,0.7) 100%
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer-text 4s linear infinite;
+    }
+
+    /* =============================================
+       PAGE GRID & CARDS
+    ============================================= */
 
     .page-grid {
       display: grid;
@@ -40,40 +186,58 @@
       margin-top: 40px;
     }
 
-    .page-copy {
-      color: var(--quick-silver);
-    }
-
-    .page-copy p + p {
-      margin-top: 16px;
-    }
+    .page-copy { color: var(--quick-silver); }
+    .page-copy p + p { margin-top: 16px; }
 
     .page-card {
       padding: 30px;
       border: 1px solid var(--white-alpha-10);
       border-radius: 24px;
-      background: rgba(0, 0, 0, 0.18);
+      background: rgba(0,0,0,0.18);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
     }
 
-    /* Hover zoom on about image */
+    .page-card:not(figure):hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.3);
+      border-color: rgba(212,169,106,0.2);
+    }
+
     figure.page-card {
       overflow: hidden;
       border-radius: 24px;
       padding: 0;
+      position: relative;
+    }
+
+    figure.page-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 55%;
+      height: 100%;
+      background: linear-gradient(105deg, transparent 38%, rgba(255,255,255,0.07) 50%, transparent 62%);
+      pointer-events: none;
+    }
+
+    figure.page-card:hover::after {
+      animation: shimmer-overlay 0.65s ease forwards;
     }
 
     figure.page-card img {
-      transition: transform 0.5s ease;
+      transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       display: block;
       width: 100%;
       border-radius: 24px;
     }
 
-    figure.page-card:hover img {
-      transform: scale(1.05);
-    }
+    figure.page-card:hover img { transform: scale(1.07); }
 
-    /* Milestones strip */
+    /* =============================================
+       MILESTONES
+    ============================================= */
+
     .milestones {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -82,30 +246,55 @@
     }
 
     .milestone-item {
-      padding: 24px;
+      padding: 28px 24px;
       text-align: center;
       border: 1px solid var(--white-alpha-10);
       border-radius: 18px;
       background: rgba(0,0,0,0.18);
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
+    .milestone-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(212,169,106,0.07), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .milestone-item:hover {
+      transform: translateY(-7px) scale(1.025);
+      border-color: rgba(212,169,106,0.38);
+      animation: glow-pulse 2s ease infinite;
+    }
+
+    .milestone-item:hover::before { opacity: 1; }
+
     .milestone-item .m-number {
-      font-size: 36px;
+      font-size: 38px;
       font-weight: 700;
       color: var(--accent-wheat, #d4a96a);
       line-height: 1.1;
+      animation: number-glow 3s ease-in-out infinite;
     }
 
     .milestone-item .m-label {
       font-size: 13px;
       color: rgba(255,255,255,0.55);
-      margin-top: 6px;
+      margin-top: 8px;
+      line-height: 1.5;
     }
 
-    /* Our Journey section */
-    .journey-section {
-      padding-block: 20px 80px;
-    }
+    /* =============================================
+       JOURNEY SECTION
+    ============================================= */
+
+    .journey-section { padding-block: 20px 80px; }
 
     .journey-grid {
       display: grid;
@@ -120,17 +309,20 @@
       border-radius: 24px;
       overflow: hidden;
       border: 1px solid var(--white-alpha-10);
+      transition: box-shadow 0.4s ease;
+    }
+
+    .journey-image-wrap:hover {
+      box-shadow: 0 22px 60px rgba(0,0,0,0.42);
     }
 
     .journey-image-wrap img {
       width: 100%;
       display: block;
-      transition: transform 0.5s ease;
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
-    .journey-image-wrap:hover img {
-      transform: scale(1.04);
-    }
+    .journey-image-wrap:hover img { transform: scale(1.06); }
 
     .journey-badge {
       position: absolute;
@@ -141,6 +333,7 @@
       border-radius: 14px;
       padding: 10px 18px;
       backdrop-filter: blur(6px);
+      animation: badge-bounce 4.5s ease-in-out infinite;
     }
 
     .journey-badge .badge-number {
@@ -156,44 +349,158 @@
       margin-top: 2px;
     }
 
+    /* =============================================
+       JOURNEY CARDS — ANIMATED TIMELINE
+    ============================================= */
+
     .journey-cards {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 0;
+      position: relative;
+    }
+
+    /* Vertical connecting line */
+    .journey-cards.has-timeline::before {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 28px;
+      bottom: 28px;
+      width: 2px;
+      background: linear-gradient(to bottom, rgba(212,169,106,0.7), rgba(212,169,106,0.08));
+      border-radius: 2px;
+      transform-origin: top center;
+      transform: scaleY(0);
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .journey-cards.has-timeline.line-active::before {
+      transform: scaleY(1);
     }
 
     .journey-card {
-      padding: 24px 28px;
+      padding: 22px 22px 22px 54px;
       border: 1px solid var(--white-alpha-10);
       border-radius: 20px;
-      background: rgba(0, 0, 0, 0.18);
+      background: rgba(0,0,0,0.18);
+      margin-bottom: 16px;
+      position: relative;
+      transition: transform 0.32s ease, border-color 0.32s ease,
+                  box-shadow 0.32s ease, background 0.32s ease;
+      cursor: default;
+    }
+
+    .journey-card:last-child { margin-bottom: 0; }
+
+    /* Timeline dot */
+    .journey-cards.has-timeline .journey-card::before {
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 26px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent-wheat, #d4a96a);
+      border: 2px solid rgba(0,0,0,0.5);
+      z-index: 2;
+      animation: dot-pulse 2.8s ease-in-out infinite;
+    }
+
+    .journey-cards.has-timeline .journey-card:nth-child(2)::before { animation-delay: 0.4s; }
+    .journey-cards.has-timeline .journey-card:nth-child(3)::before { animation-delay: 0.8s; }
+    .journey-cards.has-timeline .journey-card:nth-child(4)::before { animation-delay: 1.2s; }
+
+    .journey-card:hover {
+      transform: translateX(7px);
+      border-color: rgba(212,169,106,0.32);
+      box-shadow: 0 8px 32px rgba(212,169,106,0.1);
+      background: rgba(212,169,106,0.04);
     }
 
     .journey-card .card-icon {
-      font-size: 24px;
-      margin-bottom: 8px;
+      font-size: 22px;
+      margin-bottom: 6px;
       display: block;
+      animation: float-icon 3.2s ease-in-out infinite;
     }
+
+    .journey-card:nth-child(2) .card-icon { animation-delay: 0.5s; }
+    .journey-card:nth-child(3) .card-icon { animation-delay: 1.0s; }
+    .journey-card:nth-child(4) .card-icon { animation-delay: 1.5s; }
 
     .journey-card .card-title {
       color: var(--accent-wheat, #d4a96a);
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
-      margin-bottom: 8px;
-      letter-spacing: 0.06em;
+      margin-bottom: 7px;
+      letter-spacing: 0.07em;
       text-transform: uppercase;
     }
 
     .journey-card p {
       font-size: 14px;
-      line-height: 1.75;
+      line-height: 1.78;
       color: rgba(255,255,255,0.58);
     }
 
-    /* Telugu story block */
-    .telugu-story {
-      padding-block: 20px 80px;
+    /* Promise section — no timeline dots */
+    .promise-cards::before     { display: none !important; }
+    .promise-cards .journey-card { padding-left: 28px; }
+    .promise-cards .journey-card::before { display: none !important; }
+
+    .promise-cards .journey-card:hover {
+      transform: translateY(-5px) translateX(0);
+      border-color: rgba(212,169,106,0.32);
+      box-shadow: 0 12px 40px rgba(212,169,106,0.1);
+      background: rgba(212,169,106,0.04);
     }
+
+    /* =============================================
+       PRINCIPLE PILLS
+    ============================================= */
+
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .principle-pill {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 11px 14px;
+      border: 1px solid var(--white-alpha-10);
+      border-radius: 12px;
+      background: rgba(0,0,0,0.18);
+      font-size: 13px;
+      color: rgba(255,255,255,0.70);
+      opacity: 0;
+      transition: transform 0.28s ease, border-color 0.28s ease,
+                  background 0.28s ease, color 0.28s ease;
+    }
+
+    .principle-pill.pill-visible {
+      animation: pill-in 0.42s ease forwards;
+    }
+
+    .principle-pill:hover {
+      border-color: rgba(212,169,106,0.36);
+      background: rgba(212,169,106,0.06);
+      color: rgba(255,255,255,0.9);
+      transform: translateX(4px);
+    }
+
+    .principle-pill .pill-icon { font-size: 16px; flex-shrink: 0; }
+
+    /* =============================================
+       TELUGU STORY
+    ============================================= */
+
+    .telugu-story { padding-block: 20px 80px; }
 
     .telugu-story-inner {
       padding: 36px 40px;
@@ -218,40 +525,123 @@
       pointer-events: none;
     }
 
+    /* Animated shimmer wash */
+    .telugu-story-inner::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      background: linear-gradient(90deg, transparent 20%, rgba(212,169,106,0.05) 50%, transparent 80%);
+      background-size: 300% 100%;
+      animation: border-flow 6s linear infinite;
+      pointer-events: none;
+    }
+
     .telugu-story-inner p {
       font-size: 15px;
       line-height: 2;
       color: rgba(255,255,255,0.62);
+      opacity: 0;
+      position: relative;
+      z-index: 1;
     }
 
-    .telugu-story-inner p + p {
-      margin-top: 16px;
+    .telugu-story-inner p.para-visible {
+      animation: para-in 0.55s ease forwards;
     }
+
+    .telugu-story-inner p + p { margin-top: 16px; }
+
+    /* =============================================
+       RESPONSIVE — TABLET
+    ============================================= */
 
     @media (max-width: 900px) {
       .page-grid,
       .journey-grid {
         grid-template-columns: 1fr;
       }
+
+      .journey-grid .journey-image-wrap { order: -1; }
     }
 
-    @media (max-width: 560px) {
+    @media (max-width: 768px) {
+      .page-intro { padding-block: 110px 60px; }
+
       .milestones {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
       }
 
-      .telugu-story-inner {
-        padding: 24px 20px;
+      .milestone-item { padding: 18px 12px; }
+      .milestone-item .m-number { font-size: 26px; }
+      .milestone-item .m-label  { font-size: 11px; }
+
+      .telugu-story-inner { padding: 28px 22px; }
+      .journey-section    { padding-block: 10px 60px; }
+
+      .journey-card {
+        padding: 18px 18px 18px 48px;
       }
+    }
+
+    /* =============================================
+       RESPONSIVE — MOBILE
+    ============================================= */
+
+    @media (max-width: 560px) {
+      .page-intro { padding-block: 100px 48px; }
+
+      /* Milestones stack with row layout */
+      .milestones { grid-template-columns: 1fr; gap: 12px; }
+
+      .milestone-item {
+        display: flex;
+        align-items: center;
+        text-align: left;
+        gap: 16px;
+        padding: 16px 20px;
+      }
+
+      .milestone-item .m-number {
+        font-size: 30px;
+        flex-shrink: 0;
+        min-width: 66px;
+        text-align: center;
+      }
+
+      .milestone-item .m-label { margin-top: 0; font-size: 13px; }
+
+      .telugu-story-inner { padding: 22px 18px; }
+      .telugu-story-inner::before { font-size: 80px; }
+      .telugu-story-inner p { font-size: 14px; }
+
+      .principles-grid { grid-template-columns: 1fr; }
+
+      .journey-card { padding: 16px 16px 16px 44px; }
+      .journey-cards.has-timeline::before { left: 16px; }
+      .journey-cards.has-timeline .journey-card::before { left: 9px; width: 12px; height: 12px; }
+
+      .page-card { padding: 20px; }
+      .journey-section { padding-block: 10px 48px; }
+      .telugu-story   { padding-block: 10px 48px; }
+    }
+
+    @media (max-width: 400px) {
+      .milestone-item .m-number { font-size: 24px; min-width: 56px; }
+      .journey-card .card-icon  { font-size: 18px; }
+      .journey-card             { padding-left: 40px; }
     }
   </style>
 </head>
 
 <body class="inner-page" id="top">
 
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
   <div class="topbar">
     <div class="container">
-
       <address class="topbar-item">
         <div class="icon">
           <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
@@ -260,32 +650,26 @@
           Little Village, Near NRI Hospital, Mangalagiri, Guntur, Andhra Pradesh
         </span>
       </address>
-
       <div class="separator"></div>
-
       <div class="topbar-item item-2">
         <div class="icon">
           <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
         </div>
         <span class="span">Open Daily : 11:30 AM - 10:30 PM</span>
       </div>
-
       <a href="tel:+919440159707" class="topbar-item link">
         <div class="icon">
           <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
         </div>
         <span class="span">+91 94401 59707</span>
       </a>
-
       <div class="separator"></div>
-
       <a href="https://wa.me/919440159707" class="topbar-item link">
         <div class="icon">
           <ion-icon name="logo-whatsapp" aria-hidden="true"></ion-icon>
         </div>
         <span class="span">WhatsApp Us</span>
       </a>
-
     </div>
   </div>
 
@@ -297,15 +681,12 @@
       </a>
 
       <nav class="navbar" data-navbar>
-
         <button class="close-btn" aria-label="close menu" data-nav-toggler>
           <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
         </button>
-
         <a href="index.html" class="logo">
           <img src="./assets/images/lvlogo.png" width="160" height="50" alt="Little Village menu logo">
         </a>
-
         <ul class="navbar-list">
           <li class="navbar-item">
             <a href="index.html" class="navbar-link hover-underline">
@@ -344,7 +725,6 @@
             </a>
           </li>
         </ul>
-
         <div class="text-center">
           <p class="headline-1 navbar-title">Visit Us</p>
           <address class="body-4">
@@ -358,7 +738,6 @@
             +91 94401 59707
           </a>
         </div>
-
       </nav>
 
       <a href="https://wa.me/919440159707" class="btn btn-secondary btn-whatsapp">
@@ -373,7 +752,6 @@
       </button>
 
       <div class="overlay" data-nav-toggler data-overlay></div>
-
     </div>
   </header>
 
@@ -381,25 +759,32 @@
 
     <!-- ===== INTRO SECTION ===== -->
     <article class="page-intro section">
+
+      <div class="intro-particles" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+      </div>
+
       <div class="container">
 
-        <p class="section-subtitle label-2 text-center" data-aos="fade-up">Our Story</p>
-        <h1 class="headline-1 section-title text-center" data-aos="fade-up" data-aos-delay="100">
-          Authentic Taste Meets Rustic Charm
+        <p class="section-subtitle label-2 text-center"
+           data-aos="fade-down" data-aos-duration="600">
+          మా కథ — Our Story
+        </p>
+        <h1 class="headline-1 section-title text-center headline-shimmer"
+            data-aos="fade-up" data-aos-delay="100" data-aos-duration="750">
+          A Journey Born From Passion &amp; Taste
         </h1>
 
         <div class="page-grid">
 
-          <div class="page-card page-copy" data-aos="fade-right" data-aos-delay="150">
+          <div class="page-card page-copy"
+               data-aos="fade-right" data-aos-delay="160" data-aos-duration="750">
             <p>
-              Little Village brings together Andhra village warmth and multi-cuisine dining in one relaxed,
-              family-friendly space. The restaurant is designed to feel grounded and welcoming, with a setting that
-              mirrors the quiet charm of rural life.
+              Little Village is not just a restaurant — it is a story of resilience, reinvention, and an uncompromising love for quality food. Founded by <strong style="color:rgba(255,255,255,0.88);">Kanneganti Venkateswarlу (VR Kanneganti)</strong>, the restaurant was born from a simple but powerful belief: that genuinely good food, made with premium ingredients and cooked with care, can change someone's day.
             </p>
             <p>
-              From everyday meals to celebrations, the experience is built around comfort, flavour, and generous
-              hospitality. The function hall, open dining areas, and signature dishes are all part of that same
-              village-inspired atmosphere.
+              What started with a ₹120 biryani discovery on a Machilipatnam trip has grown into one of the most trusted dining destinations in the region — a place where every plate reflects the same commitment to taste and quality that set it all in motion.
             </p>
             <a href="menu.html" class="btn btn-primary" style="margin-top: 24px;">
               <span class="text text-1">Explore Full Menu</span>
@@ -407,27 +792,35 @@
             </a>
           </div>
 
-          <figure class="page-card" data-aos="fade-left" data-aos-delay="200">
-            <img src="./assets/images/about-banner.jpg" width="570" height="570" loading="lazy"
-              alt="Little Village dining ambiance" class="w-100">
+          <figure class="page-card"
+                  data-aos="fade-left" data-aos-delay="220" data-aos-duration="750">
+            <img src="./assets/images/about-banner.jpg" width="570" height="570"
+                 loading="lazy" alt="Little Village dining ambiance" class="w-100">
           </figure>
 
         </div>
 
-        <!-- Milestones strip -->
+        <!-- Milestones -->
         <div class="milestones">
-          <div class="milestone-item" data-aos="fade-up" data-aos-delay="100">
-            <div class="m-number">9+</div>
-            <div class="m-label">Years of Service</div>
+
+          <div class="milestone-item"
+               data-aos="zoom-in" data-aos-delay="100" data-aos-duration="600">
+            <div class="m-number" data-count="9" data-suffix="+">0</div>
+            <div class="m-label">Years of Trusted Service</div>
           </div>
-          <div class="milestone-item" data-aos="fade-up" data-aos-delay="200">
-            <div class="m-number">6 mo</div>
-            <div class="m-label">Chef Training Before Opening</div>
+
+          <div class="milestone-item"
+               data-aos="zoom-in" data-aos-delay="230" data-aos-duration="600">
+            <div class="m-number">₹120</div>
+            <div class="m-label">The Biryani That Started It All</div>
           </div>
-          <div class="milestone-item" data-aos="fade-up" data-aos-delay="300">
-            <div class="m-number">1</div>
-            <div class="m-label">Goal — Your Happiness</div>
+
+          <div class="milestone-item"
+               data-aos="zoom-in" data-aos-delay="360" data-aos-duration="600">
+            <div class="m-number">Zero</div>
+            <div class="m-label">Compromise on Quality — Ever</div>
           </div>
+
         </div>
 
       </div>
@@ -437,46 +830,121 @@
     <section class="journey-section section">
       <div class="container">
 
-        <p class="section-subtitle label-2 text-center" data-aos="fade-up">The Journey</p>
-        <h2 class="headline-1 section-title text-center" data-aos="fade-up" data-aos-delay="100">
+        <p class="section-subtitle label-2 text-center"
+           data-aos="fade-down" data-aos-duration="600">The Journey</p>
+        <h2 class="headline-1 section-title text-center headline-shimmer"
+            data-aos="fade-up" data-aos-delay="100" data-aos-duration="750">
           From Challenge to Celebration
         </h2>
 
         <div class="journey-grid">
 
-          <div class="journey-image-wrap" data-aos="fade-right" data-aos-delay="150">
-            <img src="./assets/images/Little Village/homerestarest (1).jpeg" width="570" height="640" loading="lazy"
-              alt="Little Village restaurant interior">
+          <div class="journey-image-wrap"
+               data-aos="fade-right" data-aos-delay="160" data-aos-duration="800">
+            <img src="./assets/images/Little Village/homerestarest (1).jpeg"
+                 width="570" height="640" loading="lazy"
+                 alt="Little Village restaurant interior">
             <div class="journey-badge">
               <div class="badge-number">9+</div>
               <div class="badge-label">Years Serving Mangalagiri</div>
             </div>
           </div>
 
-          <div class="journey-cards" data-aos="fade-left" data-aos-delay="200">
+          <div class="journey-cards has-timeline" id="timelineCards"
+               data-aos="fade-left" data-aos-delay="200" data-aos-duration="800">
 
-            <div class="journey-card">
+            <div class="journey-card"
+                 data-aos="fade-up" data-aos-delay="260" data-aos-duration="620">
               <span class="card-icon">🏗️</span>
               <div class="card-title">The Beginning</div>
-              <p>Our founders ran a successful builder business for years — until unexpected government policy changes forced a major pivot. Rather than giving up, they chose to start fresh in a new direction.</p>
+              <p>Before Little Village, our founder ran a successful real estate and construction business in Mangalagiri — known for quality planning and craftsmanship. Then came demonetisation in 2016 and GST, which hit the real estate market hard and forced a major turning point.</p>
             </div>
 
-            <div class="journey-card">
-              <span class="card-icon">🍽️</span>
-              <div class="card-title">The Idea</div>
-              <p>After visiting many prominent restaurants in the region, they realised the food they loved — genuine Andhra comfort cooking — wasn't being done justice anywhere. That gap became the mission.</p>
+            <div class="journey-card"
+                 data-aos="fade-up" data-aos-delay="360" data-aos-duration="620">
+              <span class="card-icon">🍛</span>
+              <div class="card-title">The ₹120 Biryani Moment</div>
+              <p>On a trip to Machilipatnam, a chance discovery of a biryani served from a small shed for just ₹120 was the spark. The taste was extraordinary. Our founder spoke to the cook that night and said: "Come to Vijayawada — and I will open a hotel." That conversation planted the seed for Little Village.</p>
             </div>
 
-            <div class="journey-card">
-              <span class="card-icon">👨‍🍳</span>
-              <div class="card-title">The Preparation</div>
-              <p>Before opening day, experienced chefs and staff were carefully selected and put through nearly 6 months of dedicated training. Even after opening, new chefs were brought in to continuously raise the quality bar.</p>
+            <div class="journey-card"
+                 data-aos="fade-up" data-aos-delay="460" data-aos-duration="620">
+              <span class="card-icon">🎯</span>
+              <div class="card-title">Quality Before Opening</div>
+              <p>On the eve of the Dasara 2017 launch, a bold decision was made: the Indian and Chinese dishes were not up to standard. Rather than open with anything less than perfect, the chefs were respectfully let go. Food was served on opening day — but no bills were collected. The restaurant closed the next day to get it right.</p>
             </div>
 
-            <div class="journey-card">
+            <div class="journey-card"
+                 data-aos="fade-up" data-aos-delay="560" data-aos-duration="620">
               <span class="card-icon">🌿</span>
-              <div class="card-title">The Vision</div>
-              <p>A place for families — with ample parking, a village-theme setting, a spacious function hall, and food that genuinely feels like home. Not just a restaurant, but a full experience.</p>
+              <div class="card-title">The Right Team, The Right Start</div>
+              <p>New chefs were brought from Hyderabad. A single trial session produced perfect results. Within 10 days, Little Village reopened — and has maintained that same taste, quality, and dedication every day since. That standard has never been lowered.</p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FOOD PRINCIPLES SECTION ===== -->
+    <section class="journey-section section" style="padding-block: 0 80px;">
+      <div class="container">
+
+        <p class="section-subtitle label-2 text-center"
+           data-aos="fade-down" data-aos-duration="600">Our Promise</p>
+        <h2 class="headline-1 section-title text-center headline-shimmer"
+            data-aos="fade-up" data-aos-delay="100" data-aos-duration="750">
+          The Way We Cook. Always.
+        </h2>
+
+        <div class="journey-grid" style="margin-top: 40px;">
+
+          <div class="journey-cards promise-cards"
+               data-aos="fade-right" data-aos-delay="160" data-aos-duration="800">
+
+            <div class="journey-card">
+              <span class="card-icon">🧑‍🍳</span>
+              <div class="card-title">Our Food Principles</div>
+              <p style="margin-bottom: 12px;">
+                "Serve it the way you'd eat it at home." That is the guiding rule in our kitchen — no shortcuts, no substitutes.
+              </p>
+              <div class="principles-grid" id="pillsGrid">
+                <div class="principle-pill"><span class="pill-icon">✅</span> Premium ingredients</div>
+                <div class="principle-pill"><span class="pill-icon">✅</span> Home-level hygiene</div>
+                <div class="principle-pill"><span class="pill-icon">✅</span> Fresh ground masalas</div>
+                <div class="principle-pill"><span class="pill-icon">✅</span> Live fish &amp; fresh prawns</div>
+                <div class="principle-pill"><span class="pill-icon">✅</span> Fresh chicken &amp; mutton</div>
+                <div class="principle-pill"><span class="pill-icon">✅</span> Clean, healthy cooking</div>
+                <div class="principle-pill"><span class="pill-icon">❌</span> No Dalda / vanaspati</div>
+                <div class="principle-pill"><span class="pill-icon">❌</span> No palm oil</div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="journey-cards promise-cards"
+               data-aos="fade-left" data-aos-delay="200" data-aos-duration="800">
+
+            <div class="journey-card"
+                 data-aos="fade-up" data-aos-delay="260" data-aos-duration="620">
+              <span class="card-icon">💎</span>
+              <div class="card-title">Our Commitment</div>
+              <p>"Spend more to maintain quality — but never reduce quality to save cost." This mindset has guided every decision since day one, from ingredient sourcing to how dishes are plated.</p>
+            </div>
+
+            <div class="journey-card"
+                 data-aos="fade-up" data-aos-delay="360" data-aos-duration="620">
+              <span class="card-icon">🎯</span>
+              <div class="card-title">Our Concept</div>
+              <p>Every dish at Little Village is built around three pillars: the best quality ingredients, the right portion size, and a price that is honest and fair. Nothing more, nothing less.</p>
+            </div>
+
+            <div class="journey-card"
+                 data-aos="fade-up" data-aos-delay="460" data-aos-duration="620">
+              <span class="card-icon">❤️</span>
+              <div class="card-title">Little Village Today</div>
+              <p>What began with a ₹120 biryani on a night in Machilipatnam has grown into a trusted food brand. We do not just serve food — we deliver an experience. Every guest who walks through our doors is family.</p>
             </div>
 
           </div>
@@ -489,30 +957,38 @@
     <section class="telugu-story section">
       <div class="container">
 
-        <p class="section-subtitle label-2 text-center" data-aos="fade-up">మా కథ</p>
-        <h2 class="headline-1 section-title text-center" data-aos="fade-up" data-aos-delay="100">
+        <p class="section-subtitle label-2 text-center"
+           data-aos="fade-down" data-aos-duration="600">మా కథ</p>
+        <h2 class="headline-1 section-title text-center headline-shimmer"
+            data-aos="fade-up" data-aos-delay="100" data-aos-duration="750">
           మా ప్రయాణం
         </h2>
 
-        <div class="telugu-story-inner" data-aos="fade-up" data-aos-delay="150">
-          <p>
-            Little Village Restaurant కథ ఒక కొత్త ప్రారంభానికి ప్రతీక. ఒకప్పుడు నిర్మాణ రంగంలో (Builder Business) విజయవంతంగా కొనసాగిన మా ప్రయాణం, కొన్ని అనుకోని ప్రభుత్వ సమస్యల వల్ల పెద్ద మార్పు చూసింది.
+        <div class="telugu-story-inner" id="teluguStory"
+             data-aos="fade-up" data-aos-delay="160" data-aos-duration="800">
+
+          <p data-index="0">
+            లిటిల్ విలేజ్ ఒక రెస్టారెంట్ మాత్రమే కాదు — ఇది ఒక ప్రయాణం. కష్టాలు, నిర్ణయాలు, మరియు క్వాలిటీపై ఎప్పుడూ రాజీ పడని ఒక కథ. స్థాపకుడు: కన్నెగంటి వెంకటేశ్వర్లు (VR కన్నెగంటి).
           </p>
-          <p>
-            ఆ పరిస్థితుల్లో కూడా మేము వెనుకడుగు వేయలేదు. కొత్త దారిని వెతుక్కోవాలని నిర్ణయించుకుని, అనేక ప్రముఖ రెస్టారెంట్లలో ఫుడ్ టేస్ట్ చేశాం. కానీ మనసుకు నచ్చే అసలు రుచి ఎక్కడా దొరకలేదు.
+          <p data-index="1">
+            లిటిల్ విలేజ్ ప్రారంభానికి ముందు, మంగళగిరిలో రియల్ ఎస్టేట్ &amp; కన్‌స్ట్రక్షన్ వ్యాపారం విజయవంతంగా నడిచింది. కానీ 2016లో వచ్చిన డీమోనిటైజేషన్ మరియు GST ప్రభావం రియల్ ఎస్టేట్ మార్కెట్‌ను బాగా దెబ్బతీసింది. ఆ సమయంలో ఒక కొత్త ప్రారంభం మొదలైంది.
           </p>
-          <p>
-            అక్కడినుంచే Little Village ఆలోచన పుట్టింది — మంచి ఆహారం మాత్రమే కాదు, పూర్తి అనుభవం ఇవ్వగలిగే ఒక ప్రత్యేక స్థలం కావాలి అని. కుటుంబాలతో ఆనందంగా గడపగలిగే వాతావరణం, సరిపడా పార్కింగ్ సౌకర్యం, మరియు గ్రామీణ శైలి (Village Theme) కలిసిన ఒక అందమైన ప్రదేశాన్ని రూపుదిద్దాం అనుకున్నాం.
+          <p data-index="2">
+            మచిలీపట్నం ట్రిప్‌లో ఒక రాత్రి ఫుడ్ కోసం వెతుకుతుంటే, ఒక చిన్న షెడ్‌లో ₹120కి బిర్యానీ దొరికింది. ఆ టేస్ట్ చూసి ఆశ్చర్యపోయాం — "ఇంత టేస్ట్… ఇంత విలువ!" అక్కడి కుక్‌తో మాట్లాడి చెప్పాం: "మీరు విజయవాడకు వస్తే… నేను హోటల్ ప్రారంభిస్తాను." ఆ క్షణమే లిటిల్ విలేజ్‌కు బీజం పడింది.
           </p>
-          <p>
-            రెస్టారెంట్ ప్రారంభానికి ముందు అనుభవజ్ఞులైన చెఫ్‌లు మరియు స్టాఫ్‌ను ఎంపిక చేసి, దాదాపు 6 నెలలు ప్రత్యేకంగా ట్రైనింగ్ ఇచ్చాం. ఓపెనింగ్ తర్వాత కూడా మా ప్రయాణం అక్కడే ఆగలేదు — ఇంకా మంచి రుచిని అందించాలనే లక్ష్యంతో కొత్త చెఫ్‌లను తీసుకుని ఫుడ్ క్వాలిటీని మరింత మెరుగుపరిచాం.
+          <p data-index="3">
+            2017 దసరా సమయంలో లిటిల్ విలేజ్ ప్రారంభమైంది. ఓపెనింగ్‌కు ఒక రోజు ముందు ఒక పెద్ద నిర్ణయం తీసుకున్నాం — బిర్యానీ &amp; తందూర్ బాగున్నాయి, కానీ ఇండియన్ &amp; చైనీస్ వంటలు స్టాండర్డ్‌కు తగ్గట్లుగా లేవు. "క్వాలిటీ మీద ఎలాంటి రాజీ ఉండదు" అని షెఫ్స్‌ను గౌరవంగా పంపించాం. దసరా రోజు ఓపెన్ చేశాం, ఫుడ్ సర్వ్ చేశాం — కానీ బిల్ తీసుకోలేదు. ఎందుకంటే ఇంకా పర్ఫెక్ట్ కాలేదు. తర్వాతి రోజు రెస్టారెంట్ మూసివేశాం.
           </p>
-          <p>
-            ఈ రోజు, దాదాపు 9–10 సంవత్సరాలుగా Little Village Restaurant విజయవంతంగా నడుస్తూ, మంగళగిరిలో ప్రముఖ రెస్టారెంట్‌గా గుర్తింపు పొందింది. మా లక్ష్యం ఒకటే — ప్రతి కస్టమర్‌కు రుచి, సౌకర్యం, మరియు ఆనందంతో కూడిన అనుభవాన్ని అందించడం.
+          <p data-index="4">
+            హైదరాబాద్ వెళ్లి కొత్త షెఫ్స్ తీసుకొచ్చాం. ఒక ట్రయల్‌లోనే పర్ఫెక్ట్ రిజల్ట్ వచ్చింది — "ఇదే మన టీమ్." 10 రోజుల్లో మళ్లీ లిటిల్ విలేజ్ ప్రారంభమైంది. అప్పటి నుండి ఇప్పటి వరకు — అదే టేస్ట్, అదే క్వాలిటీ, అదే నిబద్ధత కొనసాగుతోంది.
           </p>
-          <p>
-            Little Village కి వచ్చిన ప్రతి అతిథి మా కుటుంబ సభ్యుడే. మీ ప్రతి సందర్శనను మరపురాని అనుభవంగా మార్చడం మా వాగ్దానం.
+          <p data-index="5">
+            మా వంటశాల సూత్రం ఒక్కటే: "మన ఇంట్లో ఎలా తింటామో… అలాగే సర్వ్ చేయాలి." ప్రీమియం పదార్థాలు, తాజా మసాలాలు, లైవ్ ఫిష్, తాజా ప్రాన్స్, తాజా చికెన్ &amp; మటన్ — ఇవే మా పునాది. డాల్డా లేదు, పామ్ ఆయిల్ లేదు, రాజీ లేదు.
           </p>
+          <p data-index="6">
+            ₹120 బిర్యానీతో ప్రారంభమైన ఈ ప్రయాణం ఈ రోజు ఒక నమ్మకమైన ఫుడ్ బ్రాండ్‌గా ఎదిగింది. లిటిల్ విలేజ్‌కి వచ్చిన ప్రతి అతిథి మా కుటుంబ సభ్యుడే. మీ ప్రతి సందర్శనను మరపురాని అనుభవంగా మార్చడం మా వాగ్దానం. ❤️
+          </p>
+
         </div>
 
       </div>
@@ -523,9 +999,7 @@
   <footer class="footer section has-bg-image text-center" id="footer"
     style="background-image: url('./assets/images/footer-bg.jpg')">
     <div class="container">
-
       <div class="footer-top grid-list">
-
         <div class="footer-brand has-before has-after">
           <a href="index.html" class="logo">
             <h2 class="headline-1" style="color: var(--accent-wheat); margin-bottom: 20px;">LITTLE VILLAGE</h2>
@@ -550,7 +1024,6 @@
             <span class="text text-2" aria-hidden="true">Book Now</span>
           </a>
         </div>
-
         <ul class="footer-list">
           <li><a href="index.html" class="label-2 footer-link hover-underline">Home</a></li>
           <li><a href="menu.html" class="label-2 footer-link hover-underline">Full Menu</a></li>
@@ -558,7 +1031,6 @@
           <li><a href="booking.html" class="label-2 footer-link hover-underline">Function Hall</a></li>
           <li><a href="contact.html" class="label-2 footer-link hover-underline">Contact</a></li>
         </ul>
-
         <ul class="footer-list">
           <li><a href="#" class="label-2 footer-link hover-underline">Facebook</a></li>
           <li><a href="https://www.instagram.com/little_village_official?igsh=MXU1NmF4MW53bXdyYw==" class="label-2 footer-link hover-underline">Instagram</a></li>
@@ -566,15 +1038,12 @@
           <li><a href="#" class="label-2 footer-link hover-underline">Youtube</a></li>
           <li><a href="https://maps.app.goo.gl/B9WqXW6YxX8X8X8X8" target="_blank" class="label-2 footer-link hover-underline">Google Map</a></li>
         </ul>
-
       </div>
-
       <div class="footer-bottom">
         <p class="copyright">
           &copy; 2026 Little Village Multi Cuisine Restaurant. All Rights Reserved.
         </p>
       </div>
-
     </div>
   </footer>
 
@@ -585,16 +1054,105 @@
   <script src="./assets/js/script.js"></script>
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
+    /* ===== AOS ===== */
     AOS.init({
       duration: 700,
-      easing: 'ease-out',
+      easing: 'ease-out-cubic',
       once: true,
-      offset: 60
+      offset: 50
     });
+
+    /* ===== Scroll progress bar ===== */
+    window.addEventListener('scroll', () => {
+      const bar = document.getElementById('scrollProgress');
+      if (!bar) return;
+      const scrolled  = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (maxScroll > 0 ? (scrolled / maxScroll) * 100 : 0) + '%';
+    }, { passive: true });
+
+    /* ===== Animated counter ===== */
+    function runCounter(el) {
+      const target    = parseInt(el.dataset.count, 10);
+      const suffix    = el.dataset.suffix || '';
+      if (isNaN(target)) return;
+      const steps     = 48;
+      const interval  = 1400 / steps;
+      let   current   = 0;
+      const inc       = target / steps;
+      const timer = setInterval(() => {
+        current += inc;
+        if (current >= target) { current = target; clearInterval(timer); }
+        el.textContent = Math.floor(current) + suffix;
+      }, interval);
+    }
+
+    new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          runCounter(entry.target);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.6 })
+    .observe(...(document.querySelectorAll('[data-count]').length
+      ? document.querySelectorAll('[data-count]')
+      : [document.createElement('div')]));
+
+    /* Handle multiple counters cleanly */
+    document.querySelectorAll('[data-count]').forEach(el => {
+      new IntersectionObserver((entries, obs) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { runCounter(e.target); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.6 }).observe(el);
+    });
+
+    /* ===== Timeline line draw ===== */
+    new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('line-active');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 }).observe(
+      document.getElementById('timelineCards') || document.createElement('div')
+    );
+
+    /* ===== Staggered pills ===== */
+    new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.principle-pill').forEach((pill, i) => {
+            setTimeout(() => pill.classList.add('pill-visible'), i * 85);
+          });
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 }).observe(
+      document.getElementById('pillsGrid') || document.createElement('div')
+    );
+
+    /* ===== Telugu paragraph staggered reveal ===== */
+    new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('p[data-index]').forEach(p => {
+            setTimeout(
+              () => p.classList.add('para-visible'),
+              parseInt(p.dataset.index, 10) * 115
+            );
+          });
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 }).observe(
+      document.getElementById('teluguStory') || document.createElement('div')
+    );
   </script>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 </body>
-
 </html>
