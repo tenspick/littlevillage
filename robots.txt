@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+# Sitemap
+Sitemap: https://hotellittlevillage.com/sitemap.xml
