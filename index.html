@@ -100,7 +100,124 @@ Dining Restaurant Near Me
   ]
 }
 </script>
-  <meta name="google-site-verification" content="M2NQSPtcsYyZpX73YDm1I_keT4Mvr8pf4MZ2s6FwpsM" />
+  <meta name="google-site-verification" content="M2NQSPtcsYyZpX73YDm1I_keT4Mvr8pf4MZ2s6FwpsM" />  
+  <style>
+  /* ===== REVIEWS SECTION ===== */
+  .reviews-section {
+    padding-block: 80px;
+    overflow: hidden;
+  }
+
+  .reviews-track-wrapper {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  }
+
+  .reviews-track {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+    animation: scrollReviews 45s linear infinite;
+  }
+
+  .reviews-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes scrollReviews {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .review-card {
+    background: linear-gradient(160deg, rgba(48,48,48,0.95), rgba(33,33,33,0.98));
+    border: 1px solid var(--white-alpha-10);
+    border-radius: 16px;
+    padding: 24px;
+    width: 320px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: var(--shadow-1);
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .review-card:hover {
+    border-color: var(--clay-orange);
+    transform: translateY(-4px);
+  }
+
+  /* ── FIXED ALIGNMENT ── */
+  .review-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .reviewer-avatar {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 50%;
+    background: var(--clay-orange);
+    color: white;
+    font-family: var(--fontFamily-forum);
+    font-size: 1.8rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    text-transform: uppercase;
+    align-self: center;
+  }
+
+  .reviewer-meta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .reviewer-name {
+    font-family: var(--fontFamily-forum);
+    font-size: 1.7rem;
+    color: var(--accent-wheat);
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .star-row {
+    color: #FBBC04;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+
+  .google-logo {
+    width: 46px;
+    flex-shrink: 0;
+    opacity: 0.85;
+    align-self: center;
+    margin-left: auto;
+  }
+
+  .review-text {
+    color: var(--quick-silver);
+    font-size: 1.35rem;
+    line-height: 1.7;
+    font-style: italic;
+  }
+</style>
 </head>
 
 <body id="top">
@@ -802,6 +919,232 @@ Dining Restaurant Near Me
 
 
     </article>
+
+<!-- ===== REVIEWS MARQUEE SECTION ===== -->
+<section class="reviews-section section">
+  <div class="container">
+    <p class="section-subtitle label-2 text-center" style="margin-bottom: 8px;">What People Say</p>
+    <h2 class="headline-1 text-center" style="margin-bottom: 48px;">Guest Reviews</h2>
+  </div>
+
+  <div class="reviews-track-wrapper">
+    <div class="reviews-track">
+
+      <!-- Review 1 -->
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-avatar" style="background:#e65100;">S</div>
+          <div class="reviewer-meta">
+            <p class="reviewer-name">Sravani Reddy</p>
+            <div class="star-row">★★★★★</div>
+          </div>
+           
+        </div>
+        <p class="review-text">"Absolutely loved the ambiance and the food! The Chicken Biryani was flavorful and aromatic. Service was prompt and friendly. Perfect place for family dinners in Mangalagiri."</p>
+      </div>
+
+      <!-- Review 2 -->
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-avatar" style="background:#1a73e8;">R</div>
+          <div class="reviewer-meta">
+            <p class="reviewer-name">Ravi Kumar</p>
+            <div class="star-row">★★★★★</div>
+          </div>
+           
+        </div>
+        <p class="review-text">"Best multi-cuisine restaurant near NRI Hospital area. Tried their Paneer Butter Masala and it was outstanding. Great value for money. Highly recommend!"</p>
+      </div>
+
+      <!-- Review 3 -->
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-avatar" style="background:#34a853;">P</div>
+          <div class="reviewer-meta">
+            <p class="reviewer-name">Priya Nair</p>
+            <div class="star-row">★★★★★</div>
+          </div>
+           
+        </div>
+        <p class="review-text">"Visited with my colleagues for lunch. The menu variety is amazing — North Indian, South Indian, Chinese all under one roof. The Dosas were crispy and fresh. Will definitely be back!"</p>
+      </div>
+
+      <!-- Review 4 -->
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-avatar" style="background:#ea4335;">A</div>
+          <div class="reviewer-meta">
+            <p class="reviewer-name">Anil Varma</p>
+            <div class="star-row">★★★★☆</div>
+          </div>
+           
+        </div>
+        <p class="review-text">"Good food, cozy atmosphere. We booked for a family function and the hall was perfectly arranged. Staff was very cooperative. Food was served hot and on time."</p>
+      </div>
+
+      <!-- Review 5 -->
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-avatar" style="background:#fbbc04; color:#333;">M</div>
+          <div class="reviewer-meta">
+            <p class="reviewer-name">Mounika Sharma</p>
+            <div class="star-row">★★★★★</div>
+          </div>
+           
+        </div>
+        <p class="review-text">"The Chinese starters are amazing! Chilli Chicken and Gobi Manchurian were perfectly spiced. The restaurant has a wonderful vibe, and the staff is very welcoming. 5 stars!"</p>
+      </div>
+
+      <!-- Review 6 -->
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-avatar" style="background:#7b1fa2;">V</div>
+          <div class="reviewer-meta">
+            <p class="reviewer-name">Venkat Rao</p>
+            <div class="star-row">★★★★★</div>
+          </div>
+           
+        </div>
+        <p class="review-text">"One of the best dining experiences I've had in the Guntur district. The Mutton Curry paired with rice was heavenly. Huge portions at very reasonable prices. Must visit!"</p>
+      </div>
+
+      <!-- Review 7 -->
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-avatar" style="background:#00897b;">K</div>
+          <div class="reviewer-meta">
+            <p class="reviewer-name">Kavitha Menon</p>
+            <div class="star-row">★★★★★</div>
+          </div>
+           
+        </div>
+        <p class="review-text">"Celebrated my daughter's birthday here. The function hall was beautifully set up and the food quality was top-notch. Everyone loved the desserts. Thank you Little Village team!"</p>
+      </div>
+
+      <!-- Review 8 -->
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-avatar" style="background:#f4511e;">D</div>
+          <div class="reviewer-meta">
+            <p class="reviewer-name">Deepak Chandra</p>
+            <div class="star-row">★★★★☆</div>
+          </div>
+           
+        </div>
+        <p class="review-text">"Great location near NRI Hospital. Perfect for a quick bite or a long leisurely meal. The thali meals are filling and delicious. Clean interiors and hygienic kitchen. Thumbs up!"</p>
+      </div>
+
+      <!-- ===== DUPLICATE SET for seamless infinite loop ===== -->
+
+      <!-- Review 1 Duplicate -->
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-avatar" style="background:#e65100;">S</div>
+          <div class="reviewer-meta">
+            <p class="reviewer-name">Sravani Reddy</p>
+            <div class="star-row">★★★★★</div>
+          </div>
+           
+        </div>
+        <p class="review-text">"Absolutely loved the ambiance and the food! The Chicken Biryani was flavorful and aromatic. Service was prompt and friendly. Perfect place for family dinners in Mangalagiri."</p>
+      </div>
+
+      <!-- Review 2 Duplicate -->
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-avatar" style="background:#1a73e8;">R</div>
+          <div class="reviewer-meta">
+            <p class="reviewer-name">Ravi Kumar</p>
+            <div class="star-row">★★★★★</div>
+          </div>
+           
+        </div>
+        <p class="review-text">"Best multi-cuisine restaurant near NRI Hospital area. Tried their Paneer Butter Masala and it was outstanding. Great value for money. Highly recommend!"</p>
+      </div>
+
+      <!-- Review 3 Duplicate -->
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-avatar" style="background:#34a853;">P</div>
+          <div class="reviewer-meta">
+            <p class="reviewer-name">Priya Nair</p>
+            <div class="star-row">★★★★★</div>
+          </div>
+           
+        </div>
+        <p class="review-text">"Visited with my colleagues for lunch. The menu variety is amazing — North Indian, South Indian, Chinese all under one roof. The Dosas were crispy and fresh. Will definitely be back!"</p>
+      </div>
+
+      <!-- Review 4 Duplicate -->
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-avatar" style="background:#ea4335;">A</div>
+          <div class="reviewer-meta">
+            <p class="reviewer-name">Anil Varma</p>
+            <div class="star-row">★★★★☆</div>
+          </div>
+           
+        </div>
+        <p class="review-text">"Good food, cozy atmosphere. We booked for a family function and the hall was perfectly arranged. Staff was very cooperative. Food was served hot and on time."</p>
+      </div>
+
+      <!-- Review 5 Duplicate -->
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-avatar" style="background:#fbbc04; color:#333;">M</div>
+          <div class="reviewer-meta">
+            <p class="reviewer-name">Mounika Sharma</p>
+            <div class="star-row">★★★★★</div>
+          </div>
+           
+        </div>
+        <p class="review-text">"The Chinese starters are amazing! Chilli Chicken and Gobi Manchurian were perfectly spiced. The restaurant has a wonderful vibe, and the staff is very welcoming. 5 stars!"</p>
+      </div>
+
+      <!-- Review 6 Duplicate -->
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-avatar" style="background:#7b1fa2;">V</div>
+          <div class="reviewer-meta">
+            <p class="reviewer-name">Venkat Rao</p>
+            <div class="star-row">★★★★★</div>
+          </div>
+           
+        </div>
+        <p class="review-text">"One of the best dining experiences I've had in the Guntur district. The Mutton Curry paired with rice was heavenly. Huge portions at very reasonable prices. Must visit!"</p>
+      </div>
+
+      <!-- Review 7 Duplicate -->
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-avatar" style="background:#00897b;">K</div>
+          <div class="reviewer-meta">
+            <p class="reviewer-name">Kavitha Menon</p>
+            <div class="star-row">★★★★★</div>
+          </div>
+           
+        </div>
+        <p class="review-text">"Celebrated my daughter's birthday here. The function hall was beautifully set up and the food quality was top-notch. Everyone loved the desserts. Thank you Little Village team!"</p>
+      </div>
+
+      <!-- Review 8 Duplicate -->
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-avatar" style="background:#f4511e;">D</div>
+          <div class="reviewer-meta">
+            <p class="reviewer-name">Deepak Chandra</p>
+            <div class="star-row">★★★★☆</div>
+          </div>
+           
+        </div>
+        <p class="review-text">"Great location near NRI Hospital. Perfect for a quick bite or a long leisurely meal. The thali meals are filling and delicious. Clean interiors and hygienic kitchen. Thumbs up!"</p>
+      </div>
+
+    </div><!-- end .reviews-track -->
+  </div><!-- end .reviews-track-wrapper -->
+</section>
+
+    
   </main>
 
 
