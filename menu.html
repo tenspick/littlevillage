@@ -12,162 +12,12 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
   <style>
-    /* ── Menu hero section ── */
-    .menu-page {
-      padding-block-start: 120px;
-      padding-block-end: 80px;
-      min-height: 70vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .menu-cta-wrapper {
-      text-align: center;
-      max-width: 680px;
-      margin-inline: auto;
-    }
-
-    .menu-cta-wrapper .headline-1 {
-      margin-bottom: 16px;
-    }
-
-    .menu-subtitle {
-      color: var(--quick-silver);
-      font-size: 1.6rem;
-      line-height: 1.7;
-      margin-bottom: 48px;
-    }
-
-    /* ── Big illustrated menu card ── */
-    .menu-card {
-      position: relative;
-      background: linear-gradient(160deg, rgba(48,48,48,0.97), rgba(28,28,28,0.99));
-      border: 1px solid var(--white-alpha-10);
-      border-radius: 20px;
-      overflow: hidden;
-      padding: 48px 40px 44px;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
-      transition: border-color 0.3s, box-shadow 0.3s;
-    }
-
-    .menu-card:hover {
-      border-color: var(--clay-orange);
-      box-shadow: 0 28px 70px rgba(0,0,0,0.6);
-    }
-
-    /* decorative diagonal accent */
-    .menu-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at top right, rgba(211,84,0,0.12), transparent 65%);
-      pointer-events: none;
-    }
-
-    .menu-card-icon {
-      font-size: 6rem;
-      color: var(--clay-orange);
-      margin-bottom: 20px;
-      display: block;
-      line-height: 1;
-    }
-
-    .menu-card-title {
-      font-family: var(--fontFamily-forum);
-      font-size: 3.2rem;
-      color: var(--accent-wheat);
-      margin-bottom: 12px;
-    }
-
-    .menu-card-desc {
-      color: var(--quick-silver);
-      font-size: 1.5rem;
-      line-height: 1.7;
-      margin-bottom: 36px;
-    }
-
-    .menu-open-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      background: var(--clay-orange);
-      color: #fff;
-      font-family: var(--fontFamily-forum);
-      font-size: 1.9rem;
-      letter-spacing: 0.04em;
-      padding: 16px 40px;
-      border-radius: 10px;
-      transition: background 0.3s, transform 0.25s, box-shadow 0.3s;
-      box-shadow: 0 6px 20px rgba(211,84,0,0.35);
-      cursor: pointer;
-    }
-
-    .menu-open-btn:hover {
-      background: #E65100;
-      transform: translateY(-3px);
-      box-shadow: 0 12px 28px rgba(211,84,0,0.45);
-    }
-
-    .menu-open-btn ion-icon {
-      font-size: 2.2rem;
-      flex-shrink: 0;
-    }
-
-    /* ── Feature pills ── */
-    .menu-pills {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 36px;
-    }
-
-    .menu-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      background: var(--white-alpha-10);
-      color: var(--accent-wheat);
-      font-size: 1.35rem;
-      padding: 8px 18px;
-      border-radius: 100px;
-      border: 1px solid var(--white-alpha-10);
-    }
-
-    .menu-pill ion-icon {
-      font-size: 1.5rem;
-      color: var(--clay-orange);
-    }
-
-    /* ── WhatsApp CTA below the card ── */
-    .wa-hint {
-      margin-top: 32px;
-      color: var(--quick-silver);
-      font-size: 1.4rem;
-    }
-
-    .wa-hint a {
-      color: #25D366;
-      font-weight: 700;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
-    @media (max-width: 480px) {
-      .menu-card {
-        padding: 36px 24px 32px;
-      }
-      .menu-card-title { font-size: 2.6rem; }
-      .menu-open-btn   { font-size: 1.7rem; padding: 14px 28px; }
-    }
+    .menu-page { padding-block-start: 120px; }
   </style>
 </head>
 
 <body class="inner-page" id="top">
 
-  <!-- ── Topbar ── -->
   <div class="topbar">
     <div class="container">
 
@@ -175,6 +25,7 @@
         <div class="icon">
           <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
         </div>
+
         <span class="span">
           Little Village, Near NRI Hospital, Mangalagiri, Guntur, Andhra Pradesh
         </span>
@@ -186,13 +37,15 @@
         <div class="icon">
           <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
         </div>
-        <span class="span">Open Daily : 11:30 AM – 10:30 PM</span>
+
+        <span class="span">Open Daily : 11:30 AM - 10:30 PM</span>
       </div>
 
-      <a href="tel:+919440159707" class="topbar-item link">
+      <a href="tel:+91 94401 59707" class="topbar-item link">
         <div class="icon">
           <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
         </div>
+
         <span class="span">+91 94401 59707</span>
       </a>
 
@@ -202,19 +55,19 @@
         <div class="icon">
           <ion-icon name="logo-whatsapp" aria-hidden="true"></ion-icon>
         </div>
+
         <span class="span">WhatsApp Us</span>
       </a>
 
     </div>
   </div>
 
-  <!-- ── Header ── -->
+  <!-- Header -->
   <header class="header" data-header>
     <div class="container">
       <a href="index.html" class="logo">
         <img src="./assets/images/lvlogo.png" width="160" height="50" alt="Little Village Home">
       </a>
-
       <nav class="navbar" data-navbar>
         <button class="close-btn" aria-label="close menu" data-nav-toggler>
           <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
@@ -231,30 +84,35 @@
               <span class="span">Home</span>
             </a>
           </li>
+
           <li class="navbar-item">
             <a href="menu.html" class="navbar-link hover-underline active">
               <div class="separator"></div>
               <span class="span">Full Menu</span>
             </a>
           </li>
+
           <li class="navbar-item">
             <a href="aboutus.html" class="navbar-link hover-underline">
               <div class="separator"></div>
               <span class="span">About Us</span>
             </a>
           </li>
+
           <li class="navbar-item">
             <a href="gallery.html" class="navbar-link hover-underline">
               <div class="separator"></div>
               <span class="span">Gallery</span>
             </a>
           </li>
+
           <li class="navbar-item">
             <a href="booking.html" class="navbar-link hover-underline">
               <div class="separator"></div>
               <span class="span">Function Hall</span>
             </a>
           </li>
+
           <li class="navbar-item">
             <a href="contact.html" class="navbar-link hover-underline">
               <div class="separator"></div>
@@ -265,98 +123,76 @@
 
         <div class="text-center">
           <p class="headline-1 navbar-title">Visit Us</p>
+
           <address class="body-4">
             NRI Hospital Road, Mangalagiri, <br>
             Guntur, Andhra Pradesh
           </address>
-          <p class="body-4 navbar-text">Daily : 11:30 AM – 10:30 PM</p>
+
+          <p class="body-4 navbar-text">Daily : 11:30 AM - 10:30 PM</p>
+
           <div class="separator"></div>
+
           <p class="contact-label">Quick Support</p>
-          <a href="tel:+919440159707" class="body-1 contact-number hover-underline">
-            +91 94401 59707
+
+          <a href="tel:+911234567890" class="body-1 contact-number hover-underline">
+            +91 12345 67890
           </a>
         </div>
       </nav>
 
       <a href="https://wa.me/919440159707" class="btn btn-secondary">
-        <span class="text text-1">
-          <ion-icon name="logo-whatsapp" aria-hidden="true"
-            style="display:inline-block;vertical-align:middle;margin-right:6px;"></ion-icon>
-          Order on WhatsApp
-        </span>
-        <span class="text text-2" aria-hidden="true">
-          <ion-icon name="logo-whatsapp" aria-hidden="true"
-            style="display:inline-block;vertical-align:middle;margin-right:6px;"></ion-icon>
-          Order on WhatsApp
-        </span>
+        <span class="text text-1"><ion-icon name="logo-whatsapp" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:6px;"></ion-icon>Order on WhatsApp</span>
+        <span class="text text-2" aria-hidden="true"><ion-icon name="logo-whatsapp" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:6px;"></ion-icon>Order on WhatsApp</span>
       </a>
 
-      <button class="nav-open-btn" data-nav-toggler>
-        <span class="line line-1"></span>
-        <span class="line line-2"></span>
-        <span class="line line-3"></span>
-      </button>
+      <button class="nav-open-btn" data-nav-toggler><span class="line line-1"></span><span class="line line-2"></span><span class="line line-3"></span></button>
       <div class="overlay" data-nav-toggler data-overlay></div>
     </div>
   </header>
 
-  <!-- ── Main ── -->
   <main>
     <article class="container menu-page">
-      <div class="menu-cta-wrapper">
 
-        <h1 class="headline-1">Our Delicious Menu</h1>
-        <p class="menu-subtitle">
-          Explore our wide spread of multi-cuisine dishes — from traditional Andhra
-          flavours to continental favourites, all crafted fresh every day.
-        </p>
+      <div style="text-align: center; margin-bottom: 40px;">
 
-        <div class="menu-card">
+        <h1 class="headline-1" style="margin-bottom: 20px;">
+          Our Delicious Menu
+        </h1>
 
-          <ion-icon name="restaurant-outline" class="menu-card-icon" aria-hidden="true"></ion-icon>
+        <button
+          id="viewMenuBtn"
+          class="btn btn-secondary"
+          style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding-inline: 28px;
+            min-width: 220px;
+          ">
 
-          <p class="menu-card-title">Full Menu — All Categories</p>
-          <p class="menu-card-desc">
-            Browse starters, main course, breads, rice, noodles, desserts, beverages
-            and everything in between. Updated as of December 2025.
-          </p>
+          <ion-icon
+            name="document-text-outline"
+            aria-hidden="true"
+            style="font-size: 2rem;">
+          </ion-icon>
 
-          <!-- Smart button: new tab on desktop, same tab on mobile -->
-          <button class="menu-open-btn" id="viewMenuBtn" aria-label="View our full menu PDF">
-            <ion-icon name="document-text-outline" aria-hidden="true"></ion-icon>
+          <span class="text text-1">
             View Full Menu
-          </button>
+          </span>
 
-          <div class="menu-pills">
-            <span class="menu-pill">
-              <ion-icon name="leaf-outline"></ion-icon> Veg &amp; Non-Veg
-            </span>
-            <span class="menu-pill">
-              <ion-icon name="flame-outline"></ion-icon> Spicy Options
-            </span>
-            <span class="menu-pill">
-              <ion-icon name="pizza-outline"></ion-icon> Multi-Cuisine
-            </span>
-            <span class="menu-pill">
-              <ion-icon name="wine-outline"></ion-icon> Beverages
-            </span>
-          </div>
+          <span class="text text-2" aria-hidden="true">
+            View Full Menu
+          </span>
 
-        </div><!-- /menu-card -->
-
-        <p class="wa-hint">
-          Want to pre-order?
-          <a href="https://wa.me/919440159707" target="_blank" rel="noopener">
-            WhatsApp us directly
-          </a>
-          and we'll take care of the rest.
-        </p>
+        </button>
 
       </div>
+
     </article>
   </main>
 
-  <!-- ── Footer ── -->
   <footer class="footer section has-bg-image text-center" id="footer"
     style="background-image: url('./assets/images/footer-bg.jpg')">
     <div class="container">
@@ -364,15 +200,22 @@
       <div class="footer-top grid-list">
 
         <div class="footer-brand has-before has-after">
+
           <a href="index.html" class="logo">
             <h2 class="headline-1" style="color: var(--accent-wheat); margin-bottom: 20px;">LITTLE VILLAGE</h2>
           </a>
+
           <address class="body-4">
             NRI Hospital Road, Mangalagiri, Guntur, Andhra Pradesh
           </address>
+
           <a href="mailto:info@littlevillage.com" class="body-4 contact-link">info@littlevillage.com</a>
+
           <a href="tel:+919440159707" class="body-4 contact-link">Inquiries : +91 94401 59707</a>
-          <p class="body-4">Open : 11:30 AM – 10:30 PM</p>
+
+          <p class="body-4">
+            Open : 11:30 AM - 10:30 PM
+          </p>
 
           <div class="wrapper">
             <div class="separator"></div>
@@ -381,56 +224,86 @@
           </div>
 
           <p class="title-1">Special Events</p>
+
           <p class="label-1">
             Book our <span class="span">Function Hall</span> for your special days.
           </p>
+
           <a href="booking.html" class="btn btn-secondary footer-cta-btn">
             <span class="text text-1">Book Now</span>
             <span class="text text-2" aria-hidden="true">Book Now</span>
           </a>
+
         </div>
 
         <ul class="footer-list">
-          <li><a href="index.html"   class="label-2 footer-link hover-underline">Home</a></li>
-          <li><a href="menu.html"    class="label-2 footer-link hover-underline">Full Menu</a></li>
-          <li><a href="aboutus.html" class="label-2 footer-link hover-underline">About Us</a></li>
-          <li><a href="booking.html" class="label-2 footer-link hover-underline">Function Hall</a></li>
-          <li><a href="contact.html" class="label-2 footer-link hover-underline">Contact</a></li>
+
+          <li>
+            <a href="index.html" class="label-2 footer-link hover-underline">Home</a>
+          </li>
+
+          <li>
+            <a href="menu.html" class="label-2 footer-link hover-underline">Full Menu</a>
+          </li>
+
+          <li>
+            <a href="aboutus.html" class="label-2 footer-link hover-underline">About Us</a>
+          </li>
+
+          <li>
+            <a href="booking.html" class="label-2 footer-link hover-underline">Function Hall</a>
+          </li>
+
+          <li>
+            <a href="contact.html" class="label-2 footer-link hover-underline">Contact</a>
+          </li>
+
         </ul>
 
         <ul class="footer-list">
-          <li><a href="#" class="label-2 footer-link hover-underline">Facebook</a></li>
-          <li><a href="#" class="label-2 footer-link hover-underline">Instagram</a></li>
-          <li><a href="#" class="label-2 footer-link hover-underline">Twitter</a></li>
-          <li><a href="#" class="label-2 footer-link hover-underline">Youtube</a></li>
+
+          <li>
+            <a href="#" class="label-2 footer-link hover-underline">Facebook</a>
+          </li>
+
+          <li>
+            <a href="#" class="label-2 footer-link hover-underline">Instagram</a>
+          </li>
+
+          <li>
+            <a href="#" class="label-2 footer-link hover-underline">Twitter</a>
+          </li>
+
+          <li>
+            <a href="#" class="label-2 footer-link hover-underline">Youtube</a>
+          </li>
+
           <li>
             <a href="https://maps.app.goo.gl/B9WqXW6YxX8X8X8X8" target="_blank"
               class="label-2 footer-link hover-underline">Google Map</a>
           </li>
+
         </ul>
 
       </div>
 
       <div class="footer-bottom">
+
         <p class="copyright">
           &copy; 2026 Little Village Multi Cuisine Restaurant. All Rights Reserved.
         </p>
+
       </div>
 
     </div>
   </footer>
 
-  <!-- ── Scripts ── -->
+  <!-- Sidebar JS -->
   <script src="./assets/js/script.js"></script>
 
   <script>
-    /**
-     * "View Full Menu" button behaviour
-     *  • Desktop  → open PDF in a new browser tab  (user can close tab to return)
-     *  • Mobile   → navigate to PDF in the SAME tab; browser back-button returns here
-     *
-     * Mobile detection: touch-capable viewport ≤ 1024 px
-     */
+    // Desktop  → open PDF in a new tab
+    // Mobile   → open PDF in the same tab so the back button returns to menu.html
     (function () {
       const PDF_PATH = './LV%20Menu%20[23-12-2025].pdf';
 
@@ -443,20 +316,16 @@
 
       document.getElementById('viewMenuBtn').addEventListener('click', function () {
         if (isMobile()) {
-          // Same tab — back button returns to menu.html naturally
-          window.location.href = PDF_PATH;
+          window.location.href = PDF_PATH;   // same tab — back button returns here
         } else {
-          // New tab on desktop
-          window.open(PDF_PATH, '_blank', 'noopener,noreferrer');
+          window.open(PDF_PATH, '_blank', 'noopener,noreferrer');  // new tab on desktop
         }
       });
     })();
   </script>
 
   <!-- Ionicons -->
-  <script type="module"
-    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule
-    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
