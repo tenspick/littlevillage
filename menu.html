@@ -12,518 +12,333 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
   <style>
-    /* ── FOOTER FIX ── */
-    body {
-      display: flex;
+    /* ── MENU OVERLAY PANEL ───────────────────────────────────── */
+    #menuOverlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: var(--eerie-black-1, #1a1a1a);
+      overflow-y: auto;
+      /* Hidden by default – shown when hash == #menu */
+      display: none;
       flex-direction: column;
-      min-height: 100vh;
     }
+    #menuOverlay.active { display: flex; }
 
-    main {
-      flex: 1;
+    .menu-overlay-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--eerie-black-1, #1a1a1a);
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
-
-    .menu-page {
-      padding-block-start: 120px;
-      padding-block-end: 120px;
-      padding-inline: 16px;
-      flex: 1;
+    .menu-overlay-header h1 {
+      font-family: var(--fontFamily-forum, 'Forum', serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--accent-wheat, #e8d5b7);
+      margin: 0;
     }
+    .menu-close-btn {
+      background: none;
+      border: none;
+      color: var(--accent-wheat, #e8d5b7);
+      font-size: 3.2rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .menu-close-btn:hover { background: rgba(255,255,255,0.08); }
 
-    /* ── CATEGORY TABS ── */
+    .menu-overlay-body { padding: 24px; flex: 1; }
+
+    /* ── CATEGORY TABS ─────────────────────────────────────────── */
     .category-tabs {
       display: flex;
       overflow-x: auto;
-      gap: 12px;
+      gap: 20px;
       margin-bottom: 40px;
       padding-bottom: 10px;
-      border-bottom: 1px solid var(--white-alpha-10);
-      -webkit-overflow-scrolling: touch;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
       scrollbar-width: none;
     }
-
-    .category-tabs::-webkit-scrollbar {
-      display: none;
-    }
-
+    .category-tabs::-webkit-scrollbar { display: none; }
     .category-btn {
-      color: var(--accent-wheat);
-      font-family: var(--fontFamily-forum);
-      font-size: 1.7rem;
-      padding: 8px 16px;
-      transition: var(--transition-1);
+      color: var(--accent-wheat, #e8d5b7);
+      font-family: var(--fontFamily-forum, 'Forum', serif);
+      font-size: 2rem;
+      padding: 10px 20px;
       white-space: nowrap;
-      border-radius: 6px;
-      flex-shrink: 0;
+      border: none;
+      background: none;
+      cursor: pointer;
+      transition: color 0.2s;
     }
-
     .category-btn.active {
-      color: var(--clay-orange);
-      border-bottom: 2px solid var(--clay-orange);
+      color: var(--clay-orange, #e67e22);
+      border-bottom: 2px solid var(--clay-orange, #e67e22);
     }
 
-    /* ── MENU GRID ── */
+    /* ── MENU GRID ─────────────────────────────────────────────── */
     .menu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
     }
-
-    @media (max-width: 600px) {
-      .menu-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-
-      .menu-page {
-        padding-block-start: 100px;
-        padding-inline: 12px;
-      }
-
-      .category-btn {
-        font-size: 1.5rem;
-        padding: 7px 14px;
-      }
-    }
-
-    /* ── MENU ITEM CARD ── */
     .menu-item {
-      background: linear-gradient(160deg, rgba(48, 48, 48, 0.95), rgba(33, 33, 33, 0.98));
+      background: linear-gradient(160deg, rgba(48,48,48,0.95), rgba(33,33,33,0.98));
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: var(--shadow-1);
-      border: 1px solid var(--white-alpha-10);
-      transition: 0.25s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
       position: relative;
     }
-
     .menu-item:hover {
       transform: translateY(-6px);
-      border-color: var(--clay-orange);
-      box-shadow: 0 18px 24px rgba(0, 0, 0, 0.35);
+      border-color: var(--clay-orange, #e67e22);
+      box-shadow: 0 18px 24px rgba(0,0,0,0.35);
     }
-
     .menu-item img {
       height: 200px;
       width: 100%;
       object-fit: cover;
       transition: transform 0.4s ease;
+      display: block;
     }
-
-    .menu-item:hover img {
-      transform: scale(1.06);
-    }
-
-    .item-content {
-      padding: 20px;
-      display: grid;
-      gap: 10px;
-    }
-
+    .menu-item:hover img { transform: scale(1.06); }
+    .item-content { padding: 20px; display: grid; gap: 10px; min-height: 220px; }
     .item-title {
-      font-family: var(--fontFamily-forum);
-      font-size: 2rem;
-      color: var(--accent-wheat);
+      font-family: var(--fontFamily-forum, 'Forum', serif);
+      font-size: 2.2rem;
+      color: var(--accent-wheat, #e8d5b7);
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      gap: 8px;
+      align-items: center;
     }
-
-    .item-price {
-      color: var(--clay-orange);
-      font-weight: bold;
-      white-space: nowrap;
-    }
-
-    .item-desc {
-      color: var(--quick-silver);
-      font-size: 1.4rem;
-      margin-block: 6px 10px;
-      line-height: 1.6;
-    }
-
+    .item-price { color: var(--clay-orange, #e67e22); font-weight: bold; }
+    .item-desc { color: var(--quick-silver, #a0a0a0); font-size: 1.4rem; margin-block: 6px 10px; line-height: 1.6; }
     .add-to-cart-btn {
-      background: var(--clay-orange);
+      background: var(--clay-orange, #e67e22);
       color: white;
       width: 100%;
       padding: 12px;
       border-radius: 8px;
       font-weight: bold;
       margin-top: 10px;
-      transition: 0.3s;
-      font-size: 1.5rem;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
     }
+    .add-to-cart-btn:hover { background: #E65100; transform: scale(1.05); }
 
-    .add-to-cart-btn:hover {
-      background: #E65100;
-      transform: scale(1.02);
-    }
-
-    /* ── SKELETON ── */
+    /* ── SKELETON LOADER ───────────────────────────────────────── */
     .skeleton-card {
       border-radius: 16px;
-      border: 1px solid var(--white-alpha-10);
+      border: 1px solid rgba(255,255,255,0.1);
       overflow: hidden;
-      background: var(--eerie-black-2);
-      box-shadow: var(--shadow-1);
+      background: var(--eerie-black-2, #222);
     }
-
     .skeleton-media,
     .skeleton-line {
       position: relative;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255,255,255,0.08);
       overflow: hidden;
     }
-
     .skeleton-media::after,
     .skeleton-line::after {
       content: "";
       position: absolute;
       inset: 0;
       transform: translateX(-100%);
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
       animation: skeletonShimmer 1.3s infinite;
     }
+    .skeleton-media { height: 200px; }
+    .skeleton-content { padding: 20px; display: grid; gap: 10px; }
+    .skeleton-line { height: 14px; border-radius: 8px; }
+    .skeleton-line.title { height: 20px; width: 78%; }
+    .skeleton-line.short { width: 46%; }
+    @keyframes skeletonShimmer { 100% { transform: translateX(100%); } }
 
-    .skeleton-media {
-      height: 200px;
-    }
-
-    .skeleton-content {
-      padding: 20px;
-      display: grid;
-      gap: 10px;
-    }
-
-    .skeleton-line {
-      height: 14px;
-      border-radius: 8px;
-    }
-
-    .skeleton-line.title {
-      height: 20px;
-      width: 78%;
-    }
-
-    .skeleton-line.short {
-      width: 46%;
-    }
-
-    @keyframes skeletonShimmer {
-      100% {
-        transform: translateX(100%);
-      }
-    }
-
-    /* ── CART DRAWER ── */
+    /* ── CART DRAWER ───────────────────────────────────────────── */
     .cart-drawer {
       position: fixed;
-      right: -420px;
+      right: -400px;
       top: 0;
       height: 100vh;
-      width: 380px;
-      background: var(--eerie-black-1);
-      z-index: 1000;
-      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.6);
-      transition: 0.4s ease;
+      width: 350px;
+      background: var(--eerie-black-1, #1a1a1a);
+      z-index: 300;
+      box-shadow: -10px 0 20px rgba(0,0,0,0.5);
+      transition: right 0.4s ease;
       padding: 20px;
       display: flex;
       flex-direction: column;
-      overflow: hidden;
     }
-
-    .cart-drawer.active {
-      right: 0;
-    }
-
-    @media (max-width: 600px) {
-      .cart-drawer {
-        width: 100%;
-        right: -100%;
-      }
-    }
-
+    .cart-drawer.active { right: 0; }
     .cart-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
-      color: var(--accent-wheat);
+      color: var(--accent-wheat, #e8d5b7);
     }
-
-    .cart-items {
-      flex: 1;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      padding-right: 6px;
-    }
-
+    .cart-items { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; padding-right: 10px; }
     .cart-item {
       display: flex;
       gap: 10px;
-      border-bottom: 1px solid var(--white-alpha-10);
-      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 10px;
+      min-height: 80px;
       align-items: center;
     }
-
-    .cart-item img {
-      width: 60px;
-      height: 60px;
-      border-radius: 8px;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-
-    .cart-item-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .cart-item-name {
-      font-size: 1.5rem;
-      color: var(--accent-wheat);
-      font-weight: bold;
-      word-break: break-word;
-    }
-
-    .cart-item-price {
-      font-size: 1.4rem;
-      color: var(--clay-orange);
-    }
-
-    .cart-qty-ctrl {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 5px;
-    }
-
+    .cart-item img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; }
+    .cart-item-info { flex: 1; }
+    .cart-item-name { font-size: 1.6rem; color: var(--accent-wheat, #e8d5b7); font-weight: bold; }
+    .cart-item-price { font-size: 1.4rem; color: var(--clay-orange, #e67e22); }
+    .cart-qty-ctrl { display: flex; align-items: center; gap: 10px; margin-top: 5px; }
     .qty-btn {
-      background: var(--white-alpha-10);
+      background: rgba(255,255,255,0.1);
       color: white;
-      width: 28px;
-      height: 28px;
+      width: 25px;
+      height: 25px;
       display: grid;
       place-content: center;
       border-radius: 4px;
-      font-size: 1.6rem;
+      border: none;
+      cursor: pointer;
     }
-
-    .qty-btn:hover {
-      background: var(--clay-orange);
-    }
-
     .cart-footer {
       margin-top: 20px;
       padding-top: 20px;
-      border-top: 2px solid var(--white-alpha-10);
+      border-top: 2px solid rgba(255,255,255,0.1);
     }
-
-    .cart-total-row {
+    .cart-total {
       display: flex;
       justify-content: space-between;
       font-size: 2rem;
-      color: var(--accent-wheat);
-      margin-bottom: 16px;
+      color: var(--accent-wheat, #e8d5b7);
+      margin-bottom: 20px;
       font-weight: bold;
     }
-
-    /* Input fields */
-    .input-field {
-      width: 100%;
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid var(--white-alpha-10);
-      border-radius: 8px;
-      color: var(--accent-wheat);
-      padding: 10px 14px;
-      font-size: 1.4rem;
-      font-family: var(--fontFamily-dmSans, 'DM Sans', sans-serif);
-      resize: none;
-      display: block;
-    }
-
-    .input-field:focus {
-      outline: none;
-      border-color: var(--clay-orange);
-    }
-
-    .input-field::placeholder {
-      color: var(--quick-silver);
-    }
-
-    /* Checkout button */
     .checkout-btn {
       background: #25D366;
       color: white;
       padding: 15px;
       width: 100%;
-      border-radius: 10px;
+      border-radius: 8px;
       font-weight: bold;
       font-size: 1.6rem;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
-      transition: 0.3s;
+      box-shadow: 0 4px 10px rgba(37,211,102,0.4);
+      border: none;
+      cursor: pointer;
     }
-
-    .checkout-btn:hover {
-      background: #1ebe5c;
-      transform: scale(1.02);
+    .drawer-close {
+      font-size: 3rem;
+      color: var(--accent-wheat, #e8d5b7);
+      cursor: pointer;
+      background: none;
+      border: none;
+      line-height: 1;
     }
+    .input-field {
+      width: 100%;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      color: #fff;
+      padding: 10px 12px;
+      font-size: 1.4rem;
+      box-sizing: border-box;
+      display: block;
+      resize: vertical;
+    }
+    .input-field::placeholder { color: rgba(255,255,255,0.4); }
 
-    /* Cart overlay button */
+    /* ── CART FAB ──────────────────────────────────────────────── */
     .cart-overlay-btn {
       position: fixed;
-      bottom: 110px;
-      right: 24px;
-      width: 58px;
-      height: 58px;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
-      background: var(--clay-orange);
+      background: var(--clay-orange, #e67e22);
       color: white;
-      display: grid;
+      display: none; /* only visible when menu overlay is open */
       place-content: center;
       font-size: 2.4rem;
-      box-shadow: var(--shadow-1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.35);
       cursor: pointer;
-      z-index: 99;
-      transition: 0.3s;
+      z-index: 250;
+      transition: transform 0.2s;
+      border: none;
     }
-
-    .cart-overlay-btn:hover {
-      transform: scale(1.1);
-    }
-
+    #menuOverlay.active ~ .cart-overlay-btn { display: grid; }
     .cart-count {
       position: absolute;
-      top: -2px;
-      right: -2px;
+      top: 0;
+      right: 0;
       background: red;
       color: white;
       width: 22px;
       height: 22px;
       border-radius: 50%;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       display: grid;
       place-content: center;
       font-weight: bold;
     }
 
-    /* Proceed to cart bar */
-    .proceed-to-cart-bar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--clay-orange);
-      color: white;
-      display: none;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 24px;
-      z-index: 98;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 1.5rem;
-      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.3);
-    }
-
-    .proceed-to-cart-bar.active {
-      display: flex;
-    }
-
-    .cart-info {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .cart-count-badge {
-      background: white;
-      color: var(--clay-orange);
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      display: grid;
-      place-content: center;
-      font-size: 1.3rem;
-      font-weight: bold;
-    }
-
-    .proceed-text {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .drawer-close {
-      font-size: 3rem;
-      color: var(--accent-wheat);
-      cursor: pointer;
-      line-height: 1;
-    }
-
-    /* Drawer overlay backdrop */
-    .cart-backdrop {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 999;
-    }
-
-    .cart-backdrop.active {
-      display: block;
+    @media (max-width: 600px) {
+      .cart-drawer { width: 100%; right: -100%; }
+      .cart-overlay-btn { bottom: 20px; right: 20px; }
     }
   </style>
 </head>
 
 <body class="inner-page" id="top">
 
+  <!-- ── TOPBAR ──────────────────────────────────────────────────── -->
   <div class="topbar">
     <div class="container">
       <address class="topbar-item">
-        <div class="icon">
-          <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
-        </div>
+        <div class="icon"><ion-icon name="location-outline" aria-hidden="true"></ion-icon></div>
         <span class="span">Little Village, Near NRI Hospital, Mangalagiri, Guntur, Andhra Pradesh</span>
       </address>
       <div class="separator"></div>
       <div class="topbar-item item-2">
-        <div class="icon">
-          <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
-        </div>
+        <div class="icon"><ion-icon name="time-outline" aria-hidden="true"></ion-icon></div>
         <span class="span">Open Daily : 11:30 AM - 10:30 PM</span>
       </div>
-      <a href="tel:+919010038444" class="topbar-item link">
-        <div class="icon">
-          <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
-        </div>
-        <span class="span">+91 90100 38444</span>
+      <a href="tel:+919440159707" class="topbar-item link">
+        <div class="icon"><ion-icon name="call-outline" aria-hidden="true"></ion-icon></div>
+        <span class="span">+91 94401 59707</span>
       </a>
       <div class="separator"></div>
-      <a href="https://wa.me/919010038444" class="topbar-item link">
-        <div class="icon">
-          <ion-icon name="logo-whatsapp" aria-hidden="true"></ion-icon>
-        </div>
+      <a href="https://wa.me/919440159707" class="topbar-item link">
+        <div class="icon"><ion-icon name="logo-whatsapp" aria-hidden="true"></ion-icon></div>
         <span class="span">WhatsApp Us</span>
       </a>
     </div>
   </div>
 
-  <!-- Header -->
+  <!-- ── HEADER ─────────────────────────────────────────────────── -->
   <header class="header" data-header>
     <div class="container">
       <a href="index.html" class="logo">
-        <img src="./assets/images/Little Village/littlelogo.png" width="160" height="50" alt="Little Village Home">
+        <img src="./assets/images/lvlogo.png" width="160" height="50" alt="Little Village Home">
       </a>
+
       <nav class="navbar" data-navbar>
         <button class="close-btn" aria-label="close menu" data-nav-toggler>
           <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
@@ -531,57 +346,61 @@
         <a href="index.html" class="logo">
           <img src="./assets/images/lvlogo.png" width="160" height="50" alt="Little Village menu logo">
         </a>
+
         <ul class="navbar-list">
           <li class="navbar-item">
             <a href="index.html" class="navbar-link hover-underline">
-              <div class="separator"></div>
-              <span class="span">Home</span>
+              <div class="separator"></div><span class="span">Home</span>
             </a>
           </li>
           <li class="navbar-item">
-            <a href="menu.html" class="navbar-link hover-underline active">
-              <div class="separator"></div>
-              <span class="span">Full Menu</span>
+            <!--
+              KEY FIX: use href="#menu" (hash) instead of "menu.html" or target="_blank".
+              This keeps navigation in the same page and lets the Back button work.
+            -->
+            <a href="#menu" class="navbar-link hover-underline active" id="openMenuLink">
+              <div class="separator"></div><span class="span">Full Menu</span>
             </a>
           </li>
           <li class="navbar-item">
             <a href="aboutus.html" class="navbar-link hover-underline">
-              <div class="separator"></div>
-              <span class="span">About Us</span>
+              <div class="separator"></div><span class="span">About Us</span>
             </a>
           </li>
           <li class="navbar-item">
             <a href="gallery.html" class="navbar-link hover-underline">
-              <div class="separator"></div>
-              <span class="span">Gallery</span>
+              <div class="separator"></div><span class="span">Gallery</span>
             </a>
           </li>
           <li class="navbar-item">
             <a href="booking.html" class="navbar-link hover-underline">
-              <div class="separator"></div>
-              <span class="span">Function Hall</span>
+              <div class="separator"></div><span class="span">Function Hall</span>
             </a>
           </li>
           <li class="navbar-item">
             <a href="contact.html" class="navbar-link hover-underline">
-              <div class="separator"></div>
-              <span class="span">Contact</span>
+              <div class="separator"></div><span class="span">Contact</span>
             </a>
           </li>
         </ul>
+
         <div class="text-center">
           <p class="headline-1 navbar-title">Visit Us</p>
           <address class="body-4">NRI Hospital Road, Mangalagiri, <br>Guntur, Andhra Pradesh</address>
           <p class="body-4 navbar-text">Daily : 11:30 AM - 10:30 PM</p>
           <div class="separator"></div>
           <p class="contact-label">Quick Support</p>
-          <a href="tel:+919010038444" class="body-1 contact-number hover-underline">+91 90100 38444</a>
+          <a href="tel:+919440159707" class="body-1 contact-number hover-underline">+91 94401 59707</a>
         </div>
       </nav>
 
-      <a href="booking.html" class="btn btn-primary">
-        <span class="text text-1">Book Function Hall</span>
-        <span class="text text-2" aria-hidden="true">Book Function Hall</span>
+      <a href="https://wa.me/919440159707" class="btn btn-secondary">
+        <span class="text text-1">
+          <ion-icon name="logo-whatsapp" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:6px;"></ion-icon>Order on WhatsApp
+        </span>
+        <span class="text text-2" aria-hidden="true">
+          <ion-icon name="logo-whatsapp" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:6px;"></ion-icon>Order on WhatsApp
+        </span>
       </a>
 
       <button class="nav-open-btn" data-nav-toggler>
@@ -593,48 +412,75 @@
     </div>
   </header>
 
+  <!-- ── MAIN PAGE CONTENT ───────────────────────────────────────── -->
   <main>
-    <article class="container menu-page">
-      <div style="text-align: center; margin-bottom: 40px;">
-
-  <h1 class="headline-1" style="margin-bottom: 20px;">
-    Our Delicious Menu
-  </h1>
-
-  <a href="./LV%20Menu%20[23-12-2025].pdf"
-     target="_blank"
-     class="btn btn-secondary"
-     style="
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding-inline: 28px;
-      min-width: 220px;
-     ">
-
-    <ion-icon
-      name="document-text-outline"
-      aria-hidden="true"
-      style="font-size: 2rem;">
-    </ion-icon>
-
-    <span class="text text-1">
-      View Full Menu
-    </span>
-
-    <span class="text text-2" aria-hidden="true">
-      View Full Menu
-    </span>
-
-  </a>
-
-</div>
-      <div class="category-tabs" id="categoryTabs"></div>
-      <div class="menu-grid" id="menuGrid"></div>
+    <article class="container" style="padding-block-start: 120px; text-align: center;">
+      <p class="body-2" style="margin-bottom: 30px;">
+        Welcome to Little Village Multi Cuisine Restaurant.
+      </p>
+      <!--
+        "View Menu" button: uses href="#menu" — no new tab, no download.
+        The JS below intercepts this hash change and shows the in-page overlay.
+      -->
+      <a href="#menu" class="btn btn-primary" id="viewMenuBtn" style="display:inline-flex;align-items:center;gap:8px;">
+        <ion-icon name="restaurant-outline" aria-hidden="true"></ion-icon>
+        <span class="text text-1">View Our Menu</span>
+        <span class="text text-2" aria-hidden="true">View Our Menu</span>
+      </a>
     </article>
   </main>
 
+  <!-- ── IN-PAGE MENU OVERLAY ────────────────────────────────────── -->
+  <!--
+    This overlay covers the full viewport when #menu hash is active.
+    It is NOT a new tab, NOT a file download — pure CSS/JS in-page panel.
+  -->
+  <div id="menuOverlay" role="dialog" aria-modal="true" aria-label="Restaurant Menu">
+
+    <div class="menu-overlay-header">
+      <h1>Our Delicious Menu</h1>
+      <!--
+        Close button writes history entry so Back button navigates correctly.
+        closeMenu() sets location.hash to '' which triggers hashchange → hides overlay.
+      -->
+      <button class="menu-close-btn" id="menuCloseBtn" aria-label="Close menu">&times;</button>
+    </div>
+
+    <div class="menu-overlay-body">
+      <div class="category-tabs" id="categoryTabs"></div>
+      <div class="menu-grid" id="menuGrid"></div>
+    </div>
+  </div>
+
+  <!-- Cart FAB — only visible when overlay is open (CSS sibling rule) -->
+  <button class="cart-overlay-btn" id="cartOverlayBtn" aria-label="Open cart">
+    <ion-icon name="cart-outline"></ion-icon>
+    <span class="cart-count" id="cartCount">0</span>
+  </button>
+
+  <!-- ── CART DRAWER ─────────────────────────────────────────────── -->
+  <div class="cart-drawer" id="cartDrawer" role="dialog" aria-label="Shopping cart">
+    <div class="cart-header">
+      <h2 style="font-family:var(--fontFamily-forum,'Forum',serif);font-size:2.4rem;margin:0;">Your Cart</h2>
+      <button class="drawer-close" id="drawerClose" aria-label="Close cart">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItemsList"></div>
+    <div class="cart-footer">
+      <div id="customerInfo" style="margin-bottom: 15px;">
+        <input type="text" id="custName" placeholder="Your Name" class="input-field" style="margin-bottom:10px;">
+        <textarea id="custAddr" placeholder="Delivery Address" class="input-field" style="height:70px;"></textarea>
+      </div>
+      <div class="cart-total">
+        <span>Total:</span>
+        <span id="cartTotalText">₹0</span>
+      </div>
+      <button class="checkout-btn" id="whatsappCheckout">
+        <ion-icon name="logo-whatsapp"></ion-icon> Send Order on WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ─────────────────────────────────────────────────── -->
   <footer class="footer section has-bg-image text-center" id="footer"
     style="background-image: url('./assets/images/footer-bg.jpg')">
     <div class="container">
@@ -645,12 +491,10 @@
           </a>
           <address class="body-4">NRI Hospital Road, Mangalagiri, Guntur, Andhra Pradesh</address>
           <a href="mailto:info@littlevillage.com" class="body-4 contact-link">info@littlevillage.com</a>
-          <a href="tel:+919010038444" class="body-4 contact-link">Inquiries : +91 90100 38444</a>
+          <a href="tel:+919440159707" class="body-4 contact-link">Inquiries : +91 94401 59707</a>
           <p class="body-4">Open : 11:30 AM - 10:30 PM</p>
           <div class="wrapper">
-            <div class="separator"></div>
-            <div class="separator"></div>
-            <div class="separator"></div>
+            <div class="separator"></div><div class="separator"></div><div class="separator"></div>
           </div>
           <p class="title-1">Special Events</p>
           <p class="label-1">Book our <span class="span">Function Hall</span> for your special days.</p>
@@ -662,78 +506,147 @@
 
         <ul class="footer-list">
           <li><a href="index.html" class="label-2 footer-link hover-underline">Home</a></li>
-          <li><a href="menu.html" class="label-2 footer-link hover-underline">Full Menu</a></li>
+          <!-- Footer "Full Menu" also uses hash – same fix -->
+          <li><a href="#menu" class="label-2 footer-link hover-underline">Full Menu</a></li>
           <li><a href="aboutus.html" class="label-2 footer-link hover-underline">About Us</a></li>
           <li><a href="booking.html" class="label-2 footer-link hover-underline">Function Hall</a></li>
           <li><a href="contact.html" class="label-2 footer-link hover-underline">Contact</a></li>
         </ul>
 
         <ul class="footer-list">
-          <li><a href="https://www.facebook.com/share/1HgcQjiayB/"
-              class="label-2 footer-link hover-underline">Facebook</a></li>
-          <li><a href="https://www.instagram.com/little_village_official?igsh=MXU1NmF4MW53bXdyYw=="
-              class="label-2 footer-link hover-underline">Instagram</a></li>
+          <li><a href="#" class="label-2 footer-link hover-underline">Facebook</a></li>
+          <li><a href="#" class="label-2 footer-link hover-underline">Instagram</a></li>
           <li><a href="#" class="label-2 footer-link hover-underline">Twitter</a></li>
           <li><a href="#" class="label-2 footer-link hover-underline">Youtube</a></li>
           <li><a href="https://maps.app.goo.gl/B9WqXW6YxX8X8X8X8" target="_blank"
-              class="label-2 footer-link hover-underline">Google Map</a></li>
-          <li><a href="https://share.google/Bp6kmKEFvW4919XRe" target="_blank" rel="noopener noreferrer"
-              class="label-2 footer-link hover-underline">⭐ Rate Us on Google</a></li>
+            class="label-2 footer-link hover-underline">Google Map</a></li>
         </ul>
       </div>
-
       <div class="footer-bottom">
         <p class="copyright">&copy; 2026 Little Village Multi Cuisine Restaurant. All Rights Reserved.</p>
       </div>
     </div>
   </footer>
 
-  <!-- Scripts -->
+  <!-- ── SCRIPTS ─────────────────────────────────────────────────── -->
   <script src="./assets/js/menu-data.js"></script>
   <script>
+    /* ============================================================
+       CONFIGURATION
+    ============================================================ */
     const MENU_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTuQLFksZdpPbHY1M7rG_DzxXpzARHoDv_iUMniPLQ559lqR-q34bcudLFJOyynNyQooMlgTzQAwgEP/pub?gid=0&single=true&output=csv";
-    const WHATSAPP_NUMBER = "919010038444";
+    const WHATSAPP_NUMBER = "919440159707";
     const fallbackMenuData = typeof menuData !== 'undefined' ? menuData : {};
+
+    /* ============================================================
+       STATE
+    ============================================================ */
+    let cart = JSON.parse(localStorage.getItem('lv_cart')) || [];
     let activeMenuData = fallbackMenuData;
+    let menuLoaded = false;
 
-    document.addEventListener('DOMContentLoaded', async () => {
-      const categoryTabs = document.getElementById('categoryTabs');
-      renderSkeletonCards();
+    /* ============================================================
+       HASH-BASED NAVIGATION — the core fix
+       #menu  → show overlay (pushes history entry so Back works)
+       empty  → hide overlay
+    ============================================================ */
+    function openMenu() {
+      document.getElementById('menuOverlay').classList.add('active');
+      document.body.style.overflow = 'hidden'; // prevent background scroll
+    }
 
-      categoryTabs.addEventListener('click', (e) => {
+    function closeMenu() {
+      document.getElementById('menuOverlay').classList.remove('active');
+      document.getElementById('cartDrawer').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function handleHash() {
+      if (window.location.hash === '#menu') {
+        openMenu();
+        // Load data the first time the menu is opened
+        if (!menuLoaded) {
+          menuLoaded = true;
+          initMenu();
+        }
+      } else {
+        closeMenu();
+      }
+    }
+
+    // React to hash changes (Back / Forward button, or link clicks)
+    window.addEventListener('hashchange', handleHash);
+
+    // Handle the hash present on initial page load
+    // (e.g. if user bookmarked the page with #menu)
+    window.addEventListener('DOMContentLoaded', () => {
+      handleHash();
+      bindUIEvents();
+    });
+
+    /* ============================================================
+       CLOSE BUTTON — removes hash, adds history entry so Back works
+    ============================================================ */
+    function bindUIEvents() {
+      document.getElementById('menuCloseBtn').addEventListener('click', () => {
+        // history.back() would be jarring if menu was the first page load;
+        // setting hash to '' is safer and triggers hashchange → closeMenu()
+        history.pushState(null, '', window.location.pathname + window.location.search);
+        closeMenu();
+      });
+
+      document.getElementById('cartOverlayBtn').addEventListener('click', () => {
+        document.getElementById('cartDrawer').classList.add('active');
+      });
+
+      document.getElementById('drawerClose').addEventListener('click', () => {
+        document.getElementById('cartDrawer').classList.remove('active');
+      });
+
+      document.getElementById('whatsappCheckout').addEventListener('click', sendOrderWhatsapp);
+
+      // Category tab delegation
+      document.getElementById('categoryTabs').addEventListener('click', (e) => {
         if (e.target.classList.contains('category-btn')) {
           document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
           e.target.classList.add('active');
           renderItems(e.target.dataset.category);
-          e.target.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         }
       });
 
+      updateCartUI();
+    }
+
+    /* ============================================================
+       MENU DATA LOADING
+    ============================================================ */
+    async function initMenu() {
+      renderSkeletonCards();
       activeMenuData = await loadMenuData();
       renderCategories();
-
-      const firstCategory = Object.keys(activeMenuData)[0];
-      if (firstCategory) {
-        renderItems(firstCategory);
+      const firstCat = Object.keys(activeMenuData)[0];
+      if (firstCat) {
+        renderItems(firstCat);
       } else {
-        document.getElementById('menuGrid').innerHTML = '<p class="body-2 text-center">Menu is temporarily unavailable.</p>';
+        document.getElementById('menuGrid').innerHTML =
+          '<p class="body-2" style="text-align:center;color:var(--quick-silver,#a0a0a0)">Menu is temporarily unavailable.</p>';
       }
-    });
+    }
 
     function parseCSV(text) {
       const rows = [];
-      let row = [], cell = '', insideQuotes = false;
+      let row = [], cell = '', inQuotes = false;
       for (let i = 0; i < text.length; i++) {
-        const c = text[i], n = text[i + 1];
-        if (c === '"' && insideQuotes && n === '"') { cell += '"'; i++; continue; }
-        if (c === '"') { insideQuotes = !insideQuotes; continue; }
-        if (c === ',' && !insideQuotes) { row.push(cell); cell = ''; continue; }
-        if ((c === '\n' || c === '\r') && !insideQuotes) {
-          if (c === '\r' && n === '\n') continue;
+        const ch = text[i], next = text[i + 1];
+        if (ch === '"' && inQuotes && next === '"') { cell += '"'; i++; continue; }
+        if (ch === '"') { inQuotes = !inQuotes; continue; }
+        if (ch === ',' && !inQuotes) { row.push(cell); cell = ''; continue; }
+        if ((ch === '\n' || ch === '\r') && !inQuotes) {
+          if (ch === '\r' && next === '\n') continue;
           if (cell.length || row.length) { row.push(cell); rows.push(row); row = []; cell = ''; }
           continue;
         }
-        cell += c;
+        cell += ch;
       }
       if (cell.length || row.length) { row.push(cell); rows.push(row); }
       return rows;
@@ -742,20 +655,24 @@
     function rowsToMenuData(rows) {
       if (!rows.length) return {};
       const headers = rows[0].map(h => h.trim().toUpperCase());
-      const idIdx = headers.indexOf('ID');
-      const nameIdx = headers.indexOf('NAME');
-      const catIdx = headers.indexOf('CATEGORY');
-      const priceIdx = headers.indexOf('PRICE');
-      const descIdx = headers.indexOf('DESCRIPTION');
+      const idx = {
+        id: headers.indexOf('ID'),
+        name: headers.indexOf('NAME'),
+        cat: headers.indexOf('CATEGORY'),
+        price: headers.indexOf('PRICE'),
+        desc: headers.indexOf('DESCRIPTION'),
+        img: headers.indexOf('IMAGE URL'),
+      };
       const grouped = {};
       rows.slice(1).forEach(row => {
         if (!row.length) return;
-        const category = (row[catIdx] || '').trim();
+        const category = (row[idx.cat] || '').trim();
         const item = {
-          id: Number((row[idIdx] || '').trim()),
-          name: (row[nameIdx] || '').trim(),
-          price: Number((row[priceIdx] || '').trim()),
-          desc: (row[descIdx] || '').trim(),
+          id: Number((row[idx.id] || '').trim()),
+          name: (row[idx.name] || '').trim(),
+          price: Number((row[idx.price] || '').trim()),
+          desc: (row[idx.desc] || '').trim(),
+          image: (row[idx.img] || '').trim(),
         };
         if (!category || !item.id || !item.name) return;
         if (!grouped[category]) grouped[category] = [];
@@ -767,7 +684,7 @@
     async function loadMenuData() {
       try {
         const res = await fetch(MENU_CSV_URL, { cache: 'no-store' });
-        if (!res.ok) throw new Error();
+        if (!res.ok) throw new Error(`CSV load failed: ${res.status}`);
         const csv = await res.text();
         const menu = rowsToMenuData(parseCSV(csv));
         return Object.keys(menu).length > 0 ? menu : fallbackMenuData;
@@ -776,12 +693,15 @@
       }
     }
 
+    /* ============================================================
+       RENDER HELPERS
+    ============================================================ */
     function renderCategories() {
       const tabs = document.getElementById('categoryTabs');
       tabs.innerHTML = '';
       Object.keys(activeMenuData).forEach((cat, i) => {
         const btn = document.createElement('button');
-        btn.className = `category-btn ${i === 0 ? 'active' : ''}`;
+        btn.className = `category-btn${i === 0 ? ' active' : ''}`;
         btn.textContent = cat;
         btn.dataset.category = cat;
         tabs.appendChild(btn);
@@ -792,9 +712,9 @@
       const grid = document.getElementById('menuGrid');
       grid.innerHTML = '';
       for (let i = 0; i < count; i++) {
-        const sk = document.createElement('div');
-        sk.className = 'skeleton-card';
-        sk.innerHTML = `
+        const s = document.createElement('div');
+        s.className = 'skeleton-card';
+        s.innerHTML = `
           <div class="skeleton-media"></div>
           <div class="skeleton-content">
             <div class="skeleton-line title"></div>
@@ -802,32 +722,125 @@
             <div class="skeleton-line"></div>
             <div class="skeleton-line short"></div>
           </div>`;
-        grid.appendChild(sk);
+        grid.appendChild(s);
       }
     }
 
     function renderItems(category) {
       const grid = document.getElementById('menuGrid');
       grid.innerHTML = '';
-      const items = activeMenuData[category] || [];
-      if (!items.length) {
-        grid.innerHTML = '<p class="body-2 text-center" style="grid-column:1/-1;">No items in this category.</p>';
-        return;
-      }
-      items.forEach(item => {
+      (activeMenuData[category] || []).forEach(item => {
         const card = document.createElement('div');
         card.className = 'menu-item';
         card.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" loading="lazy">
           <div class="item-content">
             <div class="item-title">
               <span>${item.name}</span>
               <span class="item-price">₹${item.price}</span>
             </div>
             <p class="item-desc">${item.desc}</p>
-            <a href="./LV%20Menu%20[23-12-2025].pdf" target="_blank" class="add-to-cart-btn" style="display: block; text-align: center;">View Menu</a>
+            <button class="add-to-cart-btn" data-item-id="${item.id}">Add to Cart</button>
           </div>`;
         grid.appendChild(card);
       });
+
+      // Event delegation — no inline onclick
+      grid.addEventListener('click', (e) => {
+        const btn = e.target.closest('.add-to-cart-btn');
+        if (btn) addToCart(Number(btn.dataset.itemId));
+      }, { once: false });
+    }
+
+    /* ============================================================
+       CART LOGIC
+    ============================================================ */
+    function addToCart(id) {
+      let found = null;
+      for (const cat in activeMenuData) {
+        found = activeMenuData[cat].find(item => item.id === id);
+        if (found) break;
+      }
+      if (!found) return;
+      const existing = cart.find(i => i.id === id);
+      if (existing) { existing.qty++; } else { cart.push({ ...found, qty: 1 }); }
+      updateCartUI();
+      document.getElementById('cartDrawer').classList.add('active');
+    }
+
+    function updateCartUI() {
+      localStorage.setItem('lv_cart', JSON.stringify(cart));
+      const list = document.getElementById('cartItemsList');
+      const count = document.getElementById('cartCount');
+      const totalText = document.getElementById('cartTotalText');
+      list.innerHTML = '';
+      let total = 0, totalQty = 0;
+
+      cart.forEach((item, index) => {
+        total += item.price * item.qty;
+        totalQty += item.qty;
+        const el = document.createElement('div');
+        el.className = 'cart-item';
+        el.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <div class="cart-item-info">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-price">₹${item.price} × ${item.qty}</div>
+            <div class="cart-qty-ctrl">
+              <button class="qty-btn" data-index="${index}" data-delta="-1">−</button>
+              <span>${item.qty}</span>
+              <button class="qty-btn" data-index="${index}" data-delta="1">+</button>
+            </div>
+          </div>
+          <button style="color:red;font-size:2rem;background:none;border:none;cursor:pointer;" data-remove="${index}" aria-label="Remove item">
+            <ion-icon name="trash-outline"></ion-icon>
+          </button>`;
+        list.appendChild(el);
+      });
+
+      count.textContent = totalQty;
+      totalText.textContent = `₹${total}`;
+
+      // Delegate qty / remove button clicks
+      list.onclick = (e) => {
+        const qBtn = e.target.closest('.qty-btn');
+        const rmBtn = e.target.closest('[data-remove]');
+        if (qBtn) changeQty(Number(qBtn.dataset.index), Number(qBtn.dataset.delta));
+        if (rmBtn) removeFromCart(Number(rmBtn.dataset.remove));
+      };
+    }
+
+    function changeQty(index, delta) {
+      cart[index].qty += delta;
+      if (cart[index].qty < 1) cart.splice(index, 1);
+      updateCartUI();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartUI();
+    }
+
+    /* ============================================================
+       WHATSAPP CHECKOUT
+    ============================================================ */
+    function sendOrderWhatsapp() {
+      if (!cart.length) { alert('Your cart is empty!'); return; }
+      const name = document.getElementById('custName').value.trim();
+      const addr = document.getElementById('custAddr').value.trim();
+      if (!name || !addr) { alert('Please enter your name and address for delivery.'); return; }
+
+      let msg = `*New Order - Little Village Restaurant*\n\n`;
+      msg += `*Customer:* ${name}\n*Address:* ${addr}\n\n*Items:*\n`;
+      let total = 0;
+      cart.forEach(item => {
+        msg += `- ${item.name} x ${item.qty} (₹${item.price * item.qty})\n`;
+        total += item.price * item.qty;
+      });
+      msg += `\n*Total Amount: ₹${total}*\n----------------------------\n_Sent from Restaurant Website_`;
+
+      // Opens WhatsApp in the same tab on mobile — no forced new tab
+      window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
     }
   </script>
 
@@ -835,5 +848,4 @@
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
-
 </html>
