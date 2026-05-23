@@ -386,6 +386,19 @@
       transition: 0.3s;
     }
     .pdf-toggle-btn:hover { background: #c9692a; }
+
+    /* ── PDF EMBED RESPONSIVE ── */
+    .pdf-embed-wrap {
+      width: 100%;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+    .pdf-embed-wrap iframe {
+      width: 100%;
+      height: 85vh;
+      min-height: 600px;
+      border: none;
+    }
     .pdf-viewer-wrap {
       display: none;
       border-radius: 14px;
@@ -413,10 +426,14 @@
       .item-content { padding: 14px; gap: 6px; }
       .item-name { font-size: 1.5rem; }
       .item-price { font-size: 1.4rem; }
+      /* Adjust PDF embed height on tablets */
+      .pdf-embed-wrap iframe { height: 60vh; min-height: 400px; }
     }
     @media (max-width: 480px) {
       .menu-grid { grid-template-columns: 1fr; gap: 12px; }
       .category-select { flex-basis: 100%; }
+      /* Adjust PDF embed height on mobile */
+      .pdf-embed-wrap iframe { height: 80vh; min-height: 300px; }
     }
   </style>
 </head>
@@ -498,10 +515,9 @@
       <div class="menu-hero">
         <h1>Your Delicious Moments Begin Here</h1>
         <p>Multi-Cuisine · Tandoori · Andhra Specials · Biryani · Chinese · Shakes & More</p>
-        <a href="./LV%20Menu%20[23-12-2025].pdf" target="_blank" class="pdf-download-btn">
-          <ion-icon name="document-text-outline" style="font-size:1.8rem"></ion-icon>
-          Download Full Menu PDF
-        </a>
+      <div class="pdf-embed-wrap">
+        <iframe src="./LV%20Menu%20[23-12-2025].pdf#toolbar=0&navpanes=0&scrollbar=1" style="border:none;"></iframe>
+      </div>
       </div>
 
       <!-- Controls Bar -->
@@ -528,21 +544,6 @@
 
       <!-- Menu Grid -->
       <div class="menu-grid" id="menuGrid"></div>
-
-      <!-- PDF Section -->
-      <div class="pdf-section">
-        <div class="pdf-section-header">
-          <h2>Browse Our Full Menu</h2>
-          <p>View the original beautifully designed menu PDF</p>
-          <button class="pdf-toggle-btn" id="pdfToggleBtn">
-            <ion-icon name="book-outline" style="font-size:1.6rem"></ion-icon>
-            <span id="pdfToggleText">Open Menu PDF</span>
-          </button>
-        </div>
-        <div class="pdf-viewer-wrap" id="pdfViewer">
-          <iframe src="./LV%20Menu%20[23-12-2025].pdf#toolbar=1&navpanes=0&scrollbar=1" title="Little Village Full Menu"></iframe>
-        </div>
-      </div>
 
     </article>
   </main>
@@ -1151,13 +1152,7 @@
       renderMenu();
     });
 
-    // PDF toggle
-    document.getElementById('pdfToggleBtn').addEventListener('click', () => {
-      const viewer = document.getElementById('pdfViewer');
-      const text = document.getElementById('pdfToggleText');
-      const isOpen = viewer.classList.toggle('open');
-      text.textContent = isOpen ? 'Close Menu PDF' : 'Open Menu PDF';
-    });
+
   }
 
   function buildCategoryDropdown() {
