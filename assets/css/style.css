@@ -1858,6 +1858,37 @@ textarea.input-field {
   box-shadow: var(--shadow-1);
   transition: var(--transition-1);
   opacity: 0;
+
+/* ---- Footer Custom Styles ---- */
+.footer-top {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  margin-block-end: 44px;
+}
+
+.footer-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  border-top: 1px solid var(--white-alpha-10);
+}
+
+@media (max-width: 768px) {
+  .footer-top {
+    grid-template-columns: 1fr;
+  }
+  .footer-list {
+    grid-template-columns: 1fr;
+  }
+}
   visibility: hidden;
   z-index: 4;
 }
