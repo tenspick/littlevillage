@@ -11,13 +11,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
-  
   <style>
+    /* ── FOOTER FIX & BACKGROUND CONFIGURATION ── */
     body {
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      /* Background Image Implementation */
+      /* Fixed translucent background setup */
       background: url('./assets/images/lvbg.png') no-repeat center center fixed;
       background-size: cover;
     }
@@ -35,13 +35,13 @@
       flex: 1;
     }
 
-    /* Redesigned Navigation Controls Row */
+    /* ── PREMIUM INTERACTIVE CONTROL ROW ── */
     .menu-controls {
       display: flex;
       flex-direction: column;
       gap: 20px;
       margin-bottom: 40px;
-      background: rgba(20, 20, 20, 0.8);
+      background: rgba(26, 26, 26, 0.85);
       padding: 20px;
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -49,7 +49,7 @@
       -webkit-backdrop-filter: blur(12px);
     }
 
-    @media (min-width: 992px) {
+    @media (min-width: 768px) {
       .menu-controls {
         flex-direction: row;
         justify-content: space-between;
@@ -57,11 +57,11 @@
       }
     }
 
-    /* Category Navigation Tabs */
+    /* ── CATEGORY TABS ── */
     .category-tabs {
       display: flex;
       overflow-x: auto;
-      gap: 10px;
+      gap: 12px;
       padding-bottom: 5px;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
@@ -75,8 +75,8 @@
     .category-btn {
       color: var(--accent-wheat);
       font-family: var(--fontFamily-forum);
-      font-size: 1.5rem;
-      padding: 8px 18px;
+      font-size: 1.6rem;
+      padding: 8px 20px;
       transition: var(--transition-1);
       white-space: nowrap;
       border-radius: 30px;
@@ -92,13 +92,12 @@
       border-color: var(--clay-orange);
     }
 
-    /* Interactive Sorting Dropdown element */
+    /* ── SORT OPTION SYSTEM ── */
     .sort-container {
       display: flex;
       align-items: center;
       gap: 10px;
       align-self: flex-start;
-      flex-shrink: 0;
     }
 
     .sort-label {
@@ -125,33 +124,47 @@
       border-color: var(--clay-orange);
     }
 
-    /* Premium Menu Display Card Layouts */
+    /* ── MENU GRID ── */
     .menu-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
+      gap: 24px;
     }
 
+    @media (max-width: 600px) {
+      .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .menu-page {
+        padding-block-start: 110px;
+        padding-inline: 12px;
+      }
+    }
+
+    /* ── GLASSMORPHIC MENU ITEM CARD ── */
     .menu-item {
-      background: linear-gradient(165deg, rgba(35, 35, 35, 0.85), rgba(20, 20, 20, 0.95));
+      background: linear-gradient(165deg, rgba(40, 40, 40, 0.85), rgba(25, 25, 25, 0.95));
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
     }
 
     .menu-item:hover {
-      transform: translateY(-5px);
+      transform: translateY(-6px);
       border-color: var(--clay-orange);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 18px 30px rgba(0, 0, 0, 0.55);
     }
 
     .item-content {
-      padding: 20px;
+      padding: 24px;
       display: flex;
       flex-direction: column;
       height: 100%;
@@ -167,7 +180,7 @@
 
     .item-title {
       font-family: var(--fontFamily-forum);
-      font-size: 2rem;
+      font-size: 2.2rem;
       color: var(--accent-wheat);
       line-height: 1.3;
     }
@@ -176,12 +189,12 @@
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 4px;
+      gap: 6px;
     }
 
     .item-price {
       color: var(--clay-orange);
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: bold;
       white-space: nowrap;
     }
@@ -197,7 +210,13 @@
       letter-spacing: 0.5px;
     }
 
-    /* Multivariant pricing support rules */
+    .item-desc {
+      color: var(--quick-silver);
+      font-size: 1.4rem;
+      line-height: 1.6;
+    }
+
+    /* Compound Multi-Pricing Render Style */
     .multi-price-list {
       margin-top: auto;
       padding-top: 12px;
@@ -218,17 +237,6 @@
       color: var(--clay-orange);
       font-weight: bold;
     }
-
-    @media (max-width: 600px) {
-      .menu-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-      .menu-page {
-        padding-block-start: 110px;
-        padding-inline: 12px;
-      }
-    }
   </style>
 </head>
 
@@ -237,17 +245,30 @@
   <div class="topbar">
     <div class="container">
       <address class="topbar-item">
-        <div class="icon"><ion-icon name="location-outline" aria-hidden="true"></ion-icon></div>
+        <div class="icon">
+          <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
+        </div>
         <span class="span">Little Village, Near NRI Hospital, Mangalagiri, Guntur, Andhra Pradesh</span>
       </address>
       <div class="separator"></div>
       <div class="topbar-item item-2">
-        <div class="icon"><ion-icon name="time-outline" aria-hidden="true"></ion-icon></div>
+        <div class="icon">
+          <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+        </div>
         <span class="span">Open Daily : 11:30 AM - 10:30 PM</span>
       </div>
       <a href="tel:+919010038444" class="topbar-item link">
-        <div class="icon"><ion-icon name="call-outline" aria-hidden="true"></ion-icon></div>
+        <div class="icon">
+          <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
+        </div>
         <span class="span">+91 90100 38444</span>
+      </a>
+      <div class="separator"></div>
+      <a href="https://wa.me/919010038444" class="topbar-item link">
+        <div class="icon">
+          <ion-icon name="logo-whatsapp" aria-hidden="true"></ion-icon>
+        </div>
+        <span class="span">WhatsApp Us</span>
       </a>
     </div>
   </div>
@@ -261,18 +282,32 @@
         <button class="close-btn" aria-label="close menu" data-nav-toggler>
           <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
         </button>
+        <a href="index.html" class="logo">
+          <img src="./assets/images/lvlogo.png" width="160" height="50" alt="Little Village menu logo">
+        </a>
         <ul class="navbar-list">
           <li class="navbar-item"><a href="index.html" class="navbar-link hover-underline"><span class="span">Home</span></a></li>
           <li class="navbar-item"><a href="menu.html" class="navbar-link hover-underline active"><span class="span">Full Menu</span></a></li>
           <li class="navbar-item"><a href="aboutus.html" class="navbar-link hover-underline"><span class="span">About Us</span></a></li>
+          <li class="navbar-item"><a href="gallery.html" class="navbar-link hover-underline"><span class="span">Gallery</span></a></li>
           <li class="navbar-item"><a href="booking.html" class="navbar-link hover-underline"><span class="span">Function Hall</span></a></li>
           <li class="navbar-item"><a href="contact.html" class="navbar-link hover-underline"><span class="span">Contact</span></a></li>
         </ul>
+        <div class="text-center">
+          <p class="headline-1 navbar-title">Visit Us</p>
+          <address class="body-4">NRI Hospital Road, Mangalagiri, <br>Guntur, Andhra Pradesh</address>
+          <p class="body-4 navbar-text">Daily : 11:30 AM - 10:30 PM</p>
+          <div class="separator"></div>
+          <p class="contact-label">Quick Support</p>
+          <a href="tel:+919010038444" class="body-1 contact-number hover-underline">+91 90100 38444</a>
+        </div>
       </nav>
+
       <a href="booking.html" class="btn btn-primary">
         <span class="text text-1">Book Function Hall</span>
         <span class="text text-2" aria-hidden="true">Book Function Hall</span>
       </a>
+
       <button class="nav-open-btn" data-nav-toggler>
         <span class="line line-1"></span><span class="line line-2"></span><span class="line line-3"></span>
       </button>
@@ -283,12 +318,21 @@
   <main>
     <article class="container menu-page">
       
+      <div style="text-align: center; margin-bottom: 40px;">
+        <h1 class="headline-1" style="margin-bottom: 20px;">Your Delicious Moments Begin Here.</h1>
+        <a href="./LV%20Menu%20[23-12-2025].pdf" target="_self" class="btn btn-secondary" style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding-inline: 28px; min-width: 220px;">
+          <ion-icon name="document-text-outline" aria-hidden="true" style="font-size: 2rem;"></ion-icon>
+          <span class="text text-1">View Full PDF Menu</span>
+          <span class="text text-2" aria-hidden="true">View Full PDF Menu</span>
+        </a>
+      </div>
+
       <div class="menu-controls">
         <div class="category-tabs" id="categoryTabs"></div>
         <div class="sort-container">
           <label class="sort-label" for="priceSort">Sort By:</label>
           <select id="priceSort" class="sort-select">
-            <option value="default">Default Order</option>
+            <option value="default">Menu Layout</option>
             <option value="low-high">Price: Low to High</option>
             <option value="high-low">Price: High to Low</option>
           </select>
@@ -302,6 +346,44 @@
 
   <footer class="footer section has-bg-image text-center" id="footer" style="background-image: url('./assets/images/footer-bg.jpg')">
     <div class="container">
+      <div class="footer-top grid-list">
+        <div class="footer-brand has-before has-after">
+          <a href="index.html" class="logo">
+            <h2 class="headline-1" style="color: var(--accent-wheat); margin-bottom: 20px;">LITTLE VILLAGE</h2>
+          </a>
+          <address class="body-4">NRI Hospital Road, Mangalagiri, Guntur, Andhra Pradesh</address>
+          <a href="mailto:info@littlevillage.com" class="body-4 contact-link">info@littlevillage.com</a>
+          <a href="tel:+919010038444" class="body-4 contact-link">Inquiries : +91 90100 38444</a>
+          <p class="body-4">Open : 11:30 AM - 10:30 PM</p>
+          <div class="wrapper">
+            <div class="separator"></div><div class="separator"></div><div class="separator"></div>
+          </div>
+          <p class="title-1">Special Events</p>
+          <p class="label-1">Book our <span class="span">Function Hall</span> for your special days.</p>
+          <a href="booking.html" class="btn btn-secondary footer-cta-btn">
+            <span class="text text-1">Book Now</span>
+            <span class="text text-2" aria-hidden="true">Book Now</span>
+          </a>
+        </div>
+
+        <ul class="footer-list">
+          <li><a href="index.html" class="label-2 footer-link hover-underline">Home</a></li>
+          <li><a href="menu.html" class="label-2 footer-link hover-underline">Full Menu</a></li>
+          <li><a href="aboutus.html" class="label-2 footer-link hover-underline">About Us</a></li>
+          <li><a href="booking.html" class="label-2 footer-link hover-underline">Function Hall</a></li>
+          <li><a href="contact.html" class="label-2 footer-link hover-underline">Contact</a></li>
+        </ul>
+
+        <ul class="footer-list">
+          <li><a href="https://www.facebook.com/share/1HgcQjiayB/" class="label-2 footer-link hover-underline">Facebook</a></li>
+          <li><a href="https://www.instagram.com/little_village_official?igsh=MXU1NmF4MW53bXdyYw==" class="label-2 footer-link hover-underline">Instagram</a></li>
+          <li><a href="#" class="label-2 footer-link hover-underline">Twitter</a></li>
+          <li><a href="#" class="label-2 footer-link hover-underline">Youtube</a></li>
+          <li><a href="https://maps.app.goo.gl/B9WqXW6YxX8X8X8X8" target="_blank" class="label-2 footer-link hover-underline">Google Map</a></li>
+          <li><a href="https://share.google/Bp6kmKEFvW4919XRe" target="_blank" rel="noopener noreferrer" class="label-2 footer-link hover-underline">⭐ Rate Us on Google</a></li>
+        </ul>
+      </div>
+
       <div class="footer-bottom">
         <p class="copyright">© 2026 Little Village Multi Cuisine Restaurant. All Rights Reserved.</p>
       </div>
@@ -309,333 +391,333 @@
   </footer>
 
   <script>
-    const globalMenuDatabase = {
+    const comprehensiveMenuDataset = {
       "Soups": [
-        { name: "Veg Corn / Clear / Tomato Soup", price: 155, mustTry: false },
-        { name: "Veg Manchow Soup", price: 155, mustTry: false },
-        { name: "Veg Hot Garlic / Hot & Sour Soup", price: 155, mustTry: false },
-        { name: "Veg Lemon Coriander Soup", price: 155, mustTry: false },
-        { name: "Chicken Corn Soup", price: 175, mustTry: false },
-        { name: "Chicken Manchow Soup", price: 175, mustTry: false },
-        { name: "Chicken Hot Garlic Soup", price: 175, mustTry: false },
-        { name: "Chicken Hot & Sour Soup", price: 175, mustTry: false },
-        { name: "Chicken Lemon Coriander Soup", price: 175, mustTry: false },
-        { name: "Mutton Bone Soup", price: 185, mustTry: false },
-        { name: "Mutton Marag with Cashew", price: 195, mustTry: true }
+        { name: "Veg Corn / Clear / Tomato Soup", price: 155, desc: "Classic vegetable warm broth served piping hot.", mustTry: false },
+        { name: "Veg Manchow Soup", price: 155, desc: "Spicy and tangy Chinese hot soup with crispy fried noodles.", mustTry: false },
+        { name: "Veg Hot Garlic / Hot & Sour Soup", price: 155, desc: "Zesty dark broth infused with crushed garlic or sour profiles.", mustTry: false },
+        { name: "Veg Lemon Coriander Soup", price: 155, desc: "Light, refreshing vegetable soup clear base flavored with fresh citrus squeeze.", mustTry: false },
+        { name: "Chicken Corn Soup", price: 175, desc: "Hearty chicken soup thickened with sweet cream style kernel corn.", mustTry: false },
+        { name: "Chicken Manchow Soup", price: 175, desc: "Classic spicy dark chicken soup with egg drops and crispy textures.", mustTry: false },
+        { name: "Chicken Hot Garlic Soup", price: 175, desc: "Bold ginger garlic spiked chicken base soup profile.", mustTry: false },
+        { name: "Chicken Hot & Sour Soup", price: 175, desc: "Perfect balanced hot chili pepper heat and dark vinegar sharpness.", mustTry: false },
+        { name: "Chicken Lemon Coriander Soup", price: 175, desc: "Clear stock infused cleanly with fresh crushed coriander roots.", mustTry: false },
+        { name: "Mutton Bone Soup", price: 185, desc: "Slow simmering rich marrow extract bone soup with Indian elements.", mustTry: false },
+        { name: "Mutton Marag with Cashew", price: 195, desc: "Hyderabadi style rich, creamy soup made with tender mutton and cashew paste.", mustTry: true }
       ],
       "Starters Veg": [
-        { name: "American Corn Tikka", price: 320, mustTry: false },
-        { name: "Harabara Kebab", price: 320, mustTry: false },
-        { name: "Stuffed Paneer Tikka", price: 360, mustTry: false },
-        { name: "Achari Paneer Tikka", price: 350, mustTry: false },
-        { name: "Paneer Tikka", price: 350, mustTry: false },
-        { name: "Malai Paneer Tikka", price: 350, mustTry: false },
-        { name: "Juicy Paneer Tikka", price: 360, mustTry: true },
-        { name: "Broccoli Malai", price: 360, mustTry: false },
-        { name: "Tandoori Baby Corn", price: 330, mustTry: false },
-        { name: "Tandoori Mushroom", price: 350, mustTry: false }
+        { name: "American Corn Tikka", price: 320, desc: "Charcoal skewered savory spiced sweetcorn patty tikkas.", mustTry: false },
+        { name: "Harabara Kebab", price: 320, desc: "Fried iron-rich spinach, green pea, and potato blended cutlet cakes.", mustTry: false },
+        { name: "Stuffed Paneer Tikka", price: 360, desc: "Layered premium paneer blocks with internal mint cheese configurations.", mustTry: false },
+        { name: "Achari Paneer Tikka", price: 350, desc: "Cottage cheese marinated in fierce, pungent pickling tandoori spices.", mustTry: false },
+        { name: "Paneer Tikka", price: 350, desc: "Classic tandoor fired spiced red yogurt masala paneer cubes.", mustTry: false },
+        { name: "Malai Paneer Tikka", price: 350, desc: "Mild alternative marinated heavily in fresh heavy cream, cheese and cardamom.", mustTry: false },
+        { name: "Juicy Paneer Tikka", price: 360, desc: "Extra tender premium melt-in-the-mouth recipe optimization.", mustTry: true },
+        { name: "Broccoli Malai", price: 360, desc: "Fresh broccoli florets coated in luxury cashewnut cream skewered glaze.", mustTry: false },
+        { name: "Tandoori Baby Corn", price: 330, desc: "Crisp young ears of corn marinated in signature dry rub tandoori clay mix.", mustTry: false },
+        { name: "Tandoori Mushroom", price: 350, desc: "Plump button mushrooms marinated and roasted to earthy perfection over clay coals.", mustTry: false }
       ],
       "Starters Non-Veg": [
-        { name: "Murgh Malai Tikka", price: 380, mustTry: false },
-        { name: "Murgh Afghani Kebab", price: 390, mustTry: false },
-        { name: "Juicy Kebab", price: 400, mustTry: true },
-        { name: "Banjara Kebab", price: 410, mustTry: false },
-        { name: "Chicken Tikka", price: 380, mustTry: false },
-        { name: "Murgh Kali Mirchi Kebab", price: 390, mustTry: false },
-        { name: "Chicken Kulfi", price: 420, mustTry: false },
-        { name: "Kalmi Kebab", price: 270, multiPrices: [{ label: "2 Pcs", price: 270 }, { label: "4 Pcs", price: 410 }] },
-        { name: "Tangdi Kebab", price: 260, multiPrices: [{ label: "Half (2 Pcs)", price: 260 }, { label: "Full (4 Pcs)", price: 400 }] },
-        { name: "Afgani Tandoori", price: 370, multiPrices: [{ label: "Half Portion", price: 370 }, { label: "Full Bird", price: 640 }] },
-        { name: "Tandoori Chicken", price: 370, multiPrices: [{ label: "Half Portion", price: 370 }, { label: "Full Bird", price: 640 }] }
+        { name: "Murgh Malai Tikka", price: 380, desc: "Boneless chicken steeped in rich cream, cashew paste, and light spices.", mustTry: false },
+        { name: "Murgh Afghani Kebab", price: 390, desc: "Rich royal cashew cream cashew base chicken skewers.", mustTry: false },
+        { name: "Juicy Kebab", price: 400, desc: "Succulent ground meat skewered layout maximizing internal moisture vectors.", mustTry: true },
+        { name: "Banjara Kebab", price: 410, desc: "Spicy green herb, yogurt and coarse pounded red spice marinade chicken chunks.", mustTry: false },
+        { name: "Chicken Tikka", price: 380, desc: "The timeless gold standard red yogurt base boneless chicken breast cubes.", mustTry: false },
+        { name: "Murgh Kali Mirchi Kebab", price: 390, desc: "Sharp premium aromatic black pepper crushed marinade chicken variant.", mustTry: false },
+        { name: "Chicken Kulfi", price: 420, desc: "Premium novelty minced chicken skewered design presentation style.", mustTry: false },
+        { name: "Kalmi Kebab", price: 270, desc: "Pristine chicken leg drumsticks coated in aromatic Mughlai yellow paste.", multiPrices: [{ label: "2 Pcs portion", price: 270 }, { label: "4 Pcs portion", price: 410 }] },
+        { name: "Tangdi Kebab", price: 260, desc: "Premium full sized chicken drumsticks charcoal baked down to texture.", multiPrices: [{ label: "Half Portion (2 Pcs)", price: 260 }, { label: "Full Portion (4 Pcs)", price: 400 }] },
+        { name: "Afgani Tandoori", price: 370, desc: "Dynamic bird roast design featuring mild white pepper cashew marinade.", multiPrices: [{ label: "Half Bird Setup", price: 370 }, { label: "Full Bird Setup", price: 640 }] },
+        { name: "Tandoori Chicken", price: 370, desc: "The quintessential clay oven classic bird layout done inside separate spices.", multiPrices: [{ label: "Half Portion Bird", price: 370 }, { label: "Full Portion Bird", price: 640 }] }
       ],
       "Chinese Starters Veg": [
-        { name: "Veg Spring Roll", price: 340, mustTry: false },
-        { name: "Classical Paneer", price: 350, mustTry: false },
-        { name: "Chilli Paneer / Paneer 65", price: 310, mustTry: false },
-        { name: "Chilly Spicy Paneer", price: 310, mustTry: false },
-        { name: "Crispy Corn / Crispy Baby Corn", price: 300, mustTry: false },
-        { name: "Chilli Baby Corn", price: 350, mustTry: false },
-        { name: "Chilli Mushroom Wet", price: 330, mustTry: false },
-        { name: "Chilli Butter Mushroom", price: 350, mustTry: false },
-        { name: "Cashew Nut Fry", price: 360, mustTry: false },
-        { name: "Crispy Veg", price: 300, mustTry: false },
-        { name: "Palak Manchuria", price: 310, mustTry: false },
-        { name: "Peanut Masala / Boiled Peanut", price: 300, mustTry: false },
-        { name: "Vegetables Mix", price: 300, mustTry: false },
-        { name: "Veg Manchuria", price: 280, multiPrices: [{ label: "Dry Style", price: 280 }, { label: "Wet Style", price: 300 }] },
-        { name: "Paneer Majestic", price: 330, multiPrices: [{ label: "Dry Style", price: 330 }, { label: "Wet Style", price: 350 }] }
+        { name: "Veg Spring Roll", price: 340, desc: "Golden fried sheet wrapper rolls packing finely shredded seasoned stir vegetables.", mustTry: false },
+        { name: "Classical Paneer", price: 350, desc: "Signature minimalist master dry paneer toss sauce execution.", mustTry: false },
+        { name: "Chilli Paneer / Paneer 65", price: 310, desc: "Choose your variation of hot soy chili stir fry or tempered curry leaf red crispy blocks.", mustTry: false },
+        { name: "Chilly Spicy Paneer", price: 310, desc: "High heat dynamic variations packing extra birds eye capsicum spice indexes.", mustTry: false },
+        { name: "Crispy Corn / Crispy Baby Corn", price: 300, desc: "Starch dusted kernels or sliced baby corn wok flipped dry with pepper salt spring onion.", mustTry: false },
+        { name: "Chilli Baby Corn", price: 350, desc: "Crispy fried baby corn tossed with capsicum, onions, and dark green chili dynamic profile.", mustTry: false },
+        { name: "Chilli Mushroom Wet", price: 330, desc: "Fresh button mushrooms fried and bathed in thick Chinese chili configuration.", mustTry: false },
+        { name: "Chilli Butter Mushroom", price: 350, desc: "Silky premium butter glazed rich soy garlic mushroom dry plate.", mustTry: false },
+        { name: "Cashew Nut Fry", price: 360, desc: "Salted gold toasted whole split cashew nuts finished dry with signature seasoning spice.", mustTry: false },
+        { name: "Crispy Veg", price: 300, desc: "Assorted exotic garden fresh vegetables crisp-battered and wok shaken.", mustTry: false },
+        { name: "Palak Manchuria", price: 310, desc: "Distinct fresh green spinach extract ball execution of classical manchuria system.", mustTry: false },
+        { name: "Peanut Masala / Boiled Peanut", price: 300, desc: "Spiced raw onion tomato green chili peanut dynamic crunch alignment.", mustTry: false },
+        { name: "Vegetables Mix", price: 300, desc: "Clean oriental salt tossed seasonal dynamic farm selection.", mustTry: false },
+        { name: "Veg Manchuria", price: 280, desc: "Crispy vegetable balls tossed in dynamic garlic soy alignments.", multiPrices: [{ label: "Dry Baseline Plate", price: 280 }, { label: "Wet Savory Sauce", price: 300 }] },
+        { name: "Paneer Majestic", price: 330, desc: "Strips of paneer fried crisp and tossed in light soy buttermilk sauce.", multiPrices: [{ label: "Dry Baseline Style", price: 330 }, { label: "Wet Savory Sauce", price: 350 }] }
       ],
       "Chinese Starters Non-Veg": [
-        { name: "Darling Chicken", price: 410, mustTry: true },
-        { name: "Crispy Chicken Chips", price: 390, mustTry: false },
-        { name: "Pepper Chicken", price: 380, mustTry: false },
-        { name: "Cashew Chicken", price: 390, mustTry: false },
-        { name: "Chicken Lollipop Half", price: 250, mustTry: false },
-        { name: "Pepper Garlic Chicken", price: 390, mustTry: false },
-        { name: "Classical Chicken", price: 400, mustTry: false },
-        { name: "Red Chilli Spicy Chicken", price: 400, mustTry: false },
-        { name: "Sweet Chilli Prawns", price: 430, mustTry: false },
-        { name: "Satay Chicken", price: 410, mustTry: false },
-        { name: "Chicken 555 / Majestic", price: 390, mustTry: false },
-        { name: "Chicken Hong Kong", price: 390, mustTry: false },
-        { name: "Chicken 99", price: 390, mustTry: false },
-        { name: "Lemon Chicken", price: 390, mustTry: false },
-        { name: "Guljara Chicken", price: 390, mustTry: false },
-        { name: "Chilli Spicy Chicken", price: 400, mustTry: false },
-        { name: "Dragon Chicken", price: 400, mustTry: false },
-        { name: "Imperial Fish / Apollo Fish", price: 420, mustTry: false },
-        { name: "Fried Fish", price: 420, mustTry: false },
-        { name: "Korameenu Fry (Boneless)", price: 550, mustTry: true },
-        { name: "Garlic Prawns", price: 440, mustTry: false },
-        { name: "Loose Prawns / Chilly Prawns", price: 440, mustTry: false },
-        { name: "Fried Prawns", price: 440, mustTry: false },
-        { name: "Chilli Egg", price: 300, mustTry: false },
-        { name: "Egg Manchuria", price: 300, mustTry: false },
-        { name: "Chicken Lollipop / Wings", price: 400, multiPrices: [{ label: "Standard Pack", price: 400 }, { label: "Wet Style Sauce", price: 430 }] },
-        { name: "Chilli Chicken / Chicken 65", price: 380, multiPrices: [{ label: "Standard Cut", price: 380 }, { label: "Special Premium", price: 400 }] },
-        { name: "Chicken Manchuria", price: 380, multiPrices: [{ label: "Dry Style", price: 380 }, { label: "Wet Style Sauce", price: 400 }] }
+        { name: "Darling Chicken", price: 410, desc: "Chef exclusive recipe crisp tossed spicy profile sweet sour accents.", mustTry: true },
+        { name: "Crispy Chicken Chips", price: 390, desc: "Ultra thin razor cut chicken breast flakes double fried to crunchy chip consistency.", mustTry: false },
+        { name: "Pepper Chicken", price: 380, desc: "Dry wok shredded chicken heavy loading of fresh coarse ground black peppercorns.", mustTry: false },
+        { name: "Cashew Chicken", price: 390, desc: "Stir fried sliced chicken meat tossed with whole roasted golden cashews in light brown profile.", mustTry: false },
+        { name: "Chicken Lollipop Half", price: 250, desc: "Half scale size classic winglet drummette alignment.", mustTry: false },
+        { name: "Pepper Garlic Chicken", price: 390, desc: "Pungent balance pairing high kick hot fresh pepper with crisp aromatic fried garlic bits.", mustTry: false },
+        { name: "Classical Chicken", price: 400, desc: "Traditional dark soy green pepper scallion wok standard recipe.", mustTry: false },
+        { name: "Red Chilli Spicy Chicken", price: 400, desc: "Intense dark red variant loaded up with dried red pods and hot paste.", mustTry: false },
+        { name: "Sweet Chilli Prawns", price: 430, desc: "Jumbo fresh ocean prawns tossed beautifully in sweet chili garlic glaze.", mustTry: false },
+        { name: "Satay Chicken", price: 410, desc: "Thai style grilled skewered design layouts paired with rich aromatic glaze.", mustTry: false },
+        { name: "Chicken 555 / Majestic", price: 390, desc: "Strips of chicken crisp fried and tossed in a special rich yogurt-garlic tempered sauce.", mustTry: false },
+        { name: "Chicken Hong Kong", price: 390, desc: "Stir-fried variant featuring cashew nuts and dry sweet red pepper profiles.", mustTry: false },
+        { name: "Chicken 99", price: 390, desc: "Spicy crisp bite-sized chicken array with specialized internal chef spice mixes.", mustTry: false },
+        { name: "Lemon Chicken", price: 390, desc: "Light batter breast cubes drenched in silken citrus lemon tang reduction.", mustTry: false },
+        { name: "Guljara Chicken", price: 390, desc: "Exclusive specialty recipe variant incorporating mint coriander accents.", mustTry: false },
+        { name: "Chilli Spicy Chicken", price: 400, desc: "High octane traditional dark green chili wok fry arrangement.", mustTry: false },
+        { name: "Dragon Chicken", price: 400, desc: "Crisp strips tossed alongside julienned bell peppers and cashews in spicy red paste glaze.", mustTry: false },
+        { name: "Imperial Fish / Apollo Fish", price: 420, desc: "Spiced boneless fish fillet cubes wok finished with green chilis and curry leaves.", mustTry: false },
+        { name: "Fried Fish", price: 420, desc: "Traditional clean crusted shallow-crisped local fish preparation.", mustTry: false },
+        { name: "Korameenu Fry (Boneless)", price: 550, desc: "Premium locally sourced fresh Murrel fish boneless loins pan fried with state spices.", mustTry: true },
+        { name: "Garlic Prawns", price: 440, desc: "Juicy prawns drowned in premium garlic infused transparent wok oil finish.", mustTry: false },
+        { name: "Loose Prawns / Chilly Prawns", price: 440, desc: "Lightly coated ultra crisp dry prawns or sticky soy red chili wok tossed.", mustTry: false },
+        { name: "Fried Prawns", price: 440, desc: "Golden crusted butterfly shape dynamic crispy clean deep fried prawns.", mustTry: false },
+        { name: "Chilli Egg", price: 300, desc: "Boiled egg segments battered, fried, and finished inside hot sweet soy glaze.", mustTry: false },
+        { name: "Egg Manchuria", price: 300, desc: "Minced egg cluster configurations finished under standard coriander ginger manchuria sauce.", mustTry: false },
+        { name: "Chicken Lollipop / Wings", price: 400, desc: "Classic drummettes shaped into handheld configurations fried in savory crisp armor.", multiPrices: [{ label: "Crisp Dry Pack", price: 400 }, { label: "Wet Gravy Toss", price: 430 }] },
+        { name: "Chilli Chicken / Chicken 65", price: 380, desc: "Choose classic hot soy chili loop or the absolute crimson south curry leaf tempered deep fry classic.", multiPrices: [{ label: "Standard Layout", price: 380 }, { label: "Special Premium", price: 400 }] },
+        { name: "Chicken Manchuria", price: 380, desc: "Deep fried chicken bites finished cleanly in coriander dark soy ginger sauce glaze.", multiPrices: [{ label: "Dry Standard", price: 380 }, { label: "Wet Style Sauce", price: 400 }] }
       ],
       "Indian Starters": [
-        { name: "Konaseema Kodi Vepudu", price: 410, mustTry: false },
-        { name: "Guntur Chicken Fry", price: 400, mustTry: false },
-        { name: "Andhra Spl. Chilli Chicken", price: 400, mustTry: false },
-        { name: "Andhra Spl. Chilli Mutton", price: 540, mustTry: false },
-        { name: "Velluli Karam Chicken Fry", price: 400, mustTry: false },
-        { name: "Kariveypaku Karam Chicken Fry", price: 400, mustTry: false },
-        { name: "Jeedipappu Veta Mamsam Fry", price: 570, mustTry: true },
-        { name: "Mutton Dry (Boneless)", price: 620, mustTry: false },
-        { name: "Chicken Roast", price: 400, mustTry: false },
-        { name: "Mutton Fry", price: 550, mustTry: false },
-        { name: "Mutton Spicy Pepper Fry", price: 550, mustTry: false },
-        { name: "Special Coriander Chicken", price: 400, mustTry: false },
-        { name: "Royyala Iguru", price: 450, mustTry: false },
-        { name: "Andhra Kodi Vepudu", price: 390, multiPrices: [{ label: "Bone-in Portion", price: 390 }, { label: "Boneless Style", price: 410 }] }
+        { name: "Konaseema Kodi Vepudu", price: 410, desc: "Fiery regional wet style chicken stir fry packed with intense coconut black pepper notes.", mustTry: false },
+        { name: "Guntur Chicken Fry", price: 400, desc: "Blistering dry spice heat loading using world famous vibrant Guntur red chilis.", mustTry: false },
+        { name: "Andhra Spl. Chilli Chicken", price: 400, desc: "Local state restaurant style green chili shredded chicken heat blast.", mustTry: false },
+        { name: "Andhra Spl. Chilli Mutton", price: 540, desc: "Tender goat pieces wok scorched with slit green chilis and regional garam masala.", mustTry: false },
+        { name: "Velluli Karam Chicken Fry", price: 400, desc: "Garlic clove rich coarse roasted red pepper powder coated dry chicken masterpiece.", mustTry: false },
+        { name: "Kariveypaku Karam Chicken Fry", price: 400, desc: "Dehydrated crispy curry leaf master grind seasoning powder dry chicken toss.", mustTry: false },
+        { name: "Jeedipappu Veta Mamsam Fry", price: 570, desc: "Premium tender mountain goat chunks fried crisp with heavy ratios of premium cashews.", mustTry: true },
+        { name: "Mutton Dry (Boneless)", price: 620, desc: "Clean boneless hand trimmed goat meat slow roasted down to concentrated dark spice state.", mustTry: false },
+        { name: "Chicken Roast", price: 400, desc: "Ghee layered pan slow roasted tender chicken bone-in standard.", mustTry: false },
+        { name: "Mutton Fry", price: 550, desc: "Traditional dark brown rich caramelized onion bone-in mutton dry plate.", mustTry: false },
+        { name: "Mutton Spicy Pepper Fry", price: 550, desc: "High kick Southern black peppercorn dust infused dry pan fried goat.", mustTry: false },
+        { name: "Special Coriander Chicken", price: 400, desc: "Fresh wet green cilantro paste base skillet fried chicken starter clean build.", mustTry: false },
+        { name: "Royyala Iguru", price: 450, desc: "Semi dry fresh ocean prawn thick masala reduction rich in coastal spices.", mustTry: false },
+        { name: "Andhra Kodi Vepudu", price: 390, desc: "Authentic coastal style dry roast variant cooked alongside regional state components.", multiPrices: [{ label: "Bone-In Selection", price: 390 }, { label: "Boneless Selection", price: 410 }] }
       ],
       "Curries Veg": [
-        { name: "Plain Palak / Veg Chatphat", price: 290, mustTry: false },
-        { name: "Paneer Butter Masala", price: 340, mustTry: false },
-        { name: "Palak Paneer / Methi Chaman", price: 340, mustTry: false },
-        { name: "Kadai Paneer / Paneer Shahi Korma", price: 340, mustTry: false },
-        { name: "Paneer Cashew Curry", price: 380, mustTry: false },
-        { name: "Kadai Veg", price: 320, mustTry: false },
-        { name: "Veg Kheema Rampuri", price: 320, mustTry: false },
-        { name: "Mushroom Masala", price: 340, mustTry: false },
-        { name: "Mushroom Capsicum Tomato Curry", price: 340, mustTry: false },
-        { name: "Tomato Cashew Curry", price: 370, mustTry: false },
-        { name: "Cashew Curry", price: 390, mustTry: false },
-        { name: "Tomato Capsicum Paneer Curry", price: 360, mustTry: false },
-        { name: "Veg Kolhapuri / Mixed Veg", price: 320, mustTry: false },
-        { name: "Veg Asiana", price: 350, mustTry: true },
-        { name: "Kodi Guddu Kura", price: 280, mustTry: false },
-        { name: "Hyderabad Veg Curry", price: 320, mustTry: false },
-        { name: "Kashmiri Veg Curry", price: 320, mustTry: false },
-        { name: "Egg Palak", price: 320, mustTry: false },
-        { name: "Egg Keema Masala", price: 310, mustTry: false },
-        { name: "Egg Bhurji", price: 300, mustTry: false },
-        { name: "Palak Mushroom", price: 340, mustTry: false }
+        { name: "Plain Palak / Veg Chatphat", price: 290, desc: "Smooth pureed creamed spinach or a tangy assortment of garden vegetables.", mustTry: false },
+        { name: "Paneer Butter Masala", price: 340, desc: "Soft paneer cubes in a classic rich, velvety sweet tomato cashew cream gravy.", mustTry: false },
+        { name: "Palak Paneer / Methi Chaman", price: 340, desc: "Smooth green spinach cream or grated paneer rich in fenugreek leaf aromatics.", mustTry: false },
+        { name: "Kadai Paneer / Paneer Shahi Korma", price: 340, desc: "Bell pepper wok coriander gravy or white cashew almond royal silk base.", mustTry: false },
+        { name: "Paneer Cashew Curry", price: 380, desc: "Double luxury rich profile blending cottage cheese blocks with whole boiled cashews.", mustTry: false },
+        { name: "Kadai Veg", price: 320, desc: "Wok mixed freshly cut vegetables in thick coarse onion tomato masala structure.", mustTry: false },
+        { name: "Veg Kheema Rampuri", price: 320, desc: "Finely minced soy vegetable proteins slow simmered inside historic royal Rampur style gravy.", mustTry: false },
+        { name: "Mushroom Masala", price: 340, desc: "Earthy plump button mushrooms cooked within medium hot spiced brown onion sauce gravy.", mustTry: false },
+        { name: "Mushroom Capsicum Tomato Curry", price: 340, desc: "Tangy rich tomato base balanced neatly with fresh sweet bell peppers and sliced mushrooms.", mustTry: false },
+        { name: "Tomato Cashew Curry", price: 370, desc: "Rich sweet and sour tomato curry base packing high volumes of whole sweet cashews.", mustTry: false },
+        { name: "Cashew Curry", price: 390, desc: "The ultimate pure cashew nut base thick gravy built for premium flatbread pairing.", mustTry: false },
+        { name: "Tomato Capsicum Paneer Curry", price: 360, desc: "Semi dry rich gravy featuring paneer bars, green bell pepper, and chunky fresh tomato base.", mustTry: false },
+        { name: "Veg Kolhapuri / Mixed Veg", price: 320, desc: "Spicy Maharashtrian style hot grated coconut red chili curry finish.", mustTry: false },
+        { name: "Veg Asiana", price: 350, desc: "Special exotic multi mix vegetable layout in secret premium aromatic house gravy base.", mustTry: true },
+        { name: "Kodi Guddu Kura", price: 280, desc: "Traditional home style hard boiled egg curry in classic tempered onion gravy.", mustTry: false },
+        { name: "Hyderabad Veg Curry", price: 320, desc: "Mint coriander infused green spinach cashew gravy rich vegetable base.", mustTry: false },
+        { name: "Kashmiri Veg Curry", price: 320, desc: "Mild sweet aromatic yellow gravy garnished clean with dried fruits and nuts.", mustTry: false },
+        { name: "Egg Palak", price: 320, desc: "Pan seared boiled eggs nested inside thick pureed seasoned garlic spinach cream.", mustTry: false },
+        { name: "Egg Keema Masala", price: 310, desc: "Finely shredded scrambled egg structure processed inside robust hot onion curry base.", mustTry: false },
+        { name: "Egg Bhurji", price: 300, desc: "Three egg pan scramble layout featuring chopped chilis, onions, and fresh coriander leaves.", mustTry: false },
+        { name: "Palak Mushroom", price: 340, desc: "Delicious earthy button mushrooms swimming in thick iron rich green cream gravy.", mustTry: false }
       ],
       "Indian Breads": [
-        { name: "Plain Pulka", price: 30, mustTry: false },
-        { name: "Jonna Pulka", price: 30, mustTry: false },
-        { name: "Raagi Pulka", price: 30, mustTry: false },
-        { name: "Garlic Naan / Kashmiri Naan", price: 90, mustTry: false },
-        { name: "Lachha Roti / Pudina Paratha", price: 90, mustTry: false },
-        { name: "Stuffed Paratha", price: 90, mustTry: false },
-        { name: "Egg Paratha", price: 95, mustTry: false },
-        { name: "Stuffed Kulcha", price: 85, mustTry: false },
-        { name: "Malai Naan", price: 90, mustTry: false },
-        { name: "Malai Paratha", price: 95, mustTry: false },
-        { name: "Tandoori Roti", price: 50, multiPrices: [{ label: "Plain Roti", price: 50 }, { label: "Butter Roti", price: 55 }] },
-        { name: "Plain Naan", price: 65, multiPrices: [{ label: "Plain Naan", price: 65 }, { label: "Butter Naan", price: 70 }] }
+        { name: "Plain Pulka", price: 30, desc: "Traditional whole wheat slim flatbread puffed over open flames.", mustTry: false },
+        { name: "Jonna Pulka", price: 30, desc: "Healthy rustic sorghum millet flour local flatbread option.", mustTry: false },
+        { name: "Raagi Pulka", price: 30, desc: "Nutrient dense finger millet red flour rustic flatbread execution.", mustTry: false },
+        { name: "Garlic Naan / Kashmiri Naan", price: 90, desc: "Minced garlic butter crusting or sweet dry fruit nut interior stuffing layout.", mustTry: false },
+        { name: "Lachha Roti / Pudina Paratha", price: 90, desc: "Multi layered flaky structure or mint dust coated tandoor paratha.", mustTry: false },
+        { name: "Stuffed Paratha", price: 90, desc: "Mashed spiced potato herb filled thick clay oven wheat flatbread.", mustTry: false },
+        { name: "Egg Paratha", price: 95, desc: "Layered tandoor paratha enriched with beaten egg layer coding.", mustTry: false },
+        { name: "Stuffed Kulcha", price: 85, desc: "Soft leavened bread round stuffed with spiced paneer onion paste.", mustTry: false },
+        { name: "Malai Naan", price: 90, desc: "Ultra luxurious naan brushed heavily with white clotted milk cream creaminess.", mustTry: false },
+        { name: "Malai Paratha", price: 95, desc: "Layered luxury flaky flatbread variant using cream enriched dough sheets.", mustTry: false },
+        { name: "Tandoori Roti", price: 50, desc: "Clay oven baked classic whole wheat flatbread layouts.", multiPrices: [{ label: "Plain Layout", price: 50 }, { label: "Butter Glazed", price: 55 }] },
+        { name: "Plain Naan", price: 65, desc: "Classic premium refined flour leavened flatbread pulled long.", multiPrices: [{ label: "Plain Layout", price: 65 }, { label: "Butter Glazed", price: 70 }] }
       ],
       "Andhra Special Curries": [
-        { name: "Andhra Kodi Kura (Bones)", price: 360, mustTry: false },
-        { name: "Spl. Andhra Kodi Kura (Boneless)", price: 400, mustTry: false },
-        { name: "Gongura Chicken", price: 390, mustTry: false },
-        { name: "Gongura Mutton", price: 500, mustTry: true },
-        { name: "Gongura Royyalu", price: 450, mustTry: false },
-        { name: "Prawns Curry", price: 460, mustTry: false },
-        { name: "Natu Kodi Pulusu", price: 480, mustTry: true },
-        { name: "Andhra Mutton Curry", price: 510, mustTry: false }
+        { name: "Andhra Kodi Kura (Bones)", price: 360, desc: "Authentic coastal bone-in chicken slow stewed in spicy coriander coconut dynamic base.", mustTry: false },
+        { name: "Spl. Andhra Kodi Kura (Boneless)", price: 400, desc: "Premium tender boneless chicken strips cooked inside identical home style coastal reduction.", mustTry: false },
+        { name: "Gongura Chicken", price: 390, desc: "Tangy chicken delicacy utilizing crushed sour sorrel leaves paste matrix.", mustTry: false },
+        { name: "Gongura Mutton", price: 500, desc: "Slow cooked tender mutton chunks completely infused with sour sorrel paste curry.", mustTry: true },
+        { name: "Gongura Royyalu", price: 450, desc: "Fresh ocean prawns cooked inside classic sorrel leaf tangy onion gravy reduction.", mustTry: false },
+        { name: "Prawns Curry", price: 460, desc: "Coastal style prawn curry featuring rich yellow coconut spice base profile.", mustTry: false },
+        { name: "Natu Kodi Pulusu", price: 480, desc: "Country bred free range country chicken simmered in ultra thin watery high fire soup gravy.", mustTry: true },
+        { name: "Andhra Mutton Curry", price: 510, desc: "Classic local style tender bone-in goat meat slow curried with traditional native masala mixes.", mustTry: false }
       ],
       "Curries Non-Veg": [
-        { name: "Kadai Chicken / Butter Chicken", price: 380, mustTry: false },
-        { name: "Chicken Anarkali", price: 390, mustTry: false },
-        { name: "Chicken Asiana / Maharani", price: 390, mustTry: false },
-        { name: "Chicken Chaat Phat", price: 390, mustTry: false },
-        { name: "Moghlai Chicken Curry", price: 390, mustTry: false },
-        { name: "Kashmiri Chicken Curry", price: 390, mustTry: false },
-        { name: "Chicken Tikka Masala", price: 380, mustTry: false },
-        { name: "Chicken Kolhapuri", price: 380, mustTry: false },
-        { name: "Punjabi Chicken", price: 380, mustTry: false },
-        { name: "Methi Chicken", price: 380, mustTry: false },
-        { name: "Cashew Chicken Curry", price: 400, mustTry: false },
-        { name: "Mutton Rogan Josh", price: 550, mustTry: false },
-        { name: "Mutton Keema Curry", price: 530, mustTry: false },
-        { name: "Angara Chicken Curry", price: 430, mustTry: false },
-        { name: "Mandakini Chicken Curry", price: 420, mustTry: false }
+        { name: "Kadai Chicken / Butter Chicken", price: 380, desc: "Spiced wok bell pepper base chicken or legendary sweet tomato creamy butter charcoal chicken.", mustTry: false },
+        { name: "Chicken Anarkali", price: 390, desc: "Sweet and sour hint rich almond cream royal gravy chicken configuration.", mustTry: false },
+        { name: "Chicken Asiana / Maharani", price: 390, desc: "Royal white cream base layout or house secret mild rich spice master gravy.", mustTry: false },
+        { name: "Chicken Chaat Phat", price: 390, desc: "Tangy, spicy, fast-paced flavor profile rich in lemon and green chilis.", mustTry: false },
+        { name: "Moghlai Chicken Curry", price: 390, desc: "Rich traditional egg drop thickened yellow almond cream chicken curry standard.", mustTry: false },
+        { name: "Kashmiri Chicken Curry", price: 390, desc: "Mild sweet curry base layered cleanly with fruit cocktails and cashew creams.", mustTry: false },
+        { name: "Chicken Tikka Masala", price: 380, desc: "Smoked tandoor boneless tikka cubes tossed within orange tikka onion gravy.", mustTry: false },
+        { name: "Chicken Kolhapuri", price: 380, desc: "Fierce red chili oil slicked grated dry coconut base spicy chicken stew.", mustTry: false },
+        { name: "Punjabi Chicken", price: 380, desc: "Hearty rustic highway style thick ginger onion paste bone chicken gravy.", mustTry: false },
+        { name: "Methi Chicken", price: 380, desc: "Fragrant dark green curry heavily featuring fresh fenugreek leaf infusions.", mustTry: false },
+        { name: "Cashew Chicken Curry", price: 400, desc: "Rich cashew paste based luxury chicken gravy configuration.", mustTry: false },
+        { name: "Mutton Rogan Josh", price: 550, desc: "Kashmiri heritage slow braised goat loin curry rich in ratanjot root and fennel aroma.", mustTry: false },
+        { name: "Mutton Keema Curry", price: 530, desc: "Fine minced premium goat meat slow skillet cooked down into thick spice matrix.", mustTry: false },
+        { name: "Angara Chicken Curry", price: 430, desc: "Smoky coal infused extra hot spicy red gravy chicken curry build.", mustTry: false },
+        { name: "Mandakini Chicken Curry", price: 420, desc: "Velvety mild green herb cashew gravy chicken specialty.", mustTry: false }
       ],
       "Fried Rice & Noodles": [
-        { name: "Veg Fried Rice / Veg Noodles", price: 280, mustTry: false },
-        { name: "Special Veg Fried Rice", price: 310, mustTry: false },
-        { name: "Schezwan Noodles", price: 300, mustTry: false },
-        { name: "Paneer Fried Rice", price: 300, mustTry: false },
-        { name: "Schezwan Fried Rice", price: 300, mustTry: false },
-        { name: "Jeera Rice", price: 280, mustTry: false },
-        { name: "Mushroom Fried Rice", price: 300, mustTry: false },
-        { name: "Cashew Fried Rice", price: 350, mustTry: false },
-        { name: "Corn Fried Rice", price: 310, mustTry: false },
-        { name: "Egg Fried Rice / Egg Noodles", price: 300, mustTry: false },
-        { name: "Double Egg Fried Rice", price: 330, mustTry: false },
-        { name: "Chicken Fried Rice", price: 330, mustTry: false },
-        { name: "Spl. Chicken Fried Rice", price: 370, mustTry: false },
-        { name: "Schezwan Chicken Fried Rice", price: 360, mustTry: false },
-        { name: "Prawns Fried Rice", price: 410, mustTry: false },
-        { name: "Spl Prawns Fried Rice", price: 430, mustTry: false },
-        { name: "Schezwan Egg Fried Rice", price: 310, mustTry: false },
-        { name: "Schezwan Egg Noodles", price: 320, mustTry: false },
-        { name: "Chicken Noodles", price: 330, mustTry: false },
-        { name: "Schezwan Chicken Noodles", price: 350, mustTry: false },
-        { name: "Mixed Fried Rice (Non-Veg)", price: 400, mustTry: true }
+        { name: "Veg Fried Rice / Veg Noodles", price: 280, desc: "Classic dry flame wok tossed basmati rice or long wheat noodles with fine garden vegetables.", mustTry: false },
+        { name: "Special Veg Fried Rice", price: 310, desc: "Enriched with fried cottage cheese cubes, golden baby corn, and premium cashews.", mustTry: false },
+        { name: "Schezwan Noodles", price: 300, desc: "Fiery spicy home cranked celery garlic red Schezwan chili paste wok tossed noodles.", mustTry: false },
+        { name: "Paneer Fried Rice", price: 300, desc: "Wok rice packed cleanly with small seasoned pan fried paneer cubes.", mustTry: false },
+        { name: "Schezwan Fried Rice", price: 300, desc: "Spicy dark red chili paste wok blistered long grain rice build.", mustTry: false },
+        { name: "Jeera Rice", price: 280, desc: "Fragrant premium basmati rice tempered clean with pure ghee and cracking cumin seeds.", mustTry: false },
+        { name: "Mushroom Fried Rice", price: 300, desc: "Sliced earthy fresh button mushrooms wok flipped into seasoning long grain rice.", mustTry: false },
+        { name: "Cashew Fried Rice", price: 350, desc: "Luxury basmati rice wok toss incorporating massive amounts of golden butter fried whole cashews.", mustTry: false },
+        { name: "Corn Fried Rice", price: 310, desc: "Sweet American golden kernels flipped with white pepper salt celery vegetable rice loops.", mustTry: false },
+        { name: "Egg Fried Rice / Egg Noodles", price: 300, desc: "Wok scrambled fresh eggs with white pepper vegetable rice or noodle strand mix.", mustTry: false },
+        { name: "Double Egg Fried Rice", price: 330, desc: "Double ratio egg volume ensuring heavy rich egg flakes integrated into every forkful.", mustTry: false },
+        { name: "Chicken Fried Rice", price: 330, desc: "Seasoned shredded chicken breast shreds wok flipped with eggs and dark soy seasoning rice.", mustTry: false },
+        { name: "Spl. Chicken Fried Rice", price: 370, desc: "Secret house special boneless chicken appetizer loading mixed inside egg rice format.", mustTry: false },
+        { name: "Schezwan Chicken Fried Rice", price: 360, desc: "Intense red hot chili paste chicken egg stir fried basmati configuration.", mustTry: false },
+        { name: "Prawns Fried Rice", price: 410, desc: "Fresh tiny shelled prawns wok crisped into egg and green onion fried rice matrix.", mustTry: false },
+        { name: "Spl Prawns Fried Rice", price: 430, desc: "Premium giant ocean prawns processed cleanly with specialized master spices inside fried rice build.", mustTry: false },
+        { name: "Schezwan Egg Fried Rice", price: 310, desc: "Spicy red paste variant of classic egg scrambled rice system.", mustTry: false },
+        { name: "Schezwan Egg Noodles", price: 320, desc: "Spicy red chili paste tossed egg noodle layout.", mustTry: false },
+        { name: "Chicken Noodles", price: 330, desc: "Wok snapped wheat noodles loaded with chicken shreds and cabbage carrot mix.", mustTry: false },
+        { name: "Schezwan Chicken Noodles", price: 350, desc: "Spicy garlic red pepper paste tossed chicken egg noodle configuration.", mustTry: false },
+        { name: "Mixed Fried Rice (Non-Veg)", price: 400, desc: "The ultimate ultimate wok combination combining chicken, mutton shreds, prawns, and egg flakes.", mustTry: true }
       ],
       "Biryanis": [
-        { name: "Chicken Dum Biryani", price: 340, mustTry: false },
-        { name: "Spl Chicken Biryani", price: 410, mustTry: true },
-        { name: "Chicken Fry Biryani", price: 400, mustTry: false },
-        { name: "Chicken Potlam Biryani", price: 450, mustTry: true },
-        { name: "Mutton Potlam Biryani", price: 600, mustTry: true },
-        { name: "Rambo Chicken Biryani", price: 400, mustTry: false },
-        { name: "Palamuru Chicken Biryani", price: 400, mustTry: false },
-        { name: "Gongura Chicken Biryani", price: 400, mustTry: false },
-        { name: "Avakai Chicken Biryani", price: 400, mustTry: false },
-        { name: "Red Chilli Chicken Biryani", price: 400, mustTry: false },
-        { name: "Green Chilli Chicken Biryani", price: 400, mustTry: false },
-        { name: "Ulavacharu Chicken Biryani", price: 400, mustTry: false },
-        { name: "Veg Biryani", price: 290, mustTry: false },
-        { name: "Paneer Biryani", price: 310, mustTry: false },
-        { name: "Mushroom Biryani", price: 310, mustTry: false },
-        { name: "Baby Corn Biryani", price: 310, mustTry: false },
-        { name: "Avakai Veg Biryani", price: 310, mustTry: false },
-        { name: "Kaju Biryani", price: 320, mustTry: false },
-        { name: "Kaju Paneer Biryani", price: 320, mustTry: false },
-        { name: "Ulavacharu Biryani (Veg)", price: 320, mustTry: false },
-        { name: "Biryani Rice", price: 270, mustTry: false },
-        { name: "Chicken Tikka Biryani", price: 420, mustTry: false },
-        { name: "Natu Kodi Biryani", price: 450, mustTry: true },
-        { name: "Lollipop / Wings Biryani", price: 410, mustTry: false },
-        { name: "Tangdi / Tandoori Chicken Biryani", price: 410, mustTry: false },
-        { name: "Mutton Dum / Fry Biryani", price: 520, mustTry: false },
-        { name: "Shahi Gosht Biryani", price: 540, mustTry: false },
-        { name: "Nalli Gosht Biryani", price: 550, mustTry: true },
-        { name: "Mutton Keema Biryani", price: 580, mustTry: false },
-        { name: "Gongura Mutton Biryani", price: 540, mustTry: false },
-        { name: "Prawns / Fish Biryani", price: 450, mustTry: false },
-        { name: "Egg Biryani", price: 310, mustTry: false }
+        { name: "Chicken Dum Biryani", price: 340, desc: "Classic Hyderabad style layered long basmati rice and raw spiced chicken slow cooked under dum seal.", mustTry: false },
+        { name: "Spl Chicken Biryani", price: 410, desc: "Layered biryani rice topped with special boneless juicy chicken starter appetizer cuts.", mustTry: true },
+        { name: "Chicken Fry Biryani", price: 400, desc: "Fragrant biryani rice served side by side with crisp local spice hot fried bone chicken.", mustTry: false },
+        { name: "Chicken Potlam Biryani", price: 450, desc: "Specialty minced chicken biryani packaged entirely inside thin skillet egg omelette pouch envelope.", mustTry: true },
+        { name: "Mutton Potlam Biryani", price: 600, desc: "Luxury minced goat meat spice biryani completely enveloped inside fried egg pocket sheet.", mustTry: true },
+        { name: "Rambo Chicken Biryani", price: 400, desc: "Massive scale chicken appetizer pieces loaded heavily onto signature spiced rice format.", mustTry: false },
+        { name: "Palamuru Chicken Biryani", price: 400, desc: "Rustic regional variant featuring specialized concert layers of country spice styles.", mustTry: false },
+        { name: "Gongura Chicken Biryani", price: 400, desc: "Tangy unique variation layering sour sorrel leaf paste chicken masala inside biryani rice.", mustTry: false },
+        { name: "Avakai Chicken Biryani", price: 400, desc: "Traditional spicy coastal Andhra raw mango pickle oil blended directly into biryani layers.", mustTry: false },
+        { name: "Red Chilli Chicken Biryani", price: 400, desc: "Blistering hot variant using local crushed dried red chili base inside chicken mix.", mustTry: false },
+        { name: "Green Chilli Chicken Biryani", price: 400, desc: "Sharp clean heat layout utilizing minced hot birds eye green chilis throughout the rice layer.", mustTry: false },
+        { name: "Ulavacharu Chicken Biryani", price: 400, desc: "Basmati rice completely infused with thick earthy dark brown horse gram soup concentrate juice.", mustTry: false },
+        { name: "Veg Biryani", price: 290, desc: "Aromatic slow dum layered basmati rice with mixed garden vegetables, mint, and saffron.", mustTry: false },
+        { name: "Paneer Biryani", price: 310, desc: "Biryani rice variant layered clean with spiced pan seared soft cottage cheese bars.", mustTry: false },
+        { name: "Mushroom Biryani", price: 310, desc: "Fresh button mushrooms slow cooked down in thick yogurt mint biryani masala matrix.", mustTry: false },
+        { name: "Baby Corn Biryani", price: 310, desc: "Crisp young baby corn wheels tossed inside aromatic spiced rice setup.", mustTry: false },
+        { name: "Avakai Veg Biryani", price: 310, desc: "Tangy spicy raw mango pickle oil integrated across seasonal vegetable biryani base.", mustTry: false },
+        { name: "Kaju Biryani", price: 320, desc: "Rich vegetarian alternative loading high volumes of pure whole butter roasted cashews inside.", mustTry: false },
+        { name: "Kaju Paneer Biryani", price: 320, desc: "Double combo combining crisp roasted cashew nuts along with fried cottage cheese cubes.", mustTry: false },
+        { name: "Ulavacharu Biryani (Veg)", price: 320, desc: "Traditional horsegram soup reduction massaged beautifully into fresh vegetable biryani layers.", mustTry: false },
+        { name: "Biryani Rice", price: 270, desc: "Pure pristine long grain saffron flavored plain biryani rice layer sans any meat components.", mustTry: false },
+        { name: "Chicken Tikka Biryani", price: 420, desc: "Charcoal smoked boneless chicken tikkas layered over rich aromatic biryani rice.", mustTry: false },
+        { name: "Natu Kodi Biryani", price: 450, desc: "Country free range country chicken tough meat masala paired alongside pristine basmati rice.", mustTry: true },
+        { name: "Lollipop / Wings Biryani", price: 410, desc: "Crispy fried wing lollipops crowning a heavy plate of hot spiced biryani rice.", mustTry: false },
+        { name: "Tangdi / Tandoori Chicken Biryani", price: 410, desc: "Whole charcoal tandoori chicken leg quarters resting over long saffron grains.", mustTry: false },
+        { name: "Mutton Dum / Fry Biryani", price: 520, desc: "Authentic slow dum cooked goat meat layers or hard dry pan roasted local mutton pairing options.", mustTry: false },
+        { name: "Shahi Gosht Biryani", price: 540, desc: "Royal presentation featuring extra mild sweet cashew cream paste marinated tender goat meat.", mustTry: false },
+        { name: "Nalli Gosht Biryani", price: 550, desc: "Ultra premium design featuring whole bone-in goat shanks packed with marrow over rich rice.", mustTry: true },
+        { name: "Mutton Keema Biryani", price: 580, desc: "Finely ground spiced goat meat mince layer distributed perfectly throughout long rice format.", mustTry: false },
+        { name: "Gongura Mutton Biryani", price: 540, desc: "Tangy rich sorrel leaf paste infused premium mutton chunks layered into hot dum rice.", mustTry: false },
+        { name: "Prawns / Fish Biryani", price: 450, desc: "Fresh ocean prawns or crisp fried boneless fish fillet layers handled inside separate pan layouts.", mustTry: false },
+        { name: "Egg Biryani", price: 310, desc: "Boiled eggs fried down with red chili powder paste nested in premium biryani rice.", mustTry: false }
       ],
       "Family Packs": [
-        { name: "Veg Biryani Family Pack", price: 700, mustTry: false },
-        { name: "Paneer Biryani Family Pack", price: 750, mustTry: false },
-        { name: "Mushroom Biryani Family Pack", price: 750, mustTry: false },
-        { name: "Chicken Dum Family Pack", price: 850, mustTry: false },
-        { name: "Chicken Fry Family Pack", price: 900, mustTry: false },
-        { name: "S.P Chicken Biryani Family Pack", price: 950, mustTry: false },
-        { name: "Mutton Dum Family Pack", price: 1150, mustTry: false },
-        { name: "Mutton Fry Family Pack", price: 1150, mustTry: false }
+        { name: "Veg Biryani Family Pack", price: 700, desc: "Large scale presentation box container serves 3-4 humans with extra accompaniment cups.", mustTry: false },
+        { name: "Paneer Biryani Family Pack", price: 750, desc: "Large volume layout packing massive quantities of paneer basmati layers.", mustTry: false },
+        { name: "Mushroom Biryani Family Pack", price: 750, desc: "Large combo containing complete mushroom masala basmati layers.", mustTry: false },
+        { name: "Chicken Dum Family Pack", price: 850, desc: "The standard gold volume party box pack filled with chicken bone pieces and rich rice layers.", mustTry: false },
+        { name: "Chicken Fry Family Pack", price: 900, desc: "Separate container of local red crisp bone chicken fry matched with a massive load of rice.", mustTry: false },
+        { name: "S.P Chicken Biryani Family Pack", price: 950, desc: "Premium boneless chicken starter cuts served over high volume basmati arrangements.", mustTry: false },
+        { name: "Mutton Dum Family Pack", price: 1150, desc: "The grand master party container packed fully with elite tender slow dum goat bone chunks.", mustTry: false },
+        { name: "Mutton Fry Family Pack", price: 1150, desc: "Dry pan scorched local goat recipe package coupled up with family scale spiced basmati rice layout.", mustTry: false }
       ],
       "Traditional Rice & Sides": [
-        { name: "Plain Rice", price: 120, mustTry: false },
-        { name: "Steamed Rice", price: 150, mustTry: false },
-        { name: "Pappucharu Annam", price: 220, mustTry: false },
-        { name: "Ragi Mudda", price: 150, mustTry: false },
-        { name: "Ragi Mudda with Veg Masala", price: 300, mustTry: true },
-        { name: "Curd Rice", price: 150, mustTry: false },
-        { name: "Special Curd Rice", price: 200, mustTry: false }
+        { name: "Plain Rice", price: 120, desc: "Simple clean plate of polished premium white grain rice.", mustTry: false },
+        { name: "Steamed Rice", price: 150, desc: "Fluffy light hot steamed long grain rice standard layout.", mustTry: false },
+        { name: "Pappucharu Annam", price: 220, desc: "Ultimate comfort bowl of pre-mixed rice with traditional thick tangy local lentil soup stew.", mustTry: false },
+        { name: "Ragi Mudda", price: 150, desc: "Authentic rustic steamed high nutrient finger millet large flour ball composition.", mustTry: false },
+        { name: "Ragi Mudda with Veg Masala", price: 300, desc: "Traditional millet red ball served alongside spicy thick mixed vegetable garden curry plate.", mustTry: true },
+        { name: "Curd Rice", price: 150, desc: "Cooling soft mashed rice blended with fresh premium yogurt tempered with mustard curry leaves.", mustTry: false },
+        { name: "Special Curd Rice", price: 200, desc: "Enriched cool curd rice loaded cleanly with fresh pomegranate seeds, cashew nuts, and grated ginger inputs.", mustTry: false }
       ],
       "Desserts & Sweets": [
-        { name: "Gulab Jamun", price: 70, mustTry: false },
-        { name: "Gulab Jamun with Ice Cream", price: 140, mustTry: false },
-        { name: "Apricot Delight", price: 170, mustTry: true },
-        { name: "Ariselu Half kg", price: 325, mustTry: false },
-        { name: "Ariselu (Organic Bellam) 1 kg", price: 600, mustTry: false }
+        { name: "Gulab Jamun", price: 70, desc: "Two fried milk solid flour dumplings soaked inside hot sweet sugar syrup.", mustTry: false },
+        { name: "Gulab Jamun with Ice Cream", price: 140, desc: "Hot syrup dumplings paired against a cold ball of vanilla cream.", mustTry: false },
+        { name: "Apricot Delight", price: 170, desc: "Celebrated regional dessert made from sweet stewed pureed dried apricots layered over cake custard cream.", mustTry: true },
+        { name: "Ariselu Half kg", price: 325, desc: "Half kilogram box scale of native authentic jaggery ariselu cakes.", mustTry: false },
+        { name: "Ariselu (Organic Bellam) 1 kg", price: 600, desc: "Traditional festival sweet made with raw rice flour and pure organic jaggery deep fried.", mustTry: false }
       ],
       "Ice Cream Scoops": [
-        { name: "Vanilla / Strawberry", price: 140, mustTry: false },
-        { name: "Butter Scotch", price: 150, mustTry: false },
-        { name: "Chocolate", price: 150, mustTry: false },
-        { name: "Black Forest", price: 150, mustTry: false },
-        { name: "Kaju Kismis", price: 180, mustTry: false },
-        { name: "Caremel Almond", price: 180, mustTry: false },
-        { name: "Nut Delight", price: 180, mustTry: false },
-        { name: "Lichi / Seethafal", price: 180, mustTry: false },
-        { name: "Sapota", price: 180, mustTry: false }
+        { name: "Vanilla / Strawberry", price: 140, desc: "Standard dual scoops selections chosen across classical kitchen items.", mustTry: false },
+        { name: "Butter Scotch Scoop", price: 150, desc: "Dual rich caramel crunch scoops.", mustTry: false },
+        { name: "Chocolate Scoop", price: 150, desc: "Premium rich dark cocoa dual scoop format.", mustTry: false },
+        { name: "Black Forest Scoop", price: 150, desc: "Cake crumble and syrup infused gourmet scoops.", mustTry: false },
+        { name: "Kaju Kismis", price: 180, desc: "Traditional Indian dessert style nut and raisin loaded rich scoops.", mustTry: false },
+        { name: "Caremel Almond", price: 180, desc: "Roasted nuts embedded inside rich brown ribbon cream bases.", mustTry: false },
+        { name: "Nut Delight", price: 180, desc: "Heavy array of crushed pistachio, cashew and almond shards.", mustTry: false },
+        { name: "Lichi / Seethafal", price: 180, desc: "Seasonal fruit extract structural profiles loaded with sweet textures.", mustTry: false },
+        { name: "Sapota Scoop", price: 180, desc: "Native sweet nose chiku brown pulp structural item options.", mustTry: false }
       ],
       "Fruit Shakes": [
-        { name: "Mango Fruit Shake", price: 200, mustTry: false },
-        { name: "Strawberry Fruit Shake", price: 200, mustTry: false },
-        { name: "Black Current Fruit Shake", price: 200, mustTry: false },
-        { name: "Green Apple Fruit Shake", price: 200, mustTry: false },
-        { name: "Kiwi Fruit Shake", price: 200, mustTry: false },
-        { name: "Butter Scotch Fruit Shake", price: 200, mustTry: false },
-        { name: "Banana Fruit Shake", price: 200, mustTry: false },
-        { name: "Custard Apple Fruit Shake", price: 200, mustTry: false }
+        { name: "Mango Fruit Shake", price: 200, desc: "Premium summer mango pulp whipped cleanly with cold dairy configurations.", mustTry: false },
+        { name: "Strawberry Fruit Shake", price: 200, desc: "Tangy rich pink mountain berry mash classic layout.", mustTry: false },
+        { name: "Black Current Fruit Shake", price: 200, desc: "Deep purple grape profiles whipped with premium syrup bases.", mustTry: false },
+        { name: "Green Apple Fruit Shake", price: 200, desc: "Crispy tart green skin orchard elements liquid blended.", mustTry: false },
+        { name: "Kiwi Fruit Shake", price: 200, desc: "Zesty emerald seeded luxury fruit shake alignment.", mustTry: false },
+        { name: "Butter Scotch Fruit Shake", price: 200, desc: "Praline crunch elements spun deep inside vanilla milk solutions.", mustTry: false },
+        { name: "Banana Fruit Shake", price: 200, desc: "Energy rich heavy potassium thick smooth creamy standard.", mustTry: false },
+        { name: "Custard Apple Fruit Shake", price: 200, desc: "Premium sweet seethafal cream matrix whipped beautifully cold.", mustTry: false }
       ],
       "Choco & Premium Shakes": [
-        { name: "Kitkat Shake", price: 210, mustTry: false },
-        { name: "Snickers Shake", price: 210, mustTry: false },
-        { name: "Munch Shake", price: 210, mustTry: false },
-        { name: "Dairy Milk Shake", price: 210, mustTry: false },
-        { name: "Dark Chocolate Shake", price: 240, mustTry: false },
-        { name: "Tripple Choco Shake", price: 240, mustTry: false },
-        { name: "Crunchy Almond Chip Shake", price: 240, mustTry: false },
-        { name: "Nutella Shake", price: 240, mustTry: false },
-        { name: "Oreo Nuts Shake", price: 240, mustTry: false },
-        { name: "Peanut Butter Shake", price: 240, mustTry: false },
-        { name: "Oreo Caramel Shake", price: 240, mustTry: false },
-        { name: "Dry Fruit Shake", price: 240, mustTry: false }
+        { name: "Kitkat Shake", price: 210, desc: "Blended crispy wafer fingers topped with dark chocolate curls.", mustTry: false },
+        { name: "Snickers Shake", price: 210, desc: "Nougat caramel peanut crunch bar crushed flat inside milk grids.", mustTry: false },
+        { name: "Munch Shake", price: 210, desc: "Light crisp wafer bits spun inside vanilla ice cream profiles.", mustTry: false },
+        { name: "Dairy Milk Shake", price: 210, desc: " Timeless smooth milk chocolate bar liquidation recipe.", mustTry: false },
+        { name: "Dark Chocolate Shake", price: 240, desc: "Heavy Dutch process premium cocoa paste formulation.", mustTry: false },
+        { name: "Tripple Choco Shake", price: 240, desc: "White, milk, and dark cocoa compound synergy systems layered.", mustTry: false },
+        { name: "Crunchy Almond Chip Shake", price: 240, desc: "Toasted sliced nuts coupled down with bitter cocoa chips.", mustTry: false },
+        { name: "Nutella Shake", price: 240, desc: "Massive spooning of genuine Italian hazelnut cocoa spread format.", mustTry: false },
+        { name: "Oreo Nuts Shake", price: 240, desc: "Black cream biscuits blended together with premium broken cashews.", mustTry: false },
+        { name: "Peanut Butter Shake", price: 240, desc: "Salty sweet roasted peanut paste dynamic smooth thickness.", mustTry: false },
+        { name: "Oreo Caramel Shake", price: 240, desc: "Crushed cookie shards drizzled with amber warm caramel sauce lines.", mustTry: false },
+        { name: "Dry Fruit Shake", price: 240, desc: "Premium collection of figs, almonds, dates, and cashews blended dense.", mustTry: false }
       ],
       "Exclusive Shakes & Creations": [
-        { name: "Ferrero Rocher Shake", price: 270, mustTry: false },
-        { name: "Temptation Shake", price: 270, mustTry: false },
-        { name: "Peanut Butter Banana Creation", price: 230, mustTry: false },
-        { name: "Black Current Flake Creation", price: 230, mustTry: false },
-        { name: "Strawberry Flake Creation", price: 230, mustTry: false },
-        { name: "Banana Flake Creation", price: 230, mustTry: false },
-        { name: "Oreo Cookie Shake", price: 210, mustTry: false },
-        { name: "Choco Chip Cookie Shake", price: 210, mustTry: false },
-        { name: "Dark Fantasy Cookie Shake", price: 210, mustTry: false },
-        { name: "Coffeediction Shake", price: 270, mustTry: false },
-        { name: "Coffee Fantasy Shake", price: 270, mustTry: false },
-        { name: "Coffee Caramel Shake", price: 270, mustTry: false }
+        { name: "Ferrero Rocher Shake", price: 270, desc: "Whole luxury praline hazelnut balls blended into rich cream frames.", mustTry: false },
+        { name: "Temptation Shake", price: 270, desc: "A premium rich chocolate bar creation made for luxury dessert ends.", mustTry: false },
+        { name: "Peanut Butter Banana Creation", price: 230, desc: "Clean potassium banana wheels paired with heavy peanut paste.", mustTry: false },
+        { name: "Black Current Flake Creation", price: 230, desc: "Berry rich syrups topped with crunchy structural sugar crystals.", mustTry: false },
+        { name: "Strawberry Flake Creation", price: 230, desc: "Sweet red orchard mash layers garnished with candy crumbs.", mustTry: false },
+        { name: "Banana Flake Creation", price: 230, desc: "Delicate fruit slices served inside high volume whipped dessert frames.", mustTry: false },
+        { name: "Oreo Cookie Shake", price: 210, desc: "Classic dark cocoa sandwich cookies creamed up with vanilla.", mustTry: false },
+        { name: "Choco Chip Cookie Shake", price: 210, desc: "Buttery baked chocolate chunk cookies processed into dynamic drinks.", mustTry: false },
+        { name: "Dark Fantasy Cookie Shake", price: 210, desc: "Molten core biscuit structures blended into chocolate profiles.", mustTry: false },
+        { name: "Coffeediction Shake", price: 270, desc: "High octane espresso shots churned with premium ice creams.", mustTry: false },
+        { name: "Coffee Fantasy Shake", price: 270, desc: "Sweet velvety coffee treat crafted clean with milk reductions.", mustTry: false },
+        { name: "Coffee Caramel Shake", price: 270, desc: "Bitter roast bean profiles balanced with sweet golden caramel grids.", mustTry: false }
       ],
       "Beverages & Lemonades": [
-        { name: "Lassi", price: 90, mustTry: false },
-        { name: "Vanilla Lassi", price: 170, mustTry: false },
-        { name: "Water Bottle 500 ml", price: 12, mustTry: false },
-        { name: "Water Bottle 1 Ltr", price: 19, mustTry: false },
-        { name: "Classic Lemonade", price: 160, mustTry: false },
-        { name: "Blue Curacao Lemonade", price: 160, mustTry: false },
-        { name: "Green Apple Lemonade", price: 160, mustTry: false },
-        { name: "Watermelon Lemonade", price: 160, mustTry: false },
-        { name: "Kiwi Lemonade", price: 160, mustTry: false },
-        { name: "Mango Lassi", price: 180, multiPrices: [{ label: "Mango Style", price: 180 }, { label: "Strawberry Lassi", price: 180 }] },
-        { name: "Strawberry Lemonade", price: 160, multiPrices: [{ label: "Strawberry", price: 160 }, { label: "Raspberry", price: 160 }, { label: "Raspberry Mojito", price: 170 }] }
+        { name: "Lassi", price: 90, desc: "Chilled whipped thick sweet yogurt drink available straight up.", mustTry: false },
+        { name: "Vanilla Lassi", price: 170, desc: "Aromatic vanilla bean infusion into rich churned curds.", mustTry: false },
+        { name: "Water Bottle 500 ml", price: 12, desc: "Pure ozone filtered bottled mineral liquid asset.", mustTry: false },
+        { name: "Water Bottle 1 Ltr", price: 19, desc: "Full scale pure bottled structural hydration fluid standard.", mustTry: false },
+        { name: "Classic Lemonade", price: 160, desc: "Fresh hand squeezed citrus juice balanced with iced sparkling elements.", mustTry: false },
+        { name: "Blue Curacao Lemonade", price: 160, desc: "Vibrant orange peel extract blue syrup lemonade refresh loop.", mustTry: false },
+        { name: "Green Apple Lemonade", price: 160, desc: "Crisp orchard tart apple syrups inside sparkling soda grids.", mustTry: false },
+        { name: "Watermelon Lemonade", price: 160, desc: "Fresh direct summer pink melon juice inputs done light.", mustTry: false },
+        { name: "Kiwi Lemonade", price: 160, desc: "Zesty seeded emerald fruit syrup balanced clean with sweet water.", mustTry: false },
+        { name: "Mango Lassi", price: 180, desc: "Rich sweet yogurt churned together with seasonal fruit pulps.", multiPrices: [{ label: "Mango Infused", price: 180 }, { label: "Strawberry Variant", price: 180 }] },
+        { name: "Strawberry Lemonade", price: 160, desc: "Delicious citrus water structures packing berry fruit items.", multiPrices: [{ label: "Strawberry Build", price: 160 }, { label: "Raspberry Build", price: 160 }, { label: "Raspberry Mojito (170)", price: 170 }] }
       ],
       "Mojitos & Add-Ons": [
-        { name: "Virgin Mojito", price: 170, mustTry: false },
-        { name: "Watermelon Mojito", price: 170, mustTry: false },
-        { name: "Blue Mojito", price: 170, mustTry: false },
-        { name: "Green Apple Mojito", price: 170, mustTry: false },
-        { name: "Pomegranate Mojito", price: 170, mustTry: false },
-        { name: "Strawberry Mojito", price: 170, mustTry: false },
-        { name: "Kiwi Mojito", price: 170, mustTry: false },
-        { name: "Extra Add-On: Ice Cream", price: 30, mustTry: false },
-        { name: "Extra Add-On: Choco Chips", price: 10, mustTry: false },
-        { name: "Extra Add-On: Snickers", price: 20, mustTry: false },
-        { name: "Extra Add-On: Dairy Milk", price: 10, mustTry: false }
+        { name: "Virgin Mojito", price: 170, desc: "Crushed field mint leaves and lime wedges muddled deep inside fizzy soda.", mustTry: false },
+        { name: "Watermelon Mojito", price: 170, desc: "Muddled fresh garden mint balanced with cool water sweet melon items.", mustTry: false },
+        { name: "Blue Mojito", price: 170, desc: "Curacao citrus syrups combined over clean muddled mint structures.", mustTry: false },
+        { name: "Green Apple Mojito", price: 170, desc: "Tart orchard elements pairing with crisp mint leaf oils and soda bubbles.", mustTry: false },
+        { name: "Pomegranate Mojito", price: 170, desc: "Ruby red sweet seed extra juice combined over standard mojito layouts.", mustTry: false },
+        { name: "Strawberry Mojito", price: 170, desc: "Muddled pink berries crushed with lime rinds and pristine ice chunks.", mustTry: false },
+        { name: "Kiwi Mojito", price: 170, desc: "Fresh zesty kiwi elements muddled up together with green garden mint leaves.", mustTry: false },
+        { name: "Extra Add-On: Ice Cream", price: 30, desc: "Premium cold dual layer extra scoop addition to any dynamic dish.", mustTry: false },
+        { name: "Extra Add-On: Choco Chips", price: 10, desc: "Crispy cocoa crunch morsels loaded onto your choice profile.", mustTry: false },
+        { name: "Extra Add-On: Snickers", price: 20, desc: "Chopped candy bar components packed into separate side bowls.", mustTry: false },
+        { name: "Extra Add-On: Dairy Milk", price: 10, desc: "Melting sweet chocolate ribbons added on to your configuration.", mustTry: false }
       ]
     };
 
-    let activeSelectedCategory = Object.keys(globalMenuDatabase)[0];
+    let activeSelectedCategory = Object.keys(comprehensiveMenuDataset)[0];
 
     document.addEventListener('DOMContentLoaded', () => {
       buildCategoryTabsSystem();
@@ -644,29 +726,31 @@
     });
 
     function buildCategoryTabsSystem() {
-      const tabsContainer = document.getElementById('categoryTabs');
-      tabsContainer.innerHTML = '';
+      const tabsReference = document.getElementById('categoryTabs');
+      tabsReference.innerHTML = '';
       
-      Object.keys(globalMenuDatabase).forEach((categoryName, index) => {
-        const tabButton = document.createElement('button');
-        tabButton.className = `category-btn ${index === 0 ? 'active' : ''}`;
-        tabButton.textContent = categoryName;
-        tabButton.dataset.category = categoryName;
-        tabsContainer.appendChild(tabButton);
+      Object.keys(comprehensiveMenuDataset).forEach((categoryName, index) => {
+        const structuralButton = document.createElement('button');
+        structuralButton.className = `category-btn ${index === 0 ? 'active' : ''}`;
+        structuralButton.textContent = categoryName;
+        structuralButton.dataset.category = categoryName;
+        tabsReference.appendChild(structuralButton);
       });
     }
 
     function bindInteractiveControls() {
-      document.getElementById('categoryTabs').addEventListener('click', (event) => {
-        if (event.target.classList.contains('category-btn')) {
-          document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-          event.target.classList.add('active');
-          activeSelectedCategory = event.target.dataset.category;
+      // Tab Selection Processing
+      document.getElementById('categoryTabs').addEventListener('click', (eventObject) => {
+        if (eventObject.target.classList.contains('category-btn')) {
+          document.querySelectorAll('.category-btn').forEach(btnElement => btnElement.classList.remove('active'));
+          eventObject.target.classList.add('active');
+          activeSelectedCategory = eventObject.target.dataset.category;
           executeGridRender(activeSelectedCategory);
-          event.target.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          eventObject.target.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         }
       });
 
+      // Dropdown Sorting Processing
       document.getElementById('priceSort').addEventListener('change', () => {
         executeGridRender(activeSelectedCategory);
       });
@@ -676,45 +760,48 @@
       const gridDOMReference = document.getElementById('menuGrid');
       gridDOMReference.innerHTML = '';
       
-      let itemsListClone = [...globalMenuDatabase[targetCategoryKey]];
+      let sourceItemsList = [...comprehensiveMenuDataset[targetCategoryKey]];
       const activeSortStrategy = document.getElementById('priceSort').value;
 
+      // Pricing Sort Evaluation Logic Block
       if (activeSortStrategy === 'low-high') {
-        itemsListClone.sort((a, b) => a.price - b.price);
+        sourceItemsList.sort((alpha, beta) => alpha.price - beta.price);
       } else if (activeSortStrategy === 'high-low') {
-        itemsListClone.sort((a, b) => b.price - a.price);
+        sourceItemsList.sort((alpha, beta) => beta.price - alpha.price);
       }
 
-      itemsListClone.forEach(item => {
-        const itemCard = document.createElement('div');
-        itemCard.className = 'menu-item';
+      // DOM Node Generation Loop
+      sourceItemsList.forEach(itemObject => {
+        const itemCardElement = document.createElement('div');
+        itemCardElement.className = 'menu-item';
         
         let dynamicSubPricesMarkup = '';
-        if (item.multiPrices && item.multiPrices.length > 0) {
+        if (itemObject.multiPrices && itemObject.multiPrices.length > 0) {
           dynamicSubPricesMarkup = `<div class="multi-price-list">`;
-          item.multiPrices.forEach(subItem => {
+          itemObject.multiPrices.forEach(subPrice => {
             dynamicSubPricesMarkup += `
               <div class="multi-price-row">
-                <span>${subItem.label}</span>
-                <span class="multi-price-val">₹${subItem.price}</span>
+                <span>${subPrice.label}</span>
+                <span class="multi-price-val">₹${subPrice.price}</span>
               </div>`;
           });
           dynamicSubPricesMarkup += `</div>`;
         }
 
-        itemCard.innerHTML = `
+        itemCardElement.innerHTML = `
           <div class="item-content">
             <div class="item-header">
-              <h3 class="item-title">${item.name}</h3>
+              <h3 class="item-title">${itemObject.name}</h3>
               <div class="item-badge-container">
-                <span class="item-price">₹${item.price}</span>
-                ${item.mustTry ? `<span class="must-try-badge">Must Try</span>` : ''}
+                <span class="item-price">₹${itemObject.price}</span>
+                ${itemObject.mustTry ? `<span class="must-try-badge">Must Try</span>` : ''}
               </div>
             </div>
+            <p class="item-desc">${itemObject.desc}</p>
             ${dynamicSubPricesMarkup}
           </div>
         `;
-        gridDOMReference.appendChild(itemCard);
+        gridDOMReference.appendChild(itemCardElement);
       });
     }
   </script>
