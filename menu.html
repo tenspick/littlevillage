@@ -11,12 +11,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
+  
   <style>
-    /* ── FOOTER FIX ── */
     body {
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      /* Background Image Implementation */
+      background: url('./assets/images/lvbg.png') no-repeat center center fixed;
+      background-size: cover;
     }
 
     main {
@@ -26,22 +29,43 @@
     }
 
     .menu-page {
-      padding-block-start: 120px;
+      padding-block-start: 140px;
       padding-block-end: 120px;
       padding-inline: 16px;
       flex: 1;
     }
 
-    /* ── CATEGORY TABS ── */
+    /* Redesigned Navigation Controls Row */
+    .menu-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 40px;
+      background: rgba(20, 20, 20, 0.8);
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    @media (min-width: 992px) {
+      .menu-controls {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    /* Category Navigation Tabs */
     .category-tabs {
       display: flex;
       overflow-x: auto;
-      gap: 12px;
-      margin-bottom: 40px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--white-alpha-10);
+      gap: 10px;
+      padding-bottom: 5px;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
+      flex: 1;
     }
 
     .category-tabs::-webkit-scrollbar {
@@ -51,24 +75,148 @@
     .category-btn {
       color: var(--accent-wheat);
       font-family: var(--fontFamily-forum);
-      font-size: 1.7rem;
-      padding: 8px 16px;
+      font-size: 1.5rem;
+      padding: 8px 18px;
       transition: var(--transition-1);
       white-space: nowrap;
-      border-radius: 6px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+    }
+
+    .category-btn:hover,
+    .category-btn.active {
+      color: #ffffff;
+      background: var(--clay-orange);
+      border-color: var(--clay-orange);
+    }
+
+    /* Interactive Sorting Dropdown element */
+    .sort-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      align-self: flex-start;
       flex-shrink: 0;
     }
 
-    .category-btn.active {
-      color: var(--clay-orange);
-      border-bottom: 2px solid var(--clay-orange);
+    .sort-label {
+      color: var(--accent-wheat);
+      font-size: 1.4rem;
+      font-family: var(--fontFamily-dmSans);
+      white-space: nowrap;
     }
 
-    /* ── MENU GRID ── */
+    .sort-select {
+      background: rgba(30, 30, 30, 0.95);
+      color: var(--accent-wheat);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 1.4rem;
+      font-family: var(--fontFamily-dmSans);
+      outline: none;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .sort-select:focus {
+      border-color: var(--clay-orange);
+    }
+
+    /* Premium Menu Display Card Layouts */
     .menu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .menu-item {
+      background: linear-gradient(165deg, rgba(35, 35, 35, 0.85), rgba(20, 20, 20, 0.95));
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu-item:hover {
+      transform: translateY(-5px);
+      border-color: var(--clay-orange);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .item-content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .item-title {
+      font-family: var(--fontFamily-forum);
+      font-size: 2rem;
+      color: var(--accent-wheat);
+      line-height: 1.3;
+    }
+
+    .item-badge-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    .item-price {
+      color: var(--clay-orange);
+      font-size: 1.8rem;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .must-try-badge {
+      background: linear-gradient(90deg, #ff8c00, #e65100);
+      color: #ffffff;
+      font-size: 0.9rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Multivariant pricing support rules */
+    .multi-price-list {
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .multi-price-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.3rem;
+      color: var(--quick-silver);
+    }
+
+    .multi-price-val {
+      color: var(--clay-orange);
+      font-weight: bold;
     }
 
     @media (max-width: 600px) {
@@ -76,411 +224,10 @@
         grid-template-columns: 1fr;
         gap: 16px;
       }
-
       .menu-page {
-        padding-block-start: 100px;
+        padding-block-start: 110px;
         padding-inline: 12px;
       }
-
-      .category-btn {
-        font-size: 1.5rem;
-        padding: 7px 14px;
-      }
-    }
-
-    /* ── MENU ITEM CARD ── */
-    .menu-item {
-      background: linear-gradient(160deg, rgba(48, 48, 48, 0.95), rgba(33, 33, 33, 0.98));
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: var(--shadow-1);
-      border: 1px solid var(--white-alpha-10);
-      transition: 0.25s ease;
-      position: relative;
-    }
-
-    .menu-item:hover {
-      transform: translateY(-6px);
-      border-color: var(--clay-orange);
-      box-shadow: 0 18px 24px rgba(0, 0, 0, 0.35);
-    }
-
-    .menu-item img {
-      height: 200px;
-      width: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-    }
-
-    .menu-item:hover img {
-      transform: scale(1.06);
-    }
-
-    .item-content {
-      padding: 20px;
-      display: grid;
-      gap: 10px;
-    }
-
-    .item-title {
-      font-family: var(--fontFamily-forum);
-      font-size: 2rem;
-      color: var(--accent-wheat);
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 8px;
-    }
-
-    .item-price {
-      color: var(--clay-orange);
-      font-weight: bold;
-      white-space: nowrap;
-    }
-
-    .item-desc {
-      color: var(--quick-silver);
-      font-size: 1.4rem;
-      margin-block: 6px 10px;
-      line-height: 1.6;
-    }
-
-    .add-to-cart-btn {
-      background: var(--clay-orange);
-      color: white;
-      width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      font-weight: bold;
-      margin-top: 10px;
-      transition: 0.3s;
-      font-size: 1.5rem;
-    }
-
-    .add-to-cart-btn:hover {
-      background: #E65100;
-      transform: scale(1.02);
-    }
-
-    /* ── SKELETON ── */
-    .skeleton-card {
-      border-radius: 16px;
-      border: 1px solid var(--white-alpha-10);
-      overflow: hidden;
-      background: var(--eerie-black-2);
-      box-shadow: var(--shadow-1);
-    }
-
-    .skeleton-media,
-    .skeleton-line {
-      position: relative;
-      background: rgba(255, 255, 255, 0.08);
-      overflow: hidden;
-    }
-
-    .skeleton-media::after,
-    .skeleton-line::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      transform: translateX(-100%);
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
-      animation: skeletonShimmer 1.3s infinite;
-    }
-
-    .skeleton-media {
-      height: 200px;
-    }
-
-    .skeleton-content {
-      padding: 20px;
-      display: grid;
-      gap: 10px;
-    }
-
-    .skeleton-line {
-      height: 14px;
-      border-radius: 8px;
-    }
-
-    .skeleton-line.title {
-      height: 20px;
-      width: 78%;
-    }
-
-    .skeleton-line.short {
-      width: 46%;
-    }
-
-    @keyframes skeletonShimmer {
-      100% {
-        transform: translateX(100%);
-      }
-    }
-
-    /* ── CART DRAWER ── */
-    .cart-drawer {
-      position: fixed;
-      right: -420px;
-      top: 0;
-      height: 100vh;
-      width: 380px;
-      background: var(--eerie-black-1);
-      z-index: 1000;
-      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.6);
-      transition: 0.4s ease;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .cart-drawer.active {
-      right: 0;
-    }
-
-    @media (max-width: 600px) {
-      .cart-drawer {
-        width: 100%;
-        right: -100%;
-      }
-    }
-
-    .cart-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      color: var(--accent-wheat);
-    }
-
-    .cart-items {
-      flex: 1;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      padding-right: 6px;
-    }
-
-    .cart-item {
-      display: flex;
-      gap: 10px;
-      border-bottom: 1px solid var(--white-alpha-10);
-      padding-bottom: 12px;
-      align-items: center;
-    }
-
-    .cart-item img {
-      width: 60px;
-      height: 60px;
-      border-radius: 8px;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-
-    .cart-item-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .cart-item-name {
-      font-size: 1.5rem;
-      color: var(--accent-wheat);
-      font-weight: bold;
-      word-break: break-word;
-    }
-
-    .cart-item-price {
-      font-size: 1.4rem;
-      color: var(--clay-orange);
-    }
-
-    .cart-qty-ctrl {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 5px;
-    }
-
-    .qty-btn {
-      background: var(--white-alpha-10);
-      color: white;
-      width: 28px;
-      height: 28px;
-      display: grid;
-      place-content: center;
-      border-radius: 4px;
-      font-size: 1.6rem;
-    }
-
-    .qty-btn:hover {
-      background: var(--clay-orange);
-    }
-
-    .cart-footer {
-      margin-top: 20px;
-      padding-top: 20px;
-      border-top: 2px solid var(--white-alpha-10);
-    }
-
-    .cart-total-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 2rem;
-      color: var(--accent-wheat);
-      margin-bottom: 16px;
-      font-weight: bold;
-    }
-
-    /* Input fields */
-    .input-field {
-      width: 100%;
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid var(--white-alpha-10);
-      border-radius: 8px;
-      color: var(--accent-wheat);
-      padding: 10px 14px;
-      font-size: 1.4rem;
-      font-family: var(--fontFamily-dmSans, 'DM Sans', sans-serif);
-      resize: none;
-      display: block;
-    }
-
-    .input-field:focus {
-      outline: none;
-      border-color: var(--clay-orange);
-    }
-
-    .input-field::placeholder {
-      color: var(--quick-silver);
-    }
-
-    /* Checkout button */
-    .checkout-btn {
-      background: #25D366;
-      color: white;
-      padding: 15px;
-      width: 100%;
-      border-radius: 10px;
-      font-weight: bold;
-      font-size: 1.6rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
-      transition: 0.3s;
-    }
-
-    .checkout-btn:hover {
-      background: #1ebe5c;
-      transform: scale(1.02);
-    }
-
-    /* Cart overlay button */
-    .cart-overlay-btn {
-      position: fixed;
-      bottom: 110px;
-      right: 24px;
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      background: var(--clay-orange);
-      color: white;
-      display: grid;
-      place-content: center;
-      font-size: 2.4rem;
-      box-shadow: var(--shadow-1);
-      cursor: pointer;
-      z-index: 99;
-      transition: 0.3s;
-    }
-
-    .cart-overlay-btn:hover {
-      transform: scale(1.1);
-    }
-
-    .cart-count {
-      position: absolute;
-      top: -2px;
-      right: -2px;
-      background: red;
-      color: white;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      font-size: 1.1rem;
-      display: grid;
-      place-content: center;
-      font-weight: bold;
-    }
-
-    /* Proceed to cart bar */
-    .proceed-to-cart-bar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--clay-orange);
-      color: white;
-      display: none;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 24px;
-      z-index: 98;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 1.5rem;
-      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.3);
-    }
-
-    .proceed-to-cart-bar.active {
-      display: flex;
-    }
-
-    .cart-info {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .cart-count-badge {
-      background: white;
-      color: var(--clay-orange);
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      display: grid;
-      place-content: center;
-      font-size: 1.3rem;
-      font-weight: bold;
-    }
-
-    .proceed-text {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .drawer-close {
-      font-size: 3rem;
-      color: var(--accent-wheat);
-      cursor: pointer;
-      line-height: 1;
-    }
-
-    /* Drawer overlay backdrop */
-    .cart-backdrop {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 999;
-    }
-
-    .cart-backdrop.active {
-      display: block;
     }
   </style>
 </head>
@@ -490,35 +237,21 @@
   <div class="topbar">
     <div class="container">
       <address class="topbar-item">
-        <div class="icon">
-          <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
-        </div>
+        <div class="icon"><ion-icon name="location-outline" aria-hidden="true"></ion-icon></div>
         <span class="span">Little Village, Near NRI Hospital, Mangalagiri, Guntur, Andhra Pradesh</span>
       </address>
       <div class="separator"></div>
       <div class="topbar-item item-2">
-        <div class="icon">
-          <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
-        </div>
+        <div class="icon"><ion-icon name="time-outline" aria-hidden="true"></ion-icon></div>
         <span class="span">Open Daily : 11:30 AM - 10:30 PM</span>
       </div>
       <a href="tel:+919010038444" class="topbar-item link">
-        <div class="icon">
-          <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
-        </div>
+        <div class="icon"><ion-icon name="call-outline" aria-hidden="true"></ion-icon></div>
         <span class="span">+91 90100 38444</span>
-      </a>
-      <div class="separator"></div>
-      <a href="https://wa.me/919010038444" class="topbar-item link">
-        <div class="icon">
-          <ion-icon name="logo-whatsapp" aria-hidden="true"></ion-icon>
-        </div>
-        <span class="span">WhatsApp Us</span>
       </a>
     </div>
   </div>
 
-  <!-- Header -->
   <header class="header" data-header>
     <div class="container">
       <a href="index.html" class="logo">
@@ -528,66 +261,20 @@
         <button class="close-btn" aria-label="close menu" data-nav-toggler>
           <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
         </button>
-        <a href="index.html" class="logo">
-          <img src="./assets/images/lvlogo.png" width="160" height="50" alt="Little Village menu logo">
-        </a>
         <ul class="navbar-list">
-          <li class="navbar-item">
-            <a href="index.html" class="navbar-link hover-underline">
-              <div class="separator"></div>
-              <span class="span">Home</span>
-            </a>
-          </li>
-          <li class="navbar-item">
-            <a href="menu.html" class="navbar-link hover-underline active">
-              <div class="separator"></div>
-              <span class="span">Full Menu</span>
-            </a>
-          </li>
-          <li class="navbar-item">
-            <a href="aboutus.html" class="navbar-link hover-underline">
-              <div class="separator"></div>
-              <span class="span">About Us</span>
-            </a>
-          </li>
-          <li class="navbar-item">
-            <a href="gallery.html" class="navbar-link hover-underline">
-              <div class="separator"></div>
-              <span class="span">Gallery</span>
-            </a>
-          </li>
-          <li class="navbar-item">
-            <a href="booking.html" class="navbar-link hover-underline">
-              <div class="separator"></div>
-              <span class="span">Function Hall</span>
-            </a>
-          </li>
-          <li class="navbar-item">
-            <a href="contact.html" class="navbar-link hover-underline">
-              <div class="separator"></div>
-              <span class="span">Contact</span>
-            </a>
-          </li>
+          <li class="navbar-item"><a href="index.html" class="navbar-link hover-underline"><span class="span">Home</span></a></li>
+          <li class="navbar-item"><a href="menu.html" class="navbar-link hover-underline active"><span class="span">Full Menu</span></a></li>
+          <li class="navbar-item"><a href="aboutus.html" class="navbar-link hover-underline"><span class="span">About Us</span></a></li>
+          <li class="navbar-item"><a href="booking.html" class="navbar-link hover-underline"><span class="span">Function Hall</span></a></li>
+          <li class="navbar-item"><a href="contact.html" class="navbar-link hover-underline"><span class="span">Contact</span></a></li>
         </ul>
-        <div class="text-center">
-          <p class="headline-1 navbar-title">Visit Us</p>
-          <address class="body-4">NRI Hospital Road, Mangalagiri, <br>Guntur, Andhra Pradesh</address>
-          <p class="body-4 navbar-text">Daily : 11:30 AM - 10:30 PM</p>
-          <div class="separator"></div>
-          <p class="contact-label">Quick Support</p>
-          <a href="tel:+919010038444" class="body-1 contact-number hover-underline">+91 90100 38444</a>
-        </div>
       </nav>
-
       <a href="booking.html" class="btn btn-primary">
         <span class="text text-1">Book Function Hall</span>
         <span class="text text-2" aria-hidden="true">Book Function Hall</span>
       </a>
-
       <button class="nav-open-btn" data-nav-toggler>
-        <span class="line line-1"></span>
-        <span class="line line-2"></span>
-        <span class="line line-3"></span>
+        <span class="line line-1"></span><span class="line line-2"></span><span class="line line-3"></span>
       </button>
       <div class="overlay" data-nav-toggler data-overlay></div>
     </div>
@@ -595,237 +282,439 @@
 
   <main>
     <article class="container menu-page">
-      <div style="text-align: center; margin-bottom: 40px;">
+      
+      <div class="menu-controls">
+        <div class="category-tabs" id="categoryTabs"></div>
+        <div class="sort-container">
+          <label class="sort-label" for="priceSort">Sort By:</label>
+          <select id="priceSort" class="sort-select">
+            <option value="default">Default Order</option>
+            <option value="low-high">Price: Low to High</option>
+            <option value="high-low">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
 
-  <h1 class="headline-1" style="margin-bottom: 20px;">
-Your Delicious Moments Begin Here.  </h1>
-
-  <a href="./LV%20Menu%20[23-12-2025].pdf"
-     target="_self"
-     class="btn btn-secondary"
-     style="
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding-inline: 28px;
-      min-width: 220px;
-     ">
-
-    <ion-icon
-      name="document-text-outline"
-      aria-hidden="true"
-      style="font-size: 2rem;">
-    </ion-icon>
-
-    <span class="text text-1">
-      View Full Menu
-    </span>
-
-    <span class="text text-2" aria-hidden="true">
-      View Full Menu
-    </span>
-
-  </a>
-
-</div>
-      <div class="category-tabs" id="categoryTabs"></div>
       <div class="menu-grid" id="menuGrid"></div>
+      
     </article>
   </main>
 
-  <footer class="footer section has-bg-image text-center" id="footer"
-    style="background-image: url('./assets/images/footer-bg.jpg')">
+  <footer class="footer section has-bg-image text-center" id="footer" style="background-image: url('./assets/images/footer-bg.jpg')">
     <div class="container">
-      <div class="footer-top grid-list">
-        <div class="footer-brand has-before has-after">
-          <a href="index.html" class="logo">
-            <h2 class="headline-1" style="color: var(--accent-wheat); margin-bottom: 20px;">LITTLE VILLAGE</h2>
-          </a>
-          <address class="body-4">NRI Hospital Road, Mangalagiri, Guntur, Andhra Pradesh</address>
-          <a href="mailto:info@littlevillage.com" class="body-4 contact-link">info@littlevillage.com</a>
-          <a href="tel:+919010038444" class="body-4 contact-link">Inquiries : +91 90100 38444</a>
-          <p class="body-4">Open : 11:30 AM - 10:30 PM</p>
-          <div class="wrapper">
-            <div class="separator"></div>
-            <div class="separator"></div>
-            <div class="separator"></div>
-          </div>
-          <p class="title-1">Special Events</p>
-          <p class="label-1">Book our <span class="span">Function Hall</span> for your special days.</p>
-          <a href="booking.html" class="btn btn-secondary footer-cta-btn">
-            <span class="text text-1">Book Now</span>
-            <span class="text text-2" aria-hidden="true">Book Now</span>
-          </a>
-        </div>
-
-        <ul class="footer-list">
-          <li><a href="index.html" class="label-2 footer-link hover-underline">Home</a></li>
-          <li><a href="menu.html" class="label-2 footer-link hover-underline">Full Menu</a></li>
-          <li><a href="aboutus.html" class="label-2 footer-link hover-underline">About Us</a></li>
-          <li><a href="booking.html" class="label-2 footer-link hover-underline">Function Hall</a></li>
-          <li><a href="contact.html" class="label-2 footer-link hover-underline">Contact</a></li>
-        </ul>
-
-        <ul class="footer-list">
-          <li><a href="https://www.facebook.com/share/1HgcQjiayB/"
-              class="label-2 footer-link hover-underline">Facebook</a></li>
-          <li><a href="https://www.instagram.com/little_village_official?igsh=MXU1NmF4MW53bXdyYw=="
-              class="label-2 footer-link hover-underline">Instagram</a></li>
-          <li><a href="#" class="label-2 footer-link hover-underline">Twitter</a></li>
-          <li><a href="#" class="label-2 footer-link hover-underline">Youtube</a></li>
-          <li><a href="https://maps.app.goo.gl/B9WqXW6YxX8X8X8X8" target="_blank"
-              class="label-2 footer-link hover-underline">Google Map</a></li>
-          <li><a href="https://share.google/Bp6kmKEFvW4919XRe" target="_blank" rel="noopener noreferrer"
-              class="label-2 footer-link hover-underline">⭐ Rate Us on Google</a></li>
-        </ul>
-      </div>
-
       <div class="footer-bottom">
-        <p class="copyright">&copy; 2026 Little Village Multi Cuisine Restaurant. All Rights Reserved.</p>
+        <p class="copyright">© 2026 Little Village Multi Cuisine Restaurant. All Rights Reserved.</p>
       </div>
     </div>
   </footer>
 
-  <!-- Scripts -->
-  <script src="./assets/js/menu-data.js"></script>
   <script>
-    const MENU_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTuQLFksZdpPbHY1M7rG_DzxXpzARHoDv_iUMniPLQ559lqR-q34bcudLFJOyynNyQooMlgTzQAwgEP/pub?gid=0&single=true&output=csv";
-    const WHATSAPP_NUMBER = "919010038444";
-    const fallbackMenuData = typeof menuData !== 'undefined' ? menuData : {};
-    let activeMenuData = fallbackMenuData;
+    const globalMenuDatabase = {
+      "Soups": [
+        { name: "Veg Corn / Clear / Tomato Soup", price: 155, mustTry: false },
+        { name: "Veg Manchow Soup", price: 155, mustTry: false },
+        { name: "Veg Hot Garlic / Hot & Sour Soup", price: 155, mustTry: false },
+        { name: "Veg Lemon Coriander Soup", price: 155, mustTry: false },
+        { name: "Chicken Corn Soup", price: 175, mustTry: false },
+        { name: "Chicken Manchow Soup", price: 175, mustTry: false },
+        { name: "Chicken Hot Garlic Soup", price: 175, mustTry: false },
+        { name: "Chicken Hot & Sour Soup", price: 175, mustTry: false },
+        { name: "Chicken Lemon Coriander Soup", price: 175, mustTry: false },
+        { name: "Mutton Bone Soup", price: 185, mustTry: false },
+        { name: "Mutton Marag with Cashew", price: 195, mustTry: true }
+      ],
+      "Starters Veg": [
+        { name: "American Corn Tikka", price: 320, mustTry: false },
+        { name: "Harabara Kebab", price: 320, mustTry: false },
+        { name: "Stuffed Paneer Tikka", price: 360, mustTry: false },
+        { name: "Achari Paneer Tikka", price: 350, mustTry: false },
+        { name: "Paneer Tikka", price: 350, mustTry: false },
+        { name: "Malai Paneer Tikka", price: 350, mustTry: false },
+        { name: "Juicy Paneer Tikka", price: 360, mustTry: true },
+        { name: "Broccoli Malai", price: 360, mustTry: false },
+        { name: "Tandoori Baby Corn", price: 330, mustTry: false },
+        { name: "Tandoori Mushroom", price: 350, mustTry: false }
+      ],
+      "Starters Non-Veg": [
+        { name: "Murgh Malai Tikka", price: 380, mustTry: false },
+        { name: "Murgh Afghani Kebab", price: 390, mustTry: false },
+        { name: "Juicy Kebab", price: 400, mustTry: true },
+        { name: "Banjara Kebab", price: 410, mustTry: false },
+        { name: "Chicken Tikka", price: 380, mustTry: false },
+        { name: "Murgh Kali Mirchi Kebab", price: 390, mustTry: false },
+        { name: "Chicken Kulfi", price: 420, mustTry: false },
+        { name: "Kalmi Kebab", price: 270, multiPrices: [{ label: "2 Pcs", price: 270 }, { label: "4 Pcs", price: 410 }] },
+        { name: "Tangdi Kebab", price: 260, multiPrices: [{ label: "Half (2 Pcs)", price: 260 }, { label: "Full (4 Pcs)", price: 400 }] },
+        { name: "Afgani Tandoori", price: 370, multiPrices: [{ label: "Half Portion", price: 370 }, { label: "Full Bird", price: 640 }] },
+        { name: "Tandoori Chicken", price: 370, multiPrices: [{ label: "Half Portion", price: 370 }, { label: "Full Bird", price: 640 }] }
+      ],
+      "Chinese Starters Veg": [
+        { name: "Veg Spring Roll", price: 340, mustTry: false },
+        { name: "Classical Paneer", price: 350, mustTry: false },
+        { name: "Chilli Paneer / Paneer 65", price: 310, mustTry: false },
+        { name: "Chilly Spicy Paneer", price: 310, mustTry: false },
+        { name: "Crispy Corn / Crispy Baby Corn", price: 300, mustTry: false },
+        { name: "Chilli Baby Corn", price: 350, mustTry: false },
+        { name: "Chilli Mushroom Wet", price: 330, mustTry: false },
+        { name: "Chilli Butter Mushroom", price: 350, mustTry: false },
+        { name: "Cashew Nut Fry", price: 360, mustTry: false },
+        { name: "Crispy Veg", price: 300, mustTry: false },
+        { name: "Palak Manchuria", price: 310, mustTry: false },
+        { name: "Peanut Masala / Boiled Peanut", price: 300, mustTry: false },
+        { name: "Vegetables Mix", price: 300, mustTry: false },
+        { name: "Veg Manchuria", price: 280, multiPrices: [{ label: "Dry Style", price: 280 }, { label: "Wet Style", price: 300 }] },
+        { name: "Paneer Majestic", price: 330, multiPrices: [{ label: "Dry Style", price: 330 }, { label: "Wet Style", price: 350 }] }
+      ],
+      "Chinese Starters Non-Veg": [
+        { name: "Darling Chicken", price: 410, mustTry: true },
+        { name: "Crispy Chicken Chips", price: 390, mustTry: false },
+        { name: "Pepper Chicken", price: 380, mustTry: false },
+        { name: "Cashew Chicken", price: 390, mustTry: false },
+        { name: "Chicken Lollipop Half", price: 250, mustTry: false },
+        { name: "Pepper Garlic Chicken", price: 390, mustTry: false },
+        { name: "Classical Chicken", price: 400, mustTry: false },
+        { name: "Red Chilli Spicy Chicken", price: 400, mustTry: false },
+        { name: "Sweet Chilli Prawns", price: 430, mustTry: false },
+        { name: "Satay Chicken", price: 410, mustTry: false },
+        { name: "Chicken 555 / Majestic", price: 390, mustTry: false },
+        { name: "Chicken Hong Kong", price: 390, mustTry: false },
+        { name: "Chicken 99", price: 390, mustTry: false },
+        { name: "Lemon Chicken", price: 390, mustTry: false },
+        { name: "Guljara Chicken", price: 390, mustTry: false },
+        { name: "Chilli Spicy Chicken", price: 400, mustTry: false },
+        { name: "Dragon Chicken", price: 400, mustTry: false },
+        { name: "Imperial Fish / Apollo Fish", price: 420, mustTry: false },
+        { name: "Fried Fish", price: 420, mustTry: false },
+        { name: "Korameenu Fry (Boneless)", price: 550, mustTry: true },
+        { name: "Garlic Prawns", price: 440, mustTry: false },
+        { name: "Loose Prawns / Chilly Prawns", price: 440, mustTry: false },
+        { name: "Fried Prawns", price: 440, mustTry: false },
+        { name: "Chilli Egg", price: 300, mustTry: false },
+        { name: "Egg Manchuria", price: 300, mustTry: false },
+        { name: "Chicken Lollipop / Wings", price: 400, multiPrices: [{ label: "Standard Pack", price: 400 }, { label: "Wet Style Sauce", price: 430 }] },
+        { name: "Chilli Chicken / Chicken 65", price: 380, multiPrices: [{ label: "Standard Cut", price: 380 }, { label: "Special Premium", price: 400 }] },
+        { name: "Chicken Manchuria", price: 380, multiPrices: [{ label: "Dry Style", price: 380 }, { label: "Wet Style Sauce", price: 400 }] }
+      ],
+      "Indian Starters": [
+        { name: "Konaseema Kodi Vepudu", price: 410, mustTry: false },
+        { name: "Guntur Chicken Fry", price: 400, mustTry: false },
+        { name: "Andhra Spl. Chilli Chicken", price: 400, mustTry: false },
+        { name: "Andhra Spl. Chilli Mutton", price: 540, mustTry: false },
+        { name: "Velluli Karam Chicken Fry", price: 400, mustTry: false },
+        { name: "Kariveypaku Karam Chicken Fry", price: 400, mustTry: false },
+        { name: "Jeedipappu Veta Mamsam Fry", price: 570, mustTry: true },
+        { name: "Mutton Dry (Boneless)", price: 620, mustTry: false },
+        { name: "Chicken Roast", price: 400, mustTry: false },
+        { name: "Mutton Fry", price: 550, mustTry: false },
+        { name: "Mutton Spicy Pepper Fry", price: 550, mustTry: false },
+        { name: "Special Coriander Chicken", price: 400, mustTry: false },
+        { name: "Royyala Iguru", price: 450, mustTry: false },
+        { name: "Andhra Kodi Vepudu", price: 390, multiPrices: [{ label: "Bone-in Portion", price: 390 }, { label: "Boneless Style", price: 410 }] }
+      ],
+      "Curries Veg": [
+        { name: "Plain Palak / Veg Chatphat", price: 290, mustTry: false },
+        { name: "Paneer Butter Masala", price: 340, mustTry: false },
+        { name: "Palak Paneer / Methi Chaman", price: 340, mustTry: false },
+        { name: "Kadai Paneer / Paneer Shahi Korma", price: 340, mustTry: false },
+        { name: "Paneer Cashew Curry", price: 380, mustTry: false },
+        { name: "Kadai Veg", price: 320, mustTry: false },
+        { name: "Veg Kheema Rampuri", price: 320, mustTry: false },
+        { name: "Mushroom Masala", price: 340, mustTry: false },
+        { name: "Mushroom Capsicum Tomato Curry", price: 340, mustTry: false },
+        { name: "Tomato Cashew Curry", price: 370, mustTry: false },
+        { name: "Cashew Curry", price: 390, mustTry: false },
+        { name: "Tomato Capsicum Paneer Curry", price: 360, mustTry: false },
+        { name: "Veg Kolhapuri / Mixed Veg", price: 320, mustTry: false },
+        { name: "Veg Asiana", price: 350, mustTry: true },
+        { name: "Kodi Guddu Kura", price: 280, mustTry: false },
+        { name: "Hyderabad Veg Curry", price: 320, mustTry: false },
+        { name: "Kashmiri Veg Curry", price: 320, mustTry: false },
+        { name: "Egg Palak", price: 320, mustTry: false },
+        { name: "Egg Keema Masala", price: 310, mustTry: false },
+        { name: "Egg Bhurji", price: 300, mustTry: false },
+        { name: "Palak Mushroom", price: 340, mustTry: false }
+      ],
+      "Indian Breads": [
+        { name: "Plain Pulka", price: 30, mustTry: false },
+        { name: "Jonna Pulka", price: 30, mustTry: false },
+        { name: "Raagi Pulka", price: 30, mustTry: false },
+        { name: "Garlic Naan / Kashmiri Naan", price: 90, mustTry: false },
+        { name: "Lachha Roti / Pudina Paratha", price: 90, mustTry: false },
+        { name: "Stuffed Paratha", price: 90, mustTry: false },
+        { name: "Egg Paratha", price: 95, mustTry: false },
+        { name: "Stuffed Kulcha", price: 85, mustTry: false },
+        { name: "Malai Naan", price: 90, mustTry: false },
+        { name: "Malai Paratha", price: 95, mustTry: false },
+        { name: "Tandoori Roti", price: 50, multiPrices: [{ label: "Plain Roti", price: 50 }, { label: "Butter Roti", price: 55 }] },
+        { name: "Plain Naan", price: 65, multiPrices: [{ label: "Plain Naan", price: 65 }, { label: "Butter Naan", price: 70 }] }
+      ],
+      "Andhra Special Curries": [
+        { name: "Andhra Kodi Kura (Bones)", price: 360, mustTry: false },
+        { name: "Spl. Andhra Kodi Kura (Boneless)", price: 400, mustTry: false },
+        { name: "Gongura Chicken", price: 390, mustTry: false },
+        { name: "Gongura Mutton", price: 500, mustTry: true },
+        { name: "Gongura Royyalu", price: 450, mustTry: false },
+        { name: "Prawns Curry", price: 460, mustTry: false },
+        { name: "Natu Kodi Pulusu", price: 480, mustTry: true },
+        { name: "Andhra Mutton Curry", price: 510, mustTry: false }
+      ],
+      "Curries Non-Veg": [
+        { name: "Kadai Chicken / Butter Chicken", price: 380, mustTry: false },
+        { name: "Chicken Anarkali", price: 390, mustTry: false },
+        { name: "Chicken Asiana / Maharani", price: 390, mustTry: false },
+        { name: "Chicken Chaat Phat", price: 390, mustTry: false },
+        { name: "Moghlai Chicken Curry", price: 390, mustTry: false },
+        { name: "Kashmiri Chicken Curry", price: 390, mustTry: false },
+        { name: "Chicken Tikka Masala", price: 380, mustTry: false },
+        { name: "Chicken Kolhapuri", price: 380, mustTry: false },
+        { name: "Punjabi Chicken", price: 380, mustTry: false },
+        { name: "Methi Chicken", price: 380, mustTry: false },
+        { name: "Cashew Chicken Curry", price: 400, mustTry: false },
+        { name: "Mutton Rogan Josh", price: 550, mustTry: false },
+        { name: "Mutton Keema Curry", price: 530, mustTry: false },
+        { name: "Angara Chicken Curry", price: 430, mustTry: false },
+        { name: "Mandakini Chicken Curry", price: 420, mustTry: false }
+      ],
+      "Fried Rice & Noodles": [
+        { name: "Veg Fried Rice / Veg Noodles", price: 280, mustTry: false },
+        { name: "Special Veg Fried Rice", price: 310, mustTry: false },
+        { name: "Schezwan Noodles", price: 300, mustTry: false },
+        { name: "Paneer Fried Rice", price: 300, mustTry: false },
+        { name: "Schezwan Fried Rice", price: 300, mustTry: false },
+        { name: "Jeera Rice", price: 280, mustTry: false },
+        { name: "Mushroom Fried Rice", price: 300, mustTry: false },
+        { name: "Cashew Fried Rice", price: 350, mustTry: false },
+        { name: "Corn Fried Rice", price: 310, mustTry: false },
+        { name: "Egg Fried Rice / Egg Noodles", price: 300, mustTry: false },
+        { name: "Double Egg Fried Rice", price: 330, mustTry: false },
+        { name: "Chicken Fried Rice", price: 330, mustTry: false },
+        { name: "Spl. Chicken Fried Rice", price: 370, mustTry: false },
+        { name: "Schezwan Chicken Fried Rice", price: 360, mustTry: false },
+        { name: "Prawns Fried Rice", price: 410, mustTry: false },
+        { name: "Spl Prawns Fried Rice", price: 430, mustTry: false },
+        { name: "Schezwan Egg Fried Rice", price: 310, mustTry: false },
+        { name: "Schezwan Egg Noodles", price: 320, mustTry: false },
+        { name: "Chicken Noodles", price: 330, mustTry: false },
+        { name: "Schezwan Chicken Noodles", price: 350, mustTry: false },
+        { name: "Mixed Fried Rice (Non-Veg)", price: 400, mustTry: true }
+      ],
+      "Biryanis": [
+        { name: "Chicken Dum Biryani", price: 340, mustTry: false },
+        { name: "Spl Chicken Biryani", price: 410, mustTry: true },
+        { name: "Chicken Fry Biryani", price: 400, mustTry: false },
+        { name: "Chicken Potlam Biryani", price: 450, mustTry: true },
+        { name: "Mutton Potlam Biryani", price: 600, mustTry: true },
+        { name: "Rambo Chicken Biryani", price: 400, mustTry: false },
+        { name: "Palamuru Chicken Biryani", price: 400, mustTry: false },
+        { name: "Gongura Chicken Biryani", price: 400, mustTry: false },
+        { name: "Avakai Chicken Biryani", price: 400, mustTry: false },
+        { name: "Red Chilli Chicken Biryani", price: 400, mustTry: false },
+        { name: "Green Chilli Chicken Biryani", price: 400, mustTry: false },
+        { name: "Ulavacharu Chicken Biryani", price: 400, mustTry: false },
+        { name: "Veg Biryani", price: 290, mustTry: false },
+        { name: "Paneer Biryani", price: 310, mustTry: false },
+        { name: "Mushroom Biryani", price: 310, mustTry: false },
+        { name: "Baby Corn Biryani", price: 310, mustTry: false },
+        { name: "Avakai Veg Biryani", price: 310, mustTry: false },
+        { name: "Kaju Biryani", price: 320, mustTry: false },
+        { name: "Kaju Paneer Biryani", price: 320, mustTry: false },
+        { name: "Ulavacharu Biryani (Veg)", price: 320, mustTry: false },
+        { name: "Biryani Rice", price: 270, mustTry: false },
+        { name: "Chicken Tikka Biryani", price: 420, mustTry: false },
+        { name: "Natu Kodi Biryani", price: 450, mustTry: true },
+        { name: "Lollipop / Wings Biryani", price: 410, mustTry: false },
+        { name: "Tangdi / Tandoori Chicken Biryani", price: 410, mustTry: false },
+        { name: "Mutton Dum / Fry Biryani", price: 520, mustTry: false },
+        { name: "Shahi Gosht Biryani", price: 540, mustTry: false },
+        { name: "Nalli Gosht Biryani", price: 550, mustTry: true },
+        { name: "Mutton Keema Biryani", price: 580, mustTry: false },
+        { name: "Gongura Mutton Biryani", price: 540, mustTry: false },
+        { name: "Prawns / Fish Biryani", price: 450, mustTry: false },
+        { name: "Egg Biryani", price: 310, mustTry: false }
+      ],
+      "Family Packs": [
+        { name: "Veg Biryani Family Pack", price: 700, mustTry: false },
+        { name: "Paneer Biryani Family Pack", price: 750, mustTry: false },
+        { name: "Mushroom Biryani Family Pack", price: 750, mustTry: false },
+        { name: "Chicken Dum Family Pack", price: 850, mustTry: false },
+        { name: "Chicken Fry Family Pack", price: 900, mustTry: false },
+        { name: "S.P Chicken Biryani Family Pack", price: 950, mustTry: false },
+        { name: "Mutton Dum Family Pack", price: 1150, mustTry: false },
+        { name: "Mutton Fry Family Pack", price: 1150, mustTry: false }
+      ],
+      "Traditional Rice & Sides": [
+        { name: "Plain Rice", price: 120, mustTry: false },
+        { name: "Steamed Rice", price: 150, mustTry: false },
+        { name: "Pappucharu Annam", price: 220, mustTry: false },
+        { name: "Ragi Mudda", price: 150, mustTry: false },
+        { name: "Ragi Mudda with Veg Masala", price: 300, mustTry: true },
+        { name: "Curd Rice", price: 150, mustTry: false },
+        { name: "Special Curd Rice", price: 200, mustTry: false }
+      ],
+      "Desserts & Sweets": [
+        { name: "Gulab Jamun", price: 70, mustTry: false },
+        { name: "Gulab Jamun with Ice Cream", price: 140, mustTry: false },
+        { name: "Apricot Delight", price: 170, mustTry: true },
+        { name: "Ariselu Half kg", price: 325, mustTry: false },
+        { name: "Ariselu (Organic Bellam) 1 kg", price: 600, mustTry: false }
+      ],
+      "Ice Cream Scoops": [
+        { name: "Vanilla / Strawberry", price: 140, mustTry: false },
+        { name: "Butter Scotch", price: 150, mustTry: false },
+        { name: "Chocolate", price: 150, mustTry: false },
+        { name: "Black Forest", price: 150, mustTry: false },
+        { name: "Kaju Kismis", price: 180, mustTry: false },
+        { name: "Caremel Almond", price: 180, mustTry: false },
+        { name: "Nut Delight", price: 180, mustTry: false },
+        { name: "Lichi / Seethafal", price: 180, mustTry: false },
+        { name: "Sapota", price: 180, mustTry: false }
+      ],
+      "Fruit Shakes": [
+        { name: "Mango Fruit Shake", price: 200, mustTry: false },
+        { name: "Strawberry Fruit Shake", price: 200, mustTry: false },
+        { name: "Black Current Fruit Shake", price: 200, mustTry: false },
+        { name: "Green Apple Fruit Shake", price: 200, mustTry: false },
+        { name: "Kiwi Fruit Shake", price: 200, mustTry: false },
+        { name: "Butter Scotch Fruit Shake", price: 200, mustTry: false },
+        { name: "Banana Fruit Shake", price: 200, mustTry: false },
+        { name: "Custard Apple Fruit Shake", price: 200, mustTry: false }
+      ],
+      "Choco & Premium Shakes": [
+        { name: "Kitkat Shake", price: 210, mustTry: false },
+        { name: "Snickers Shake", price: 210, mustTry: false },
+        { name: "Munch Shake", price: 210, mustTry: false },
+        { name: "Dairy Milk Shake", price: 210, mustTry: false },
+        { name: "Dark Chocolate Shake", price: 240, mustTry: false },
+        { name: "Tripple Choco Shake", price: 240, mustTry: false },
+        { name: "Crunchy Almond Chip Shake", price: 240, mustTry: false },
+        { name: "Nutella Shake", price: 240, mustTry: false },
+        { name: "Oreo Nuts Shake", price: 240, mustTry: false },
+        { name: "Peanut Butter Shake", price: 240, mustTry: false },
+        { name: "Oreo Caramel Shake", price: 240, mustTry: false },
+        { name: "Dry Fruit Shake", price: 240, mustTry: false }
+      ],
+      "Exclusive Shakes & Creations": [
+        { name: "Ferrero Rocher Shake", price: 270, mustTry: false },
+        { name: "Temptation Shake", price: 270, mustTry: false },
+        { name: "Peanut Butter Banana Creation", price: 230, mustTry: false },
+        { name: "Black Current Flake Creation", price: 230, mustTry: false },
+        { name: "Strawberry Flake Creation", price: 230, mustTry: false },
+        { name: "Banana Flake Creation", price: 230, mustTry: false },
+        { name: "Oreo Cookie Shake", price: 210, mustTry: false },
+        { name: "Choco Chip Cookie Shake", price: 210, mustTry: false },
+        { name: "Dark Fantasy Cookie Shake", price: 210, mustTry: false },
+        { name: "Coffeediction Shake", price: 270, mustTry: false },
+        { name: "Coffee Fantasy Shake", price: 270, mustTry: false },
+        { name: "Coffee Caramel Shake", price: 270, mustTry: false }
+      ],
+      "Beverages & Lemonades": [
+        { name: "Lassi", price: 90, mustTry: false },
+        { name: "Vanilla Lassi", price: 170, mustTry: false },
+        { name: "Water Bottle 500 ml", price: 12, mustTry: false },
+        { name: "Water Bottle 1 Ltr", price: 19, mustTry: false },
+        { name: "Classic Lemonade", price: 160, mustTry: false },
+        { name: "Blue Curacao Lemonade", price: 160, mustTry: false },
+        { name: "Green Apple Lemonade", price: 160, mustTry: false },
+        { name: "Watermelon Lemonade", price: 160, mustTry: false },
+        { name: "Kiwi Lemonade", price: 160, mustTry: false },
+        { name: "Mango Lassi", price: 180, multiPrices: [{ label: "Mango Style", price: 180 }, { label: "Strawberry Lassi", price: 180 }] },
+        { name: "Strawberry Lemonade", price: 160, multiPrices: [{ label: "Strawberry", price: 160 }, { label: "Raspberry", price: 160 }, { label: "Raspberry Mojito", price: 170 }] }
+      ],
+      "Mojitos & Add-Ons": [
+        { name: "Virgin Mojito", price: 170, mustTry: false },
+        { name: "Watermelon Mojito", price: 170, mustTry: false },
+        { name: "Blue Mojito", price: 170, mustTry: false },
+        { name: "Green Apple Mojito", price: 170, mustTry: false },
+        { name: "Pomegranate Mojito", price: 170, mustTry: false },
+        { name: "Strawberry Mojito", price: 170, mustTry: false },
+        { name: "Kiwi Mojito", price: 170, mustTry: false },
+        { name: "Extra Add-On: Ice Cream", price: 30, mustTry: false },
+        { name: "Extra Add-On: Choco Chips", price: 10, mustTry: false },
+        { name: "Extra Add-On: Snickers", price: 20, mustTry: false },
+        { name: "Extra Add-On: Dairy Milk", price: 10, mustTry: false }
+      ]
+    };
 
-    document.addEventListener('DOMContentLoaded', async () => {
-      const categoryTabs = document.getElementById('categoryTabs');
-      renderSkeletonCards();
+    let activeSelectedCategory = Object.keys(globalMenuDatabase)[0];
 
-      categoryTabs.addEventListener('click', (e) => {
-        if (e.target.classList.contains('category-btn')) {
-          document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-          e.target.classList.add('active');
-          renderItems(e.target.dataset.category);
-          e.target.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-        }
-      });
-
-      activeMenuData = await loadMenuData();
-      renderCategories();
-
-      const firstCategory = Object.keys(activeMenuData)[0];
-      if (firstCategory) {
-        renderItems(firstCategory);
-      } else {
-        document.getElementById('menuGrid').innerHTML = '<p class="body-2 text-center">Menu is temporarily unavailable.</p>';
-      }
+    document.addEventListener('DOMContentLoaded', () => {
+      buildCategoryTabsSystem();
+      bindInteractiveControls();
+      executeGridRender(activeSelectedCategory);
     });
 
-    function parseCSV(text) {
-      const rows = [];
-      let row = [], cell = '', insideQuotes = false;
-      for (let i = 0; i < text.length; i++) {
-        const c = text[i], n = text[i + 1];
-        if (c === '"' && insideQuotes && n === '"') { cell += '"'; i++; continue; }
-        if (c === '"') { insideQuotes = !insideQuotes; continue; }
-        if (c === ',' && !insideQuotes) { row.push(cell); cell = ''; continue; }
-        if ((c === '\n' || c === '\r') && !insideQuotes) {
-          if (c === '\r' && n === '\n') continue;
-          if (cell.length || row.length) { row.push(cell); rows.push(row); row = []; cell = ''; }
-          continue;
+    function buildCategoryTabsSystem() {
+      const tabsContainer = document.getElementById('categoryTabs');
+      tabsContainer.innerHTML = '';
+      
+      Object.keys(globalMenuDatabase).forEach((categoryName, index) => {
+        const tabButton = document.createElement('button');
+        tabButton.className = `category-btn ${index === 0 ? 'active' : ''}`;
+        tabButton.textContent = categoryName;
+        tabButton.dataset.category = categoryName;
+        tabsContainer.appendChild(tabButton);
+      });
+    }
+
+    function bindInteractiveControls() {
+      document.getElementById('categoryTabs').addEventListener('click', (event) => {
+        if (event.target.classList.contains('category-btn')) {
+          document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+          event.target.classList.add('active');
+          activeSelectedCategory = event.target.dataset.category;
+          executeGridRender(activeSelectedCategory);
+          event.target.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         }
-        cell += c;
-      }
-      if (cell.length || row.length) { row.push(cell); rows.push(row); }
-      return rows;
-    }
-
-    function rowsToMenuData(rows) {
-      if (!rows.length) return {};
-      const headers = rows[0].map(h => h.trim().toUpperCase());
-      const idIdx = headers.indexOf('ID');
-      const nameIdx = headers.indexOf('NAME');
-      const catIdx = headers.indexOf('CATEGORY');
-      const priceIdx = headers.indexOf('PRICE');
-      const descIdx = headers.indexOf('DESCRIPTION');
-      const grouped = {};
-      rows.slice(1).forEach(row => {
-        if (!row.length) return;
-        const category = (row[catIdx] || '').trim();
-        const item = {
-          id: Number((row[idIdx] || '').trim()),
-          name: (row[nameIdx] || '').trim(),
-          price: Number((row[priceIdx] || '').trim()),
-          desc: (row[descIdx] || '').trim(),
-        };
-        if (!category || !item.id || !item.name) return;
-        if (!grouped[category]) grouped[category] = [];
-        grouped[category].push(item);
       });
-      return grouped;
-    }
 
-    async function loadMenuData() {
-      try {
-        const res = await fetch(MENU_CSV_URL, { cache: 'no-store' });
-        if (!res.ok) throw new Error();
-        const csv = await res.text();
-        const menu = rowsToMenuData(parseCSV(csv));
-        return Object.keys(menu).length > 0 ? menu : fallbackMenuData;
-      } catch {
-        return fallbackMenuData;
-      }
-    }
-
-    function renderCategories() {
-      const tabs = document.getElementById('categoryTabs');
-      tabs.innerHTML = '';
-      Object.keys(activeMenuData).forEach((cat, i) => {
-        const btn = document.createElement('button');
-        btn.className = `category-btn ${i === 0 ? 'active' : ''}`;
-        btn.textContent = cat;
-        btn.dataset.category = cat;
-        tabs.appendChild(btn);
+      document.getElementById('priceSort').addEventListener('change', () => {
+        executeGridRender(activeSelectedCategory);
       });
     }
 
-    function renderSkeletonCards(count = 8) {
-      const grid = document.getElementById('menuGrid');
-      grid.innerHTML = '';
-      for (let i = 0; i < count; i++) {
-        const sk = document.createElement('div');
-        sk.className = 'skeleton-card';
-        sk.innerHTML = `
-          <div class="skeleton-media"></div>
-          <div class="skeleton-content">
-            <div class="skeleton-line title"></div>
-            <div class="skeleton-line"></div>
-            <div class="skeleton-line"></div>
-            <div class="skeleton-line short"></div>
-          </div>`;
-        grid.appendChild(sk);
-      }
-    }
+    function executeGridRender(targetCategoryKey) {
+      const gridDOMReference = document.getElementById('menuGrid');
+      gridDOMReference.innerHTML = '';
+      
+      let itemsListClone = [...globalMenuDatabase[targetCategoryKey]];
+      const activeSortStrategy = document.getElementById('priceSort').value;
 
-    function renderItems(category) {
-      const grid = document.getElementById('menuGrid');
-      grid.innerHTML = '';
-      const items = activeMenuData[category] || [];
-      if (!items.length) {
-        grid.innerHTML = '<p class="body-2 text-center" style="grid-column:1/-1;">No items in this category.</p>';
-        return;
+      if (activeSortStrategy === 'low-high') {
+        itemsListClone.sort((a, b) => a.price - b.price);
+      } else if (activeSortStrategy === 'high-low') {
+        itemsListClone.sort((a, b) => b.price - a.price);
       }
-      items.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'menu-item';
-        card.innerHTML = `
+
+      itemsListClone.forEach(item => {
+        const itemCard = document.createElement('div');
+        itemCard.className = 'menu-item';
+        
+        let dynamicSubPricesMarkup = '';
+        if (item.multiPrices && item.multiPrices.length > 0) {
+          dynamicSubPricesMarkup = `<div class="multi-price-list">`;
+          item.multiPrices.forEach(subItem => {
+            dynamicSubPricesMarkup += `
+              <div class="multi-price-row">
+                <span>${subItem.label}</span>
+                <span class="multi-price-val">₹${subItem.price}</span>
+              </div>`;
+          });
+          dynamicSubPricesMarkup += `</div>`;
+        }
+
+        itemCard.innerHTML = `
           <div class="item-content">
-            <div class="item-title">
-              <span>${item.name}</span>
-              <span class="item-price">₹${item.price}</span>
+            <div class="item-header">
+              <h3 class="item-title">${item.name}</h3>
+              <div class="item-badge-container">
+                <span class="item-price">₹${item.price}</span>
+                ${item.mustTry ? `<span class="must-try-badge">Must Try</span>` : ''}
+              </div>
             </div>
-            <p class="item-desc">${item.desc}</p>
-            <a href="./LV%20Menu%20[23-12-2025].pdf" target="_self" class="add-to-cart-btn" style="display: block; text-align: center;">View Menu</a>
-          </div>`;
-        grid.appendChild(card);
+            ${dynamicSubPricesMarkup}
+          </div>
+        `;
+        gridDOMReference.appendChild(itemCard);
       });
     }
   </script>
